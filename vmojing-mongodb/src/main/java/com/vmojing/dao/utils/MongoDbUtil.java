@@ -1,4 +1,4 @@
-package com.vmojing.dao;
+package com.vmojing.dao.utils;
 
 import java.net.UnknownHostException;
 
@@ -9,7 +9,6 @@ import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoException;
 import com.mongodb.ServerAddress;
 import com.mongodb.MongoClientOptions.Builder;
-import com.vmojing.dao.config.MongoConfig;
 /**
  * <code>DB</code>单例模式
  * @author v11

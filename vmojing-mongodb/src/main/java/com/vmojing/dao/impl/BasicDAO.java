@@ -13,7 +13,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
 import com.vmojing.dao.DAO;
-import com.vmojing.dao.MongoDbUtil;
+import com.vmojing.dao.utils.MongoDbUtil;
 
 
 public class BasicDAO implements DAO{
@@ -120,5 +120,6 @@ public class BasicDAO implements DAO{
 	public DBObject findOne(){
 		return Collection.findOne();
 	}
+
 	
 }

@@ -1,4 +1,4 @@
-package com.vmojing.dao.config;
+package com.vmojing.dao.utils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

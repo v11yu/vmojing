@@ -1,4 +1,4 @@
-package com.vmojing.crawler.fetcher.utils;
+package com.vmojing.crawler.fetcher;
 
 public class IdTransferUtil {
 	private static String[] str62keys = { "0", "1", "2", "3", "4", "5", "6",
