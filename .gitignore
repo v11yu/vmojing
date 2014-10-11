@@ -18,6 +18,7 @@ $RECYCLE.BIN/
 target/*
 log/*
 *svn*
+*.class
 # =========================
 # Operating System Files
 # =========================
