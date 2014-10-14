@@ -14,12 +14,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.version>4.11</junit.version>
 		<mongodb.version>2.12.2</mongodb.version>
-		<nosqlunit-version>0.7.6</nosqlunit-version>
-		<log4j-version>1.2.16</log4j-version>
-		<slf4j-version>1.7.7</slf4j-version>
-		<httpclient-version>4.3.1</httpclient-version>
-		<jsoup-version>1.7.3</jsoup-version>
-		<weibo4j-version>1.0</weibo4j-version>
+		<nosqlunit.version>0.7.6</nosqlunit.version>
+		<log4j.version>1.2.16</log4j.version>
+		<slf4j.version>1.7.7</slf4j.version>
+		<httpclient.version>4.3.1</httpclient.version>
+		<jsoup.version>1.7.3</jsoup.version>
+		<weibo4j.version>1.0</weibo4j.version>
+		<spring-data-mongodb.version>1.6.0.RELEASE</spring-data-mongodb.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -40,17 +41,17 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j-version}</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>${log4j-version}</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j-version}</version>
+			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- End: Log -->
 	</dependencies>

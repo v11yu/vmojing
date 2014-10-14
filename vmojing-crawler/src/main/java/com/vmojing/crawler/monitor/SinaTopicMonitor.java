@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -28,6 +30,7 @@ public class SinaTopicMonitor {
 	public void monitor(){
 		Map<ObjectId, String> topicIdNameMap = tbdao.getTopicNameIdMap();
 		Iterator<Entry<ObjectId, String>> iter = topicIdNameMap.entrySet().iterator();
+		ExecutorService pools = Executors.newCachedThreadPool();
 		while(iter.hasNext()){
 			Entry<ObjectId, String> entry = iter.next();
 			//new SinaTopicWorker()
