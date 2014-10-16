@@ -1,6 +1,7 @@
 package com.vmojing.mongodb.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -37,4 +38,8 @@ public class User {
 	private String lang;                  //用户语言版本
 	private String verifiedReason;		  //认证原因
 	private String weihao;				  //微號
+	/*--------博主粉丝-------*/
+	/** 该用户关注的博主列表 */
+	private List<Long> friendsList;
+	
 }
