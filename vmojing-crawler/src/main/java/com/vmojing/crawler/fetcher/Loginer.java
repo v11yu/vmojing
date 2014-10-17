@@ -6,7 +6,6 @@ import org.apache.http.client.HttpClient;
  * 登陆功能的接口
  * @author v11
  * @date 2014年9月5日
- * @Since 1.0
  */
 
 public interface Loginer {

@@ -16,9 +16,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.vmojing.crawler.fetcher.BasicFetcher;
-import com.vmojing.crawler.fetcher.IdTransferUtil;
 import com.vmojing.crawler.fetcher.Loginer;
 import com.vmojing.crawler.fetcher.TopicFetcher;
+import com.vmojing.crawler.fetcher.util.IdTransferUtil;
 
 
 
@@ -26,7 +26,6 @@ import com.vmojing.crawler.fetcher.TopicFetcher;
  * 话题微博ids获取器
  * @author v11
  * @date 2014年9月5日
- * @Since 1.0
  */
 public class MobileTopicFetcher extends BasicFetcher implements TopicFetcher{
 	private final static Integer MaxPageNum = 100;

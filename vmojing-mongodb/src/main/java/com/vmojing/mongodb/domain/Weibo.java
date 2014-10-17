@@ -39,7 +39,125 @@ public class Weibo {
 	private Integer attitudeCount;
 	/** 监测开始时间 */
 	private Date monitoredTime;
+	/** 最后更新的时间*/
+	private Date lastUpdateTime;
 	/**话题Id*/
 	private List<ObjectId> topicIds;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Date getCreateAtTime() {
+		return createAtTime;
+	}
+	public void setCreateAtTime(Date createAtTime) {
+		this.createAtTime = createAtTime;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public String getThumbnailPicture() {
+		return thumbnailPicture;
+	}
+	public void setThumbnailPicture(String thumbnailPicture) {
+		this.thumbnailPicture = thumbnailPicture;
+	}
+	public String getBmiddlePicture() {
+		return bmiddlePicture;
+	}
+	public void setBmiddlePicture(String bmiddlePicture) {
+		this.bmiddlePicture = bmiddlePicture;
+	}
+	public String getOriginalPicture() {
+		return originalPicture;
+	}
+	public void setOriginalPicture(String originalPicture) {
+		this.originalPicture = originalPicture;
+	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public Long getRetweetWeiboId() {
+		return retweetWeiboId;
+	}
+	public void setRetweetWeiboId(Long retweetWeiboId) {
+		this.retweetWeiboId = retweetWeiboId;
+	}
+	public Integer getRetweetCount() {
+		return retweetCount;
+	}
+	public void setRetweetCount(Integer retweetCount) {
+		this.retweetCount = retweetCount;
+	}
+	public Integer getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(Integer commentCount) {
+		this.commentCount = commentCount;
+	}
+	public Integer getAttitudeCount() {
+		return attitudeCount;
+	}
+	public void setAttitudeCount(Integer attitudeCount) {
+		this.attitudeCount = attitudeCount;
+	}
+	public Date getMonitoredTime() {
+		return monitoredTime;
+	}
+	public void setMonitoredTime(Date monitoredTime) {
+		this.monitoredTime = monitoredTime;
+	}
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+	public List<ObjectId> getTopicIds() {
+		return topicIds;
+	}
+	public void setTopicIds(List<ObjectId> topicIds) {
+		this.topicIds = topicIds;
+	}
+	@Override
+	public String toString() {
+		return "Weibo [id=" + id + ", createAtTime=" + createAtTime + ", text="
+				+ text + ", source=" + source + ", thumbnailPicture="
+				+ thumbnailPicture + ", bmiddlePicture=" + bmiddlePicture
+				+ ", originalPicture=" + originalPicture + ", longitude="
+				+ longitude + ", latitude=" + latitude + ", userId=" + userId
+				+ ", retweetWeiboId=" + retweetWeiboId + ", retweetCount="
+				+ retweetCount + ", commentCount=" + commentCount
+				+ ", attitudeCount=" + attitudeCount + ", monitoredTime="
+				+ monitoredTime + ", lastUpdateTime=" + lastUpdateTime
+				+ ", topicIds=" + topicIds + "]";
+	}
+	
 	
 }

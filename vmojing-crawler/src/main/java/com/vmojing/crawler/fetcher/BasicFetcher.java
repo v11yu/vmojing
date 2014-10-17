@@ -14,7 +14,6 @@ import org.apache.log4j.Logger;
  * 基础网页抓取器
  * @author v11
  * @date 2014年9月5日
- * @Since 1.0
  */
 public class BasicFetcher {
 	private final Logger log = Logger.getLogger(this.getClass().getName());

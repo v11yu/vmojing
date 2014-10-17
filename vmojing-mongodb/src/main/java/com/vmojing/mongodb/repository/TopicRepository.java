@@ -16,7 +16,6 @@ public class TopicRepository {
     MongoTemplate mongoTemplate;
 	public void insert(Topic t) {
 		//mongoTemplate.
-
         mongoTemplate.insert(t);
     }
 	public void createTopicCollection() {

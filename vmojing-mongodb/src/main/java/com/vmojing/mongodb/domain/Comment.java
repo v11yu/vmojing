@@ -23,8 +23,70 @@ public class Comment {
 	private String mid ;
 	/** 字符串型的评论ID */
 	private String idstr;
-	/** 评论的微博信息字段 */
-	private Object status;
+	/** 评论的微博信息ID */
+	private Long weiboId;
 	/** 评论来源评论，当本评论属于对另一评论的回复时返回此字段 */
-	private Object replyComment;
+	private Long replyCommentId;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Date getCreateAtTime() {
+		return createAtTime;
+	}
+	public void setCreateAtTime(Date createAtTime) {
+		this.createAtTime = createAtTime;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+	public String getSource() {
+		return source;
+	}
+	public void setSource(String source) {
+		this.source = source;
+	}
+	public Object getUser() {
+		return user;
+	}
+	public void setUser(Object user) {
+		this.user = user;
+	}
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	public String getIdstr() {
+		return idstr;
+	}
+	public void setIdstr(String idstr) {
+		this.idstr = idstr;
+	}
+	public Long getWeiboId() {
+		return weiboId;
+	}
+	public void setWeiboId(Long weiboId) {
+		this.weiboId = weiboId;
+	}
+	public Long getReplyCommentId() {
+		return replyCommentId;
+	}
+	public void setReplyCommentId(Long replyCommentId) {
+		this.replyCommentId = replyCommentId;
+	}
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", createAtTime=" + createAtTime
+				+ ", text=" + text + ", source=" + source + ", user=" + user
+				+ ", mid=" + mid + ", idstr=" + idstr + ", weiboId=" + weiboId
+				+ ", replyCommentId=" + replyCommentId + "]";
+	}
+	
 }

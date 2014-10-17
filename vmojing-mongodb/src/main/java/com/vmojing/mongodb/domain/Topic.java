@@ -25,6 +25,63 @@ public class Topic {
 	private String topicName;
 	/** 话题类别：0为领导话题，1为部门话题，2是其它话题 */
 	private Integer type;
+	
+	public ObjectId getId() {
+		return id;
+	}
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
+	public Date getCreateAtTime() {
+		return createAtTime;
+	}
+
+	public void setCreateAtTime(Date createAtTime) {
+		this.createAtTime = createAtTime;
+	}
+
+	public Date getLastUpdateTime() {
+		return lastUpdateTime;
+	}
+
+	public void setLastUpdateTime(Date lastUpdateTime) {
+		this.lastUpdateTime = lastUpdateTime;
+	}
+
+	public Integer getOperateStatus() {
+		return operateStatus;
+	}
+
+	public void setOperateStatus(Integer operateStatus) {
+		this.operateStatus = operateStatus;
+	}
+
+	public Integer getUpdateFrequency() {
+		return updateFrequency;
+	}
+
+	public void setUpdateFrequency(Integer updateFrequency) {
+		this.updateFrequency = updateFrequency;
+	}
+
+	public String getTopicName() {
+		return topicName;
+	}
+
+	public void setTopicName(String topicName) {
+		this.topicName = topicName;
+	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+
 	public Topic(Date createAtTime, Date lastUpdateTime, Integer operateStatus,
 			Integer updateFrequency, String topicName, Integer type) {
 		super();
@@ -35,5 +92,14 @@ public class Topic {
 		this.topicName = topicName;
 		this.type = type;
 	}
+
+	@Override
+	public String toString() {
+		return "Topic [id=" + id + ", createAtTime=" + createAtTime
+				+ ", lastUpdateTime=" + lastUpdateTime + ", operateStatus="
+				+ operateStatus + ", updateFrequency=" + updateFrequency
+				+ ", topicName=" + topicName + ", type=" + type + "]";
+	}
+	
 	
 }

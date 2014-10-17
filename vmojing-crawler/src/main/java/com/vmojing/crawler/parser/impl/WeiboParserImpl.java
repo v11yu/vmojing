@@ -1,26 +1,29 @@
-package com.vmojing.crawler.parser;
-import java.util.*;
+package com.vmojing.crawler.parser.impl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.vmojing.dao.utils.AccessTokenAllocation;
+
 import weibo4j.Timeline;
 import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
-/**
- * 获取Status逻辑处理类
- * @author v11
- * @date 2014年10月11日
- * @Since 1.0
- */
-public class StatusParser {
-	private static final Logger log = LoggerFactory.getLogger(StatusParser.class);
-	/**
-	 * 通过新浪api获取微博详细信息
-	 * @param wids 微博wids
-	 * @return Statuses
-	 */
-	public List<Status> getStatuses(Set<String> wids) {
+
+import com.vmojing.crawler.parser.WeiboParser;
+import com.vmojing.dao.utils.AccessTokenAllocation;
+import com.vmojing.domain.Weibo;
+
+public class WeiboParserImpl implements WeiboParser {
+	private static final Logger log = LoggerFactory
+			.getLogger(WeiboParserImpl.class);
+
+	@Override
+	public List<Weibo> getWeibo(Set<String> wids, Date lastUpdateTime) {
 		// TODO Auto-generated method stub
 		Timeline tm = new Timeline();
 		tm.setToken(AccessTokenAllocation.getAccessToken());
@@ -32,7 +35,7 @@ public class StatusParser {
 			String id = iterator.next();
 			idsStr = idsStr + id + ",";
 			i++;
-			if (!iterator.hasNext() || i%50 == 0) { // 根据微博ID批量获取微博信息，最多不超过50个
+			if (!iterator.hasNext() || i % 50 == 0) { // 根据微博ID批量获取微博信息，最多不超过50个
 				idsStr = idsStr.substring(0, idsStr.lastIndexOf(","));
 				try {
 					StatusWapper statusWapper = tm.getStatusByIds(idsStr, 0);
@@ -47,6 +50,20 @@ public class StatusParser {
 				idsStr = "";
 			}
 		}
-		return allWeibos;
+		return null;
+
 	}
+
+	@Override
+	public List<Weibo> getRetweet(Long wid, Date lastUpdateRetweetTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Weibo> getWeibo(Long uid, Date lastUpdateWeiboTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

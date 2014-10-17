@@ -38,6 +38,7 @@
 			<artifactId>nosqlunit-mongodb</artifactId>
 			<version>${nosqlunit.version}</version>
 			<scope>test</scope>
+
 		</dependency>
 		<!-- End: Test -->
 	</dependencies>

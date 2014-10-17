@@ -32,7 +32,6 @@ import com.vmojing.crawler.fetcher.Loginer;
  * 新浪手机web端登陆器
  * @author v11
  * @date 2014年9月5日
- * Since 1.0
  */
 public class MobileSinaLoginer implements Loginer{
 	private final Logger log = Logger.getLogger(this.getClass().getName());
