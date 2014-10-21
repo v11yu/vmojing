@@ -6,7 +6,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
 
-public interface DAO{
+public interface DAO<T>{
 	/** 获取查询全部记录 */
 	public DBCursor findByAll();
 	/**
@@ -31,6 +31,32 @@ public interface DAO{
 	 * @see QueryBuilder
 	 */
 	public DBCursor findQuery(QueryBuilder query);
-	
+	/** 
+	 * 保存一条记录
+	 */
+	public void save(DBObject obj);
+	/** 
+	 * 保存一条记录
+	 */
+	public void save(T obj);
+	/** 
+	 * 保存所有记录
+	 */
+	public void saveAll(DBCursor cursor);
+	/**
+	 * 删除该表所有记录
+	 */
+	public void dropAll();
+	/**
+	 * 更新数据
+	 * @param obj 变动后的<code>DBObjet</code>的完整信息
+	 * @param keyNames 需要变动的字段名，多个字段之间用,隔开<p/>
+	 * Example
+	 * <pre>
+	 * keyName = "time,age,firendCount"
+	 * </pre>
+	 * 
+	 */
+	public void update(DBObject obj,String keyNames);
 	
 }

@@ -21,6 +21,7 @@
 		<jsoup.version>1.7.3</jsoup.version>
 		<weibo4j.version>1.0</weibo4j.version>
 		<spring-data-mongodb.version>1.6.0.RELEASE</spring-data-mongodb.version>
+		<spring.framework.version>4.1.1.RELEASE</spring.framework.version>
 	</properties>
 	<repositories>
 		<repository>
