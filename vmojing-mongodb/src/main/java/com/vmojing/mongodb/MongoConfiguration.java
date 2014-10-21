@@ -18,26 +18,13 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.util.ArrayList;
+import com.vmojing.mongodb.repository.*;
 
 
-/**
- * Date:   5/24/13 / 8:05 AM
- * Author: Johnathan Mark Smith
- * Email:  john@johnathanmarksmith.com
- * <p/>
- * Comments:
- * <p/>
- * This is a example on how to setup a database with Spring's Java Configuration (JavaConfig) style.
- * <p/>
- * As you can see from the code below this is easy and a lot better then using the old style of XML files.
- * <p/>
- * T
- */
 
 @Configuration
 @EnableMongoRepositories
-@ComponentScan("com.vmojing.mongodb")
-@Import({ SpringConfiguration.class })
+
 public class MongoConfiguration extends AbstractMongoConfiguration {
 
 
@@ -47,8 +34,7 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
     }
     @Override
     public Mongo mongo() throws Exception {
-    	
-        return new Mongo(new ArrayList<ServerAddress>() {{ add(new ServerAddress("127.0.0.1", 27017));}});
+    	return MongoDbUtil.getMongo();
 
     }
     @Override

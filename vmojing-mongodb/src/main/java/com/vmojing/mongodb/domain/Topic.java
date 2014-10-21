@@ -81,7 +81,7 @@ public class Topic {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-
+	public Topic(){}
 	public Topic(Date createAtTime, Date lastUpdateTime, Integer operateStatus,
 			Integer updateFrequency, String topicName, Integer type) {
 		super();
