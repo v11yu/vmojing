@@ -12,7 +12,6 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vmojing.dao.impl.BasicDAO;
 
 public abstract class AbstractBasicFetcher {
 	@SuppressWarnings("rawtypes")

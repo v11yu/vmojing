@@ -15,8 +15,9 @@ import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
 import com.vmojing.crawler.parser.WeiboParser;
-import com.vmojing.dao.utils.AccessTokenAllocation;
-import com.vmojing.domain.Weibo;
+import com.vmojing.mongodb.business.AccessTokenAllocation;
+import com.vmojing.mongodb.domain.Weibo;
+
 
 public class WeiboParserImpl implements WeiboParser {
 	private static final Logger log = LoggerFactory

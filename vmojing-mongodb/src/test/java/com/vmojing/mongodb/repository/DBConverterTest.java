@@ -29,9 +29,18 @@ public class DBConverterTest {
 	public void testToDBObject(){
 		Topic t = new Topic(new Date(),new
 				 Date(),10,100,"hi",1);
-		DBObject obj = topicConvertor.convertFrom(t);
-		Topic t2 = topicConvertor.convertTo(obj);
+		DBObject obj = topicConvertor.convertToDB(t);
+		Topic t2 = topicConvertor.convertToPojo(obj);
 		assertEquals(t.toString(),t2.toString());
+	}
+	@Test
+	public void testError(){
+		Topic t = new Topic();
+		t.setCreateAtTime(new Date());
+		DBObject obj = topicConvertor.convertToDB(t);
+		obj.put("extra", "extraValue");
+		Topic tt = topicConvertor.convertToPojo(obj);
+		System.out.println(tt.toString());
 	}
 
 }

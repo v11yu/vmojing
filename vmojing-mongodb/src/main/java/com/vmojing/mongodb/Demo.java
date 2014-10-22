@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import com.vmojing.mongodb.domain.Topic;
-import com.vmojing.mongodb.repository.BasicRepository;
+import com.vmojing.mongodb.repository.BasicRepositoryTest;
 import com.vmojing.mongodb.utils.SpringConfigSingleton;
 
 public class Demo {

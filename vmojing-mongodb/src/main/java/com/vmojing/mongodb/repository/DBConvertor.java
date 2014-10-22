@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
-import com.vmojing.mongodb.utils.Converter;
+import com.vmojing.mongodb.repository.core.Converter;
 
 
 public class DBConvertor<T> implements Converter<DBObject, T>{
@@ -21,13 +21,13 @@ public class DBConvertor<T> implements Converter<DBObject, T>{
 		this.typeParameterClass = typeParameterClass;
 	}
 	@Override
-	public T convertTo(DBObject obj) {
+	public T convertToPojo(DBObject obj) {
 		// TODO Auto-generated method stub
 		return (T) mongoTemplate.getConverter().read(typeParameterClass, obj);
 	}
 
 	@Override
-	public DBObject convertFrom(T source) {
+	public DBObject convertToDB(T source) {
 		// TODO Auto-generated method stub
 		DBObject obj = new BasicDBObject();
 		mongoTemplate.getConverter().write(source, obj);

@@ -1,0 +1,13 @@
+{
+	"topic":
+			[
+				{
+					  "createAtTime" : { "$date" :"2013-10-12T15:20:01Z"},
+					  "operateStatus" : 0,
+					  "updateFrequency" : 774,
+					  "topicName" : "hello",
+					  "type" : 10,
+					  "lastUpdateTime" : { "$date":"2014-02-28T10:33:45.707Z"}
+				}
+			]
+}

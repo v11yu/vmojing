@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.vmojing.mongodb.domain.Topic;
-import com.vmojing.mongodb.repository.BasicRepository;
+import com.vmojing.mongodb.repository.BasicRepositoryTest;
 
 @Configuration
 @Import({ MongoConfiguration.class ,BeansConfiguration.class})
