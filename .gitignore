@@ -17,9 +17,6 @@ $RECYCLE.BIN/
 .settings/*
 target/*
 log/*
-vmojing-crawler/log/*
-vmojing-mongodb/log/*
-*.log
 *svn*
 *.class
 # =========================
