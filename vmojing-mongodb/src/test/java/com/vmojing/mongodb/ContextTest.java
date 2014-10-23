@@ -1,6 +1,6 @@
-package com.vmojing.crawler;
+package com.vmojing.mongodb;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,9 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.repository.BasicRepository;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RootConfiguration.class})
+@ContextConfiguration(classes={RootConfiguration.class})
 public class ContextTest {
 	@Autowired
 	@Qualifier("topicDao")

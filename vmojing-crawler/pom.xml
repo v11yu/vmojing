@@ -18,6 +18,7 @@
 		
 	</build>
 	<dependencies>
+	
 		<!-- Start:databaseAccessObject -->
 		<dependency>
 			<groupId>cn.ict</groupId>
