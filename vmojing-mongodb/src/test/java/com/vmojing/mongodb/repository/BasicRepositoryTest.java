@@ -39,7 +39,7 @@ public class BasicRepositoryTest {
 	public void testSava(){
 		topicDao.dropAll();
 		Topic t = new Topic(new Date(),new
-				 Date(),10,100,"hi",1);
+				 Date(),10,100,"hi",1,new Date());
 		topicDao.saveAndUpdate(t);
 		assertEquals(topicDao.countAndClose(topicDao.findByAll()), 1);
 		
@@ -68,10 +68,10 @@ public class BasicRepositoryTest {
 	public void testSaveNew(){
 		topicDao.dropAll();
 		Topic t = new Topic(new Date(),new
-				 Date(),10,100,"hi",1);
+				 Date(),10,100,"hi",1,new Date());
 		topicDao.saveAndUpdate(t);
 		t = new Topic(new Date(),new
-				 Date(),10,100,"hi",1); 
+				 Date(),10,100,"hi",1,new Date()); 
 		topicDao.saveAndUpdate(t);
 		t.setType(5);
 		topicDao.saveAndUpdate(t);

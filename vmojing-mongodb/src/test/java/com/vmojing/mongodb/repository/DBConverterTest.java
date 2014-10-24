@@ -28,7 +28,7 @@ public class DBConverterTest {
 	@Test
 	public void testToDBObject(){
 		Topic t = new Topic(new Date(),new
-				 Date(),10,100,"hi",1);
+				 Date(),10,100,"hi",1,new Date());
 		DBObject obj = topicConvertor.convertToDB(t);
 		Topic t2 = topicConvertor.convertToPojo(obj);
 		assertEquals(t.toString(),t2.toString());

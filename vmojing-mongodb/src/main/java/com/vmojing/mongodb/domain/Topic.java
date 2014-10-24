@@ -25,7 +25,16 @@ public class Topic {
 	private String topicName;
 	/** 话题类别：0为领导话题，1为部门话题，2是其它话题 */
 	private Integer type;
-	
+	/** 采集话题的最早时间域,即采集beginTime之后的话题 */
+	private Date beginTime;
+	public Date getBeginTime() {
+		return beginTime;
+	}
+
+	public void setBeginTime(Date beginTime) {
+		this.beginTime = beginTime;
+	}
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -82,8 +91,10 @@ public class Topic {
 		this.type = type;
 	}
 	public Topic(){}
-	public Topic(Date createAtTime, Date lastUpdateTime, Integer operateStatus,
-			Integer updateFrequency, String topicName, Integer type) {
+
+	public Topic( Date createAtTime, Date lastUpdateTime,
+			Integer operateStatus, Integer updateFrequency, String topicName,
+			Integer type, Date beginTime) {
 		super();
 		this.createAtTime = createAtTime;
 		this.lastUpdateTime = lastUpdateTime;
@@ -91,6 +102,7 @@ public class Topic {
 		this.updateFrequency = updateFrequency;
 		this.topicName = topicName;
 		this.type = type;
+		this.beginTime = beginTime;
 	}
 
 	@Override
@@ -98,8 +110,10 @@ public class Topic {
 		return "Topic [id=" + id + ", createAtTime=" + createAtTime
 				+ ", lastUpdateTime=" + lastUpdateTime + ", operateStatus="
 				+ operateStatus + ", updateFrequency=" + updateFrequency
-				+ ", topicName=" + topicName + ", type=" + type + "]";
+				+ ", topicName=" + topicName + ", type=" + type
+				+ ", beginTime=" + beginTime + "]";
 	}
+	
 	
 	
 }
