@@ -61,8 +61,9 @@ public interface DAO<T>{
 	/**
 	 * 根据id,如果不存在就save，否则update
 	 * @param obj
+	 * @throws Exception 
 	 */
-	public void saveAndUpdate(T obj);
+	public void saveAndUpdate(T obj) throws Exception;
 	/**
 	 * 根据id,如果不存在就save，否则update
 	 * @param obj

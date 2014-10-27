@@ -2,9 +2,12 @@ package com.vmojing.mongodb.domain;
 
 import java.util.Date;
 
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.mongodb.BasicDBList;
 
@@ -17,7 +20,7 @@ public class Topic {
 	private Date createAtTime;
 	/** 最后更新的时间*/
 	private Date lastUpdateTime;
-	/** 0为已删除，1为暂停，2为正常监测 */
+	/** 0为正常监测，1为暂停，2为已删除 */
 	private Integer operateStatus;
 	/**话题更新频率 / 分钟*/
 	private Integer updateFrequency;
@@ -26,7 +29,10 @@ public class Topic {
 	/** 话题类别：0为领导话题，1为部门话题，2是其它话题 */
 	private Integer type;
 	/** 采集话题的最早时间域,即采集beginTime之后的话题 */
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date beginTime;
+	/** 初始化采集，已经到达的时间*/
+	private Date initAtTime;
 	public Date getBeginTime() {
 		return beginTime;
 	}
@@ -90,7 +96,21 @@ public class Topic {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	public Topic(){}
+	
+	public Date getInitAtTime() {
+		return initAtTime;
+	}
+
+	public void setInitAtTime(Date initAtTime) {
+		this.initAtTime = initAtTime;
+	}
+
+	public Topic(){
+		this.createAtTime = new Date();
+		this.operateStatus = 0;
+		this.lastUpdateTime = new Date(0);
+		this.initAtTime = new Date(0);
+	}
 
 	public Topic( Date createAtTime, Date lastUpdateTime,
 			Integer operateStatus, Integer updateFrequency, String topicName,
@@ -103,6 +123,7 @@ public class Topic {
 		this.topicName = topicName;
 		this.type = type;
 		this.beginTime = beginTime;
+		this.initAtTime = new Date(0);
 	}
 
 	@Override
@@ -111,9 +132,8 @@ public class Topic {
 				+ ", lastUpdateTime=" + lastUpdateTime + ", operateStatus="
 				+ operateStatus + ", updateFrequency=" + updateFrequency
 				+ ", topicName=" + topicName + ", type=" + type
-				+ ", beginTime=" + beginTime + "]";
+				+ ", beginTime=" + beginTime + ", initAtTime=" + initAtTime
+				+ "]";
 	}
-	
-	
 	
 }

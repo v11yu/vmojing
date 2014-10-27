@@ -19,12 +19,12 @@ import com.lordofthejars.nosqlunit.annotation.UsingDataSet;
 import com.lordofthejars.nosqlunit.core.LoadStrategyEnum;
 import com.lordofthejars.nosqlunit.mongodb.MongoDbRule;
 import com.mongodb.DBObject;
-import com.vmojing.mongodb.RootConfiguration;
+import com.vmojing.mongodb.MongoRootConfiguration;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.utils.SpringConfigSingleton;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RootConfiguration.class})
+@ContextConfiguration(classes = {MongoRootConfiguration.class})
 public class BasicRepositoryTest {
 	@Autowired
 	@Qualifier("topicDao")
@@ -36,7 +36,7 @@ public class BasicRepositoryTest {
 		topicDao.createCollection();
 	}
 	@Test
-	public void testSava(){
+	public void testSava() throws Exception{
 		topicDao.dropAll();
 		Topic t = new Topic(new Date(),new
 				 Date(),10,100,"hi",1,new Date());
@@ -58,14 +58,14 @@ public class BasicRepositoryTest {
 	}
 	@Test
 	@UsingDataSet(locations = "initialTopicData.json", loadStrategy = LoadStrategyEnum.CLEAN_INSERT)
-	public void testSaveAndUpdate(){
+	public void testSaveAndUpdate() throws Exception{
 		Topic t = topicDao.findOne();
 		t.setTopicName("hello");
 		t.setType(null);
 		topicDao.saveAndUpdate(t);
 	}
 	@Test
-	public void testSaveNew(){
+	public void testSaveNew() throws Exception{
 		topicDao.dropAll();
 		Topic t = new Topic(new Date(),new
 				 Date(),10,100,"hi",1,new Date());

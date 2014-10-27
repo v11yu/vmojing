@@ -162,10 +162,18 @@ public class BasicRepository<T> implements DAO<T>{
 		update(convertor.convertToDB(obj),keyNames);
 	}
 	@Override
-	public void saveAndUpdate(T obj) {
+	public void saveAndUpdate(T obj) throws Exception {
 		// TODO Auto-generated method stub
-		getLogger().info("saveAndUpdate :"+obj+" in "+getCollectionName());
-		mongoTemplate.save(obj);
+		try {
+			getLogger().info(
+					"saveAndUpdate :" + obj + " in " + getCollectionName());
+			mongoTemplate.save(obj);
+		} catch (Exception e) {
+			getLogger().error("save failure");
+			throw new Exception("save failure");
+		} finally {
+
+		}
 	}
 	@Override
 	public void saveAndUpdate(DBObject obj) {
