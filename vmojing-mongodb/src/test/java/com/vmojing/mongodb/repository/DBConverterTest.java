@@ -14,13 +14,13 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mongodb.DBObject;
-import com.vmojing.mongodb.RootConfiguration;
+import com.vmojing.mongodb.MongoRootConfiguration;
 import com.vmojing.mongodb.domain.Topic;
 
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {RootConfiguration.class})
+@ContextConfiguration(classes = {MongoRootConfiguration.class})
 public class DBConverterTest {
 	@Autowired
 	@Qualifier("topicConvertor")

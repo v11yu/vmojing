@@ -7,7 +7,6 @@ import java.util.Set;
  * @date 2014年9月5日
  */
 public interface TopicFetcher {
-	
 	/**
 	 * 获取最近话题wids列表,最多只有1000条
 	 * <ol>

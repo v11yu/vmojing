@@ -13,7 +13,7 @@ import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.repository.BasicRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={RootConfiguration.class})
+@ContextConfiguration(classes={MongoRootConfiguration.class})
 public class ContextTest {
 	@Autowired
 	@Qualifier("topicDao")

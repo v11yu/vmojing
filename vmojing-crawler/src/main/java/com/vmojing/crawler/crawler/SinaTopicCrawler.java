@@ -1,30 +1,15 @@
 package com.vmojing.crawler.crawler;
 
 import java.util.List;
+import java.util.Set;
 
 import com.vmojing.crawler.fetcher.TopicFetcher;
+import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.domain.Weibo;
 
-public class SinaTopicCrawler extends AbstractCrawler<List<Weibo>>{
+public interface SinaTopicCrawler {
+	void addTopic();
+	List<Weibo> getWeibos(Set<String> wids);
+	Set<String> getWids(Topic t);
 	
-	@Override
-	protected void initialize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void work() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void saveAndUpdate(List<Weibo> obj) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
 }

@@ -27,34 +27,37 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+
+import com.vmojing.crawler.fetcher.BasicHttpMethod;
 import com.vmojing.crawler.fetcher.Loginer;
 /**
  * 新浪手机web端登陆器
  * @author v11
  * @date 2014年9月5日
  */
-public class MobileSinaLoginer implements Loginer{
-	private final Logger log = Logger.getLogger(this.getClass().getName());
+
+public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
+	private final static Integer TRY_NUM = 3;
 	private final String LOGIN_URL = "http://login.weibo.cn/login/";
-	private String RefererString = null;
 	private HttpClient client ;
 	private String userName = "vmojing@163.com";
 	private String password = "0744ict0744";
 	public MobileSinaLoginer(){
-
 	}
 	@Override
 	public boolean login() {
 		// TODO Auto-generated method stub
-		client = new DefaultHttpClient();
+		HttpClient tmpClient = new DefaultHttpClient();
 		HttpGet get = addHttpGetWithHeader(LOGIN_URL);
 		List<NameValuePair> formParams = new ArrayList<NameValuePair>();
 		String inputPwdName = null;
 		String actionName = null;
+		HttpResponse res = null;
 		try {
-			HttpResponse res = client.execute(get);
+			res = tmpClient.execute(get);
 			release(res);
-			Document doc = Jsoup.parse(showResponseBody(res));
+			Document doc = Jsoup.parse(getResponseBody(res));
 			Elements inputs = doc.getElementsByTag("input");
 			Element form = doc.getElementsByTag("form").get(0);
 			
@@ -74,123 +77,38 @@ public class MobileSinaLoginer implements Loginer{
     		UrlEncodedFormEntity fromEntity = new UrlEncodedFormEntity(formParams, "uTF-8");
 			HttpPost post = addHttpPostWithHeader(LOGIN_URL+actionName);
 			post.setEntity(fromEntity);
-			res = client.execute(post);
+			res = tmpClient.execute(post);
 			release(res);
 			Header header = res.getFirstHeader("Location");
 			get = addHttpGetWithHeader(header.getValue());
-			res = client.execute(get);
-			showResponse(res);
+			res = tmpClient.execute(get);
 			release(res);
 			get = addHttpGetWithHeader("http://weibo.com/u/1744649233");
-			res = client.execute(get);
-			showResponse(res);
+			res = tmpClient.execute(get);
+			this.client = tmpClient;
 			return true;
 			
 		} catch (ClientProtocolException e) {
-			log.error(e.getMessage());
+			getLogger().error(e.getMessage());
 		} catch (IOException e) {
-			log.error(e.getMessage());
+			getLogger().error(e.getMessage());
+		}finally{
+			if(res != null){
+				release(res);
+			}
 		}
 		return false;
 	}
 	@Override
 	public HttpClient getClient() {
 		// TODO Auto-generated method stub
-		return client;
-	}
-	
-	/**
-	 * 释放掉res的资源，在每次连接后
-	 * @param res
-	 */
-	private void release(HttpResponse res){
-		try {
-			EntityUtils.consume(res.getEntity());
-		} catch (IOException e) {
-			log.info(e.toString());
-		}
-	}
-	/**
-	 * 为HttpGet添加报文头信息
-	 * @param url
-	 * @return 
-	 */
-	private HttpGet addHttpGetWithHeader(String url){
-		HttpGet httpGet = new HttpGet(url);
-		httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
-		if(RefererString == null){
-			httpGet.setHeader("Referer", LOGIN_URL);
-		}
-		else {
-			httpGet.setHeader("Referer", RefererString);
-		}
-		httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
-		RefererString = url ;
-		return httpGet;
-	}
-	/**
-	 * 添加post请求报文头信息
-	 * @param url
-	 * @return
-	 */
-	private HttpPost addHttpPostWithHeader(String url){
-		HttpPost httpPost = new HttpPost(url);
-		httpPost.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
-		if(RefererString == null){
-			httpPost.setHeader("Referer", LOGIN_URL);
-		}
-		else {
-			httpPost.setHeader("Referer", RefererString);
-		}
-		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-		RefererString = url ;
-		return httpPost;
-	}
-	
-	/**
-	 * 打印出页面信息body+header
-	 * @param res
-	 */
-	private void showResponse(HttpResponse res){
-		showHeaders(res);
-		showResponseBody(res);
-	}
-	/**
-	 * 打印出response的页面信息
-	 * @param res
-	 */
-	private String showResponseBody(HttpResponse res){
-		HttpEntity entity = res.getEntity();
-		if(entity != null){
-			String content;
-			try {
-				content = EntityUtils.toString(entity,"UTF-8");
-				log.debug(content);
-				return content;
-			} catch (ParseException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
+		login();
+		if(client == null){
+			for(int i=0;i<TRY_NUM&&!login();i++){
+				getLogger().warn("httpClient登陆失败，正在尝试，尝试次数："+i);
 			}
 		}
-		return null;
+		return client;
 	}
-	/**
-	 * 打印response出报文头信息
-	 * @param response
-	 */
-	public void showHeaders(HttpResponse response){
-		log.debug("---------------------------------");
-		Header[] headers = response.getAllHeaders();
-    	for(Header header:headers){
-    		log.debug("key; "+header.getName()
-    				+" value:"+header.getValue());
-    	}
-	}
-	
-	
-	public static void main(String[] args) {
-		MobileSinaLoginer login = new MobileSinaLoginer();
-		
-	}
+
 }

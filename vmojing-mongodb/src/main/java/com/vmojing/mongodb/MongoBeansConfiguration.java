@@ -9,7 +9,7 @@ import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
 
 @Configuration
-public class BeansConfiguration {
+public class MongoBeansConfiguration {
 	/*
 	 * topic
 	 */

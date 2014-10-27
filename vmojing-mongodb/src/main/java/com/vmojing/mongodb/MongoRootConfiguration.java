@@ -9,9 +9,9 @@ import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.repository.BasicRepositoryTest;
 
 @Configuration
-@Import({ MongoConfiguration.class ,BeansConfiguration.class})
+@Import({ MongoConfiguration.class ,MongoBeansConfiguration.class})
 @ComponentScan("com.vmojing.mongodb")
-public class RootConfiguration {
+public class MongoRootConfiguration {
 
 	
 }

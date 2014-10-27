@@ -1,6 +1,8 @@
 package com.vmojing.crawler.fetcher;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -9,25 +11,30 @@ import org.apache.http.ParseException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
-/**
- * 基础网页抓取器
- * @author v11
- * @date 2014年9月5日
- */
-public class BasicFetcher {
-	private final Logger log = Logger.getLogger(this.getClass().getName());
-	private final String LOGIN_URL = "http://login.weibo.cn/login/";
-	private String RefererString = null;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class BasicHttpMethod {
+	private String RefererString = "www.baidu.com";
+	private static Map<Class, Logger> loggers = new HashMap<Class, Logger>();
+	
+	protected synchronized Logger getLogger(){
+		if(!BasicHttpMethod.loggers.containsKey(this.getClass())){
+			Logger log = LoggerFactory.getLogger(this.getClass());
+			BasicHttpMethod.loggers.put(this.getClass(), log);
+		}
+		return BasicHttpMethod.loggers.get(this.getClass());
+		
+	}
 	/**
-	 * 释放掉res的资源，在每次连接后
+	 * 释放资源
 	 * @param res
 	 */
 	protected void release(HttpResponse res){
 		try {
 			EntityUtils.consume(res.getEntity());
 		} catch (IOException e) {
-			log.info(e.toString());
+			getLogger().error(e.toString());
 		}
 	}
 	/**
@@ -38,12 +45,7 @@ public class BasicFetcher {
 	protected HttpGet addHttpGetWithHeader(String url){
 		HttpGet httpGet = new HttpGet(url);
 		httpGet.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
-		if(RefererString == null){
-			httpGet.setHeader("Referer", LOGIN_URL);
-		}
-		else {
-			httpGet.setHeader("Referer", RefererString);
-		}
+		httpGet.setHeader("Referer", RefererString);
 		httpGet.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		RefererString = url ;
 		return httpGet;
@@ -56,31 +58,20 @@ public class BasicFetcher {
 	protected HttpPost addHttpPostWithHeader(String url){
 		HttpPost httpPost = new HttpPost(url);
 		httpPost.setHeader("User-Agent","Mozilla/5.0 (Windows NT 6.1; rv:16.0) Gecko/20100101 Firefox/16.0");
-		if(RefererString == null){
-			httpPost.setHeader("Referer", LOGIN_URL);
-		}
-		else {
-			httpPost.setHeader("Referer", RefererString);
-		}
+		httpPost.setHeader("Referer", RefererString);
 		httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		RefererString = url ;
 		return httpPost;
 	}
-	
-	/**
-	 * 打印出页面信息body+header
-	 * @param res
-	 */
-	protected void showResponse(HttpResponse res){
-		log.info(toStringHeaders(res));
-		log.info("---------------------------------");
-		log.info(toStringResponseBody(res));
+	protected void printResponse(HttpResponse res){
+		getHeaders(res);
+		getResponseBody(res);
 	}
 	/**
-	 * response的页面信息
+	 * 打印出response的页面信息
 	 * @param res
 	 */
-	protected String toStringResponseBody(HttpResponse res){
+	protected String getResponseBody(HttpResponse res){
 		HttpEntity entity = res.getEntity();
 		if(entity != null){
 			String content;
@@ -96,16 +87,16 @@ public class BasicFetcher {
 		return null;
 	}
 	/**
-	 * response出报文头信息
+	 * 打印response出报文头信息
 	 * @param response
 	 */
-	protected String toStringHeaders(HttpResponse response){
-		String heads = "";
+	protected String getHeaders(HttpResponse response){
 		Header[] headers = response.getAllHeaders();
+		String res = "";
     	for(Header header:headers){
-    		heads += ("key; "+header.getName()
-    				+" value:"+header.getValue());
+    		res += "key; "+header.getName()
+    				+" value:"+header.getValue();
     	}
-    	return heads;
+    	return res;
 	}
 }
