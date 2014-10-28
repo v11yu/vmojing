@@ -8,21 +8,27 @@ import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import weibo4j.Timeline;
 import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
+import com.vmojing.crawler.parser.Converter;
 import com.vmojing.crawler.parser.WeiboParser;
+import com.vmojing.crawler.parser.convert.WeiboConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Weibo;
 
-
+@Component
 public class WeiboParserImpl implements WeiboParser {
 	private static final Logger log = LoggerFactory
 			.getLogger(WeiboParserImpl.class);
-
+	@Autowired
+	WeiboConverter weiboConverter;
+	
 	@Override
 	public List<Weibo> getWeibo(Set<String> wids, Date lastUpdateTime) {
 		// TODO Auto-generated method stub

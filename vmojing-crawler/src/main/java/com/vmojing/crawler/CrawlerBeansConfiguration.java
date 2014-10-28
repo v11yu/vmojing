@@ -25,4 +25,7 @@ public class CrawlerBeansConfiguration {
 		}
 		return new MobileTopicFetcher(loginer.getClient());
 	}
+	/*
+	 * crawler
+	 */
 }

@@ -8,7 +8,7 @@ import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.domain.Weibo;
 
 public interface SinaTopicCrawler {
-	void addTopic();
+	void addTopic(Topic t);
 	List<Weibo> getWeibos(Set<String> wids);
 	Set<String> getWids(Topic t);
 	
