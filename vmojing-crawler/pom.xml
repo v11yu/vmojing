@@ -15,10 +15,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
-		
+
 	</build>
 	<dependencies>
-	
+
 		<!-- Start:databaseAccessObject -->
 		<dependency>
 			<groupId>cn.ict</groupId>
@@ -45,5 +45,12 @@
 			<version>${weibo4j.version}</version>
 		</dependency>
 		<!-- End:sinaWeibo -->
+		<!-- Start:reflection Api -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>${commons-beanutils.version}</version>
+		</dependency>
+		<!-- End:reflection Api -->
 	</dependencies>
 </project>

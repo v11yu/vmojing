@@ -6,7 +6,10 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.vmojing.mongodb.annotation.BasicModel;
+
 @Document
+@BasicModel
 public class Comment {
 	@Id
 	private Long id;

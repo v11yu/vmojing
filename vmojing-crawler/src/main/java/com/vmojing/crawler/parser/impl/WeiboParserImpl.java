@@ -16,8 +16,8 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
-import com.vmojing.crawler.parser.Converter;
 import com.vmojing.crawler.parser.WeiboParser;
+import com.vmojing.crawler.parser.convert.Converter;
 import com.vmojing.crawler.parser.convert.WeiboConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Weibo;
@@ -27,17 +27,18 @@ public class WeiboParserImpl implements WeiboParser {
 	private static final Logger log = LoggerFactory
 			.getLogger(WeiboParserImpl.class);
 	@Autowired
-	WeiboConverter weiboConverter;
-	
+	private WeiboConverter weiboConverter;
+	public List<Status> allWeibos;
 	@Override
 	public List<Weibo> getWeibo(Set<String> wids, Date lastUpdateTime) {
 		// TODO Auto-generated method stub
 		Timeline tm = new Timeline();
+		//System.out.println();
 		tm.setToken(AccessTokenAllocation.getAccessToken());
 		Iterator<String> iterator = wids.iterator();
 		int i = 0;
 		String idsStr = "";
-		List<Status> allWeibos = new ArrayList<Status>();
+		allWeibos = new ArrayList<Status>();
 		while (iterator.hasNext()) {
 			String id = iterator.next();
 			idsStr = idsStr + id + ",";
@@ -58,9 +59,7 @@ public class WeiboParserImpl implements WeiboParser {
 			}
 		}
 		return null;
-
 	}
-
 	@Override
 	public List<Weibo> getRetweet(Long wid, Date lastUpdateRetweetTime) {
 		// TODO Auto-generated method stub

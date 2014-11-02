@@ -6,54 +6,67 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import weibo4j.model.Source;
+
+import com.vmojing.mongodb.annotation.BasicModel;
+import com.vmojing.mongodb.annotation.ManualField;
 @Document
+@BasicModel
 public class Weibo {
 	@Id
-    private Long id;
+    private String id;
 	
 	/** 创建时间*/
-	private Date createAtTime;
+	private Date createdAt;
 	/** 微博内容*/
 	private String text;
+	/** 微博mid*/
+	private String mid;
 	/** 微博发布自哪个终端 */
-	private String source;
+	private Source source;
 	/** 微图 */
-	private String thumbnailPicture;
+	private String thumbnailPic;
 	/** 中图 */
-	private String bmiddlePicture;
+	private String bmiddlePic;
 	/** 原图 */
-	private String originalPicture;
+	private String originalPic;
 	/**经度 */
 	private Double longitude;
 	/** 纬度 */
 	private Double latitude;
 	/** 用户Id*/
-	private Long userId;
+	@ManualField
+	private User user;
 	/** 转发微博Id*/
+	@ManualField
 	private Long retweetWeiboId;
 	/** 目前的转发数*/
-	private Integer retweetCount;
+	private Integer repostsCount;
 	/**目前评论数*/
-	private Integer commentCount;
+	private Integer commentsCount;
 	/** 目前的赞数 */
 	private Integer attitudeCount;
-	/** 监测开始时间 */
-	private Date monitoredTime;
+	/**地理信息*/
+	private String geo;
+	
 	/** 最后更新的时间*/
+	@ManualField
 	private Date lastUpdateTime;
 	/**话题Id*/
+	@ManualField
 	private List<ObjectId> topicIds;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getCreateAtTime() {
-		return createAtTime;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setCreateAtTime(Date createAtTime) {
-		this.createAtTime = createAtTime;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	public String getText() {
 		return text;
@@ -61,29 +74,35 @@ public class Weibo {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getSource() {
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
+	public Source getSource() {
 		return source;
 	}
-	public void setSource(String source) {
+	public void setSource(Source source) {
 		this.source = source;
 	}
-	public String getThumbnailPicture() {
-		return thumbnailPicture;
+	public String getThumbnailPic() {
+		return thumbnailPic;
 	}
-	public void setThumbnailPicture(String thumbnailPicture) {
-		this.thumbnailPicture = thumbnailPicture;
+	public void setThumbnailPic(String thumbnailPic) {
+		this.thumbnailPic = thumbnailPic;
 	}
-	public String getBmiddlePicture() {
-		return bmiddlePicture;
+	public String getBmiddlePic() {
+		return bmiddlePic;
 	}
-	public void setBmiddlePicture(String bmiddlePicture) {
-		this.bmiddlePicture = bmiddlePicture;
+	public void setBmiddlePic(String bmiddlePic) {
+		this.bmiddlePic = bmiddlePic;
 	}
-	public String getOriginalPicture() {
-		return originalPicture;
+	public String getOriginalPic() {
+		return originalPic;
 	}
-	public void setOriginalPicture(String originalPicture) {
-		this.originalPicture = originalPicture;
+	public void setOriginalPic(String originalPic) {
+		this.originalPic = originalPic;
 	}
 	public Double getLongitude() {
 		return longitude;
@@ -97,11 +116,11 @@ public class Weibo {
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
-	public Long getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 	public Long getRetweetWeiboId() {
 		return retweetWeiboId;
@@ -109,17 +128,17 @@ public class Weibo {
 	public void setRetweetWeiboId(Long retweetWeiboId) {
 		this.retweetWeiboId = retweetWeiboId;
 	}
-	public Integer getRetweetCount() {
-		return retweetCount;
+	public Integer getRepostsCount() {
+		return repostsCount;
 	}
-	public void setRetweetCount(Integer retweetCount) {
-		this.retweetCount = retweetCount;
+	public void setRepostsCount(Integer repostsCount) {
+		this.repostsCount = repostsCount;
 	}
-	public Integer getCommentCount() {
-		return commentCount;
+	public Integer getCommentsCount() {
+		return commentsCount;
 	}
-	public void setCommentCount(Integer commentCount) {
-		this.commentCount = commentCount;
+	public void setCommentsCount(Integer commentsCount) {
+		this.commentsCount = commentsCount;
 	}
 	public Integer getAttitudeCount() {
 		return attitudeCount;
@@ -127,11 +146,11 @@ public class Weibo {
 	public void setAttitudeCount(Integer attitudeCount) {
 		this.attitudeCount = attitudeCount;
 	}
-	public Date getMonitoredTime() {
-		return monitoredTime;
+	public String getGeo() {
+		return geo;
 	}
-	public void setMonitoredTime(Date monitoredTime) {
-		this.monitoredTime = monitoredTime;
+	public void setGeo(String geo) {
+		this.geo = geo;
 	}
 	public Date getLastUpdateTime() {
 		return lastUpdateTime;
@@ -147,17 +166,17 @@ public class Weibo {
 	}
 	@Override
 	public String toString() {
-		return "Weibo [id=" + id + ", createAtTime=" + createAtTime + ", text="
-				+ text + ", source=" + source + ", thumbnailPicture="
-				+ thumbnailPicture + ", bmiddlePicture=" + bmiddlePicture
-				+ ", originalPicture=" + originalPicture + ", longitude="
-				+ longitude + ", latitude=" + latitude + ", userId=" + userId
-				+ ", retweetWeiboId=" + retweetWeiboId + ", retweetCount="
-				+ retweetCount + ", commentCount=" + commentCount
-				+ ", attitudeCount=" + attitudeCount + ", monitoredTime="
-				+ monitoredTime + ", lastUpdateTime=" + lastUpdateTime
-				+ ", topicIds=" + topicIds + "]";
+		return "Weibo [id=" + id + ", createdAt=" + createdAt + ", text="
+				+ text + ", mid=" + mid + ", source=" + source
+				+ ", thumbnailPic=" + thumbnailPic + ", bmiddlePic="
+				+ bmiddlePic + ", originalPic=" + originalPic + ", longitude="
+				+ longitude + ", latitude=" + latitude + ", user=" + user
+				+ ", retweetWeiboId=" + retweetWeiboId + ", repostsCount="
+				+ repostsCount + ", commentsCount=" + commentsCount
+				+ ", attitudeCount=" + attitudeCount + ", geo=" + geo
+				+ ", lastUpdateTime=" + lastUpdateTime + ", topicIds="
+				+ topicIds + "]";
 	}
-	
+
 	
 }

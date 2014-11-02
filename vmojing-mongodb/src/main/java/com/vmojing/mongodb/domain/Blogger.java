@@ -12,8 +12,8 @@ public class Blogger {
 	/** 用户详细信息 */
 	private User user;
 	/** 检测开始时间*/
-	private Date startMonitorTime;
-	/** 运行状态，0为已删除，1为暂停，2为正常监测 */
+	private Date createAt;
+	/** 运行状态，0为正常监测，1为暂停，2为已删除 */
 	private Integer operateStatus;
 	/** 博主的状态，0为正常博主，1为异常博主 */
 	private Integer status;
@@ -32,12 +32,6 @@ public class Blogger {
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
-	public Date getStartMonitorTime() {
-		return startMonitorTime;
-	}
-	public void setStartMonitorTime(Date startMonitorTime) {
-		this.startMonitorTime = startMonitorTime;
 	}
 	public Integer getOperateStatus() {
 		return operateStatus;
@@ -63,13 +57,19 @@ public class Blogger {
 	public void setLastUpdateWeiboTime(Date lastUpdateWeiboTime) {
 		this.lastUpdateWeiboTime = lastUpdateWeiboTime;
 	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 	@Override
 	public String toString() {
-		return "Blogger [id=" + id + ", user=" + user + ", startMonitorTime="
-				+ startMonitorTime + ", operateStatus=" + operateStatus
-				+ ", status=" + status + ", lastUpdateFansTime="
-				+ lastUpdateFansTime + ", lastUpdateWeiboTime="
-				+ lastUpdateWeiboTime + "]";
+		return "Blogger [id=" + id + ", user=" + user + ", createAt="
+				+ createAt + ", operateStatus=" + operateStatus + ", status="
+				+ status + ", lastUpdateFansTime=" + lastUpdateFansTime
+				+ ", lastUpdateWeiboTime=" + lastUpdateWeiboTime + "]";
 	}
+	
 	
 }

@@ -17,4 +17,7 @@ public class SpringConfigSingleton {
 		}
 		return unique.context;
 	}
+	public static Object getBean(String name){
+		return getContext().getBean(name);
+	}
 }

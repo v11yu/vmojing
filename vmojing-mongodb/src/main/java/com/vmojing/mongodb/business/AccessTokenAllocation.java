@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.mongodb.DBCursor;
 import com.vmojing.mongodb.domain.AccessToken;
 import com.vmojing.mongodb.repository.BasicRepository;
+import com.vmojing.mongodb.repository.DBConvertor;
 import com.vmojing.mongodb.utils.SpringConfigSingleton;
 /**
  * 新浪微博AccessToken单例
@@ -26,12 +27,14 @@ public class AccessTokenAllocation {
 	private Integer accessTokenIndex;
 	private AccessTokenAllocation(){
 		accessTokenDao = (BasicRepository<AccessToken>) SpringConfigSingleton.getContext().getBean("accessTokenDao");
+		DBConvertor<AccessToken> accessTokenConvertor = (DBConvertor<AccessToken>) SpringConfigSingleton.getBean("accessTokenConvertor");
 		accessTokenIndex = 0;
 		accessTokens = new ArrayList<String>();
 		DBCursor cursor = accessTokenDao.findByAll();
 		try{
 			while(cursor.hasNext()){
-				String accessToken =  (String)cursor.next().get("access_token");
+				AccessToken at = accessTokenConvertor.convertToPojo(cursor.next()); 
+				String accessToken =  at.getToken();
 				accessTokens.add(accessToken);
 			}
 		}catch(Exception e){
@@ -49,7 +52,7 @@ public class AccessTokenAllocation {
 			uniqueAccessTokenAllocation = new AccessTokenAllocation();
 		}
 		uniqueAccessTokenAllocation.accessTokenIndex %= uniqueAccessTokenAllocation.accessTokens.size();
-		return uniqueAccessTokenAllocation.accessTokens.get(uniqueAccessTokenAllocation.accessTokenIndex++);
+		return uniqueAccessTokenAllocation.accessTokens.get(uniqueAccessTokenAllocation.accessTokenIndex);
 	}
 	/**
 	 * 系统AccessToken过期<br />

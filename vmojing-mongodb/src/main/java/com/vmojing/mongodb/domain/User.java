@@ -7,8 +7,12 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.vmojing.mongodb.annotation.BasicModel;
+import com.vmojing.mongodb.annotation.ManualField;
+
 
 @Document
+@BasicModel
 public class User {
 	@Id
 	private Long id;
@@ -63,9 +67,11 @@ public class User {
 	/** 微號 */
 	private String weihao;
 	/** 最后更新的时间*/
+	@ManualField
 	private Date lastUpdateTime;
 	/*--------博主粉丝-------*/
 	/** 该用户关注的博主列表 */
+	@ManualField
 	private List<Long> friendsList;
 	public Long getId() {
 		return id;

@@ -20,6 +20,13 @@ public class AccessToken {
 	public void setToken(String token) {
 		this.token = token;
 	}
+	public AccessToken(){
+		
+	}
+	public AccessToken(String token) {
+		super();
+		this.token = token;
+	}
 	@Override
 	public String toString() {
 		return "AccessToken [id=" + id + ", token=" + token + "]";

@@ -32,6 +32,13 @@
 			<version>${spring-data-mongodb.version}</version>
 		</dependency>
 		<!-- End: Database -->
+		<!-- Start:sinaWeibo -->
+		<dependency>
+			<groupId>com.sina.weibo</groupId>
+			<artifactId>weibo4j</artifactId>
+			<version>${weibo4j.version}</version>
+		</dependency>
+		<!-- End:sinaWeibo -->
 		<!-- Start: Test -->
 		<dependency>
 			<groupId>com.lordofthejars</groupId>

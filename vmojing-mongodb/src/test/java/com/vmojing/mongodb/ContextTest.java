@@ -23,4 +23,5 @@ public class ContextTest {
 		System.out.println(topicDao.countAndClose(topicDao.findByAll()));
 		assertNotNull(topicDao);
 	}
+	
 }

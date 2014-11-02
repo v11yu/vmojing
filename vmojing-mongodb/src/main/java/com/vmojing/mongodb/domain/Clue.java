@@ -11,8 +11,8 @@ public class Clue {
 	/** 微博详细信息 */
 	private Weibo weibo;
 	/** 监测开始时间 */
-	private Date startMonitorTime;
-	/** 运行状态，0为已删除，1为暂停，2为正常监测 */
+	private Date createAt;
+	/** 运行状态，0为正常监测，1为暂停，2为已删除 */
 	private Integer operateStatus;
 	/** 线索的状态，0为正常线索，1为异常线索 */
 	private Integer status;
@@ -31,12 +31,6 @@ public class Clue {
 	}
 	public void setWeibo(Weibo weibo) {
 		this.weibo = weibo;
-	}
-	public Date getStartMonitorTime() {
-		return startMonitorTime;
-	}
-	public void setStartMonitorTime(Date startMonitorTime) {
-		this.startMonitorTime = startMonitorTime;
 	}
 	public Integer getOperateStatus() {
 		return operateStatus;
@@ -62,13 +56,19 @@ public class Clue {
 	public void setLastUpdateCommentTime(Date lastUpdateCommentTime) {
 		this.lastUpdateCommentTime = lastUpdateCommentTime;
 	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
 	@Override
 	public String toString() {
-		return "Clue [id=" + id + ", weibo=" + weibo + ", startMonitorTime="
-				+ startMonitorTime + ", operateStatus=" + operateStatus
-				+ ", status=" + status + ", lastUpdateRetweetTime="
-				+ lastUpdateRetweetTime + ", lastUpdateCommentTime="
-				+ lastUpdateCommentTime + "]";
+		return "Clue [id=" + id + ", weibo=" + weibo + ", createAt=" + createAt
+				+ ", operateStatus=" + operateStatus + ", status=" + status
+				+ ", lastUpdateRetweetTime=" + lastUpdateRetweetTime
+				+ ", lastUpdateCommentTime=" + lastUpdateCommentTime + "]";
 	}
+	
 	
 }
