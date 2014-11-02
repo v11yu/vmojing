@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.vmojing.mongodb.annotation.BasicModel;
+import com.vmojing.mongodb.annotation.ManualField;
 
 @Document
 @BasicModel
@@ -15,20 +16,21 @@ public class Comment {
 	private Long id;
 	
 	/** 创建的时间*/
-	private Date createAtTime;
+	private Date createdAt;
 	/** 评论内容 */
 	private String text;
 	/** 评论的来源 */
 	private String source;
 	/** 评论用户 */
-	private Object user;
+	@ManualField
+	private User user;
 	/** 评论mid */
 	private String mid ;
-	/** 字符串型的评论ID */
-	private String idstr;
 	/** 评论的微博信息ID */
-	private Long weiboId;
+	@ManualField
+	private String weiboId;
 	/** 评论来源评论，当本评论属于对另一评论的回复时返回此字段 */
+	@ManualField
 	private Long replyCommentId;
 	public Long getId() {
 		return id;
@@ -36,11 +38,11 @@ public class Comment {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Date getCreateAtTime() {
-		return createAtTime;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
-	public void setCreateAtTime(Date createAtTime) {
-		this.createAtTime = createAtTime;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	public String getText() {
 		return text;
@@ -54,10 +56,10 @@ public class Comment {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	public Object getUser() {
+	public User getUser() {
 		return user;
 	}
-	public void setUser(Object user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	public String getMid() {
@@ -66,16 +68,10 @@ public class Comment {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
-	public String getIdstr() {
-		return idstr;
-	}
-	public void setIdstr(String idstr) {
-		this.idstr = idstr;
-	}
-	public Long getWeiboId() {
+	public String getWeiboId() {
 		return weiboId;
 	}
-	public void setWeiboId(Long weiboId) {
+	public void setWeiboId(String weiboId) {
 		this.weiboId = weiboId;
 	}
 	public Long getReplyCommentId() {
@@ -86,10 +82,10 @@ public class Comment {
 	}
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", createAtTime=" + createAtTime
-				+ ", text=" + text + ", source=" + source + ", user=" + user
-				+ ", mid=" + mid + ", idstr=" + idstr + ", weiboId=" + weiboId
-				+ ", replyCommentId=" + replyCommentId + "]";
+		return "Comment [id=" + id + ", createdAt=" + createdAt + ", text="
+				+ text + ", source=" + source + ", user=" + user + ", mid="
+				+ mid + ", weiboId=" + weiboId + ", replyCommentId="
+				+ replyCommentId + "]";
 	}
 	
 }

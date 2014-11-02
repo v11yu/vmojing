@@ -18,19 +18,20 @@ public interface WeiboParser {
 	 * @param lastUpdateTime 系统最后更新时间
 	 * @return weibo 微博列表
 	 */
-	public List<Weibo> getWeibo(Set<String> wids,Date lastUpdateTime);
+	public List<Weibo> getWeiboByWids(Set<String> wids,Date lastUpdateTime);
 	/**
 	 * 获取该微博的最新转发微博信息详细
 	 * @param wid 微博id
-	 * @param lastUpdateRetweetTime 系统最后更新时间
-	  * @return weibo 转发列表
+	 * @param lastUpdateRetweetTime 系统最后更新时间 
+	 * @return weibo 转发列表,最新2000
 	 */
-	public List<Weibo> getRetweet(Long wid,Date lastUpdateRetweetTime);
+	public List<Weibo> getRetweet(String wid,Date lastUpdateRetweetTime);
 	/**
 	 * 获取该博主发布的最新微博信息
 	 * @param uid 博主id
 	 * @param lastUpdateWeiboTime 最后更新时间
 	 * @return weibo 微博列表
 	 */
-	public List<Weibo> getWeibo (Long uid,Date lastUpdateWeiboTime);
+	public List<Weibo> getWeiboByUid (String uid,Date lastUpdateWeiboTime);
+	
 }

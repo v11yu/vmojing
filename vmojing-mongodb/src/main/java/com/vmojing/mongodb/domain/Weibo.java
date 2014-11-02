@@ -40,7 +40,7 @@ public class Weibo {
 	private User user;
 	/** 转发微博Id*/
 	@ManualField
-	private Long retweetWeiboId;
+	private String retweetWeiboId;
 	/** 目前的转发数*/
 	private Integer repostsCount;
 	/**目前评论数*/
@@ -122,10 +122,10 @@ public class Weibo {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Long getRetweetWeiboId() {
+	public String getRetweetWeiboId() {
 		return retweetWeiboId;
 	}
-	public void setRetweetWeiboId(Long retweetWeiboId) {
+	public void setRetweetWeiboId(String retweetWeiboId) {
 		this.retweetWeiboId = retweetWeiboId;
 	}
 	public Integer getRepostsCount() {

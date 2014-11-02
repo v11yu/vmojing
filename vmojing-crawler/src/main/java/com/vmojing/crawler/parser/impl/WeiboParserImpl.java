@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,50 +28,100 @@ import com.vmojing.mongodb.domain.Weibo;
 public class WeiboParserImpl implements WeiboParser {
 	private static final Logger log = LoggerFactory
 			.getLogger(WeiboParserImpl.class);
+	private static int MaxRetWeetPage = 10;
+	private static int MaxRetWeetSize = 200;
+	private static int MaxUserWeiboSize = 200;
+	private static int MaxWidsSize = 50;
 	@Autowired
 	private WeiboConverter weiboConverter;
-	public List<Status> allWeibos;
-	@Override
-	public List<Weibo> getWeibo(Set<String> wids, Date lastUpdateTime) {
-		// TODO Auto-generated method stub
-		Timeline tm = new Timeline();
-		//System.out.println();
+	private Timeline tm ;
+	
+	@PostConstruct
+	private void initialize(){
+		tm = new Timeline();
 		tm.setToken(AccessTokenAllocation.getAccessToken());
+	}
+	@Override
+	public List<Weibo> getWeiboByWids(Set<String> wids, Date lastUpdateTime) {
+		// TODO Auto-generated method stub
 		Iterator<String> iterator = wids.iterator();
 		int i = 0;
 		String idsStr = "";
-		allWeibos = new ArrayList<Status>();
+		List<Weibo> allWeibos = new ArrayList<Weibo>();
 		while (iterator.hasNext()) {
 			String id = iterator.next();
 			idsStr = idsStr + id + ",";
 			i++;
-			if (!iterator.hasNext() || i % 50 == 0) { // 根据微博ID批量获取微博信息，最多不超过50个
+			if (!iterator.hasNext() || i % MaxWidsSize == 0) { // 根据微博ID批量获取微博信息，最多不超过50个
 				idsStr = idsStr.substring(0, idsStr.lastIndexOf(","));
 				try {
-					StatusWapper statusWapper = tm.getStatusByIds(idsStr, 0);
-					List<Status> statuses = statusWapper.getStatuses();
-					for (int j = 0; j < statuses.size(); j++) {
-						allWeibos.add(statuses.get(j));
+					List<Weibo> weibos = getWeiboAfterTime(tm.getStatusByIds(idsStr, 0), lastUpdateTime);
+					if(null == weibos){
+						log.error("微博列表"+idsStr +" getWeiboByWids出错，StatusWapper is null");
+						continue;
 					}
+					allWeibos.addAll(getWeiboAfterTime(tm.getStatusByIds(idsStr, 0), lastUpdateTime));
+					
 				} catch (WeiboException e) {
 					// TODO Auto-generated catch block
 					log.error(e.toString());
+					return null;
 				}
 				idsStr = "";
 			}
 		}
-		return null;
+		return allWeibos;
 	}
 	@Override
-	public List<Weibo> getRetweet(Long wid, Date lastUpdateRetweetTime) {
+	public List<Weibo> getRetweet(String wid, Date lastUpdateRetweetTime) {
 		// TODO Auto-generated method stub
-		return null;
+		StatusWapper sw = null;
+		List<Weibo> res = new ArrayList<Weibo>();
+		for (int i = 1; i < MaxRetWeetPage; i++) {
+			try {
+				sw = tm.getRepostTimeline(wid, MaxRetWeetSize, i);
+				List<Weibo> weibos = getWeiboAfterTime(sw,lastUpdateRetweetTime);
+				if(null == weibos){
+					log.error("微博"+wid +" getRetweet出错，StatusWapper is null");
+					continue;
+				}
+				if(0 == weibos.size()){
+					log.info("微博"+wid +" 转发列表已采集完成，采集至第"+(i-1));
+					break;
+				}
+				res.addAll(weibos);
+			} catch (WeiboException e) {
+				// TODO Auto-generated catch block
+				log.error(""+e);
+				return null;
+			}
+		}
+		return res;
 	}
 
 	@Override
-	public List<Weibo> getWeibo(Long uid, Date lastUpdateWeiboTime) {
+	public List<Weibo> getWeiboByUid(String uid, Date lastUpdateWeiboTime) {
 		// TODO Auto-generated method stub
-		return null;
+		StatusWapper sw = null;
+		try {
+			sw = tm.getUserTimelineBatchByUids(uid, MaxUserWeiboSize, 1); // max page
+		} catch (WeiboException e) {
+			// TODO Auto-generated catch block
+			log.error(""+e);
+			return null;
+		}
+		return getWeiboAfterTime(sw,lastUpdateWeiboTime);
+		
+	}
+	private List<Weibo> getWeiboAfterTime(StatusWapper sw,Date tim){
+		List<Weibo> weibos = new ArrayList<Weibo>();
+		if(sw == null || sw.getStatuses() == null) return weibos; 
+		for(Status st: sw.getStatuses()){
+			if(st.getCreatedAt().after(tim)){
+				weibos.add(weiboConverter.convert(st));
+			}
+		}
+		return weibos;
 	}
 
 }

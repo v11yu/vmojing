@@ -40,6 +40,8 @@ public abstract class Converter <T,F>{
 						| NoSuchMethodException e) {
 					// TODO Auto-generated catch block
 					getLogger().error(""+e);
+				}catch (Exception e) {
+					getLogger().error(""+e);
 				}
 			}
 		}

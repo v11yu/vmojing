@@ -15,7 +15,7 @@ import com.vmojing.mongodb.annotation.ManualField;
 @BasicModel
 public class User {
 	@Id
-	private Long id;
+	private String id;
 	/** 微博昵称 */
 	private String screenName;
 	/** 友好显示名称，如Bill Gates,名称中间的空格正常显示(此特性暂不支持) */
@@ -73,10 +73,10 @@ public class User {
 	/** 该用户关注的博主列表 */
 	@ManualField
 	private List<Long> friendsList;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getScreenName() {

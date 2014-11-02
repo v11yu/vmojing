@@ -13,4 +13,10 @@ public interface UserParser {
 	 * @return 最新的粉丝列表
 	 */
 	public List<User> getFans(Long uid,Date lastUpdateFansTime);
+	/**
+	 * 获取用户Id，通过用户名
+	 * @param name 用户名
+	 * @return 用户id
+	 */
+	public User getIdByName(String name);
 }
