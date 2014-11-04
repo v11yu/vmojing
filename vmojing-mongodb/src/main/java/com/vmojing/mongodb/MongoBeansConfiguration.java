@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.vmojing.mongodb.domain.AccessToken;
 import com.vmojing.mongodb.domain.Topic;
+import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
 
@@ -32,6 +33,18 @@ public class MongoBeansConfiguration {
 	@Bean
 	BasicRepository<AccessToken> accessTokenDao(){
 		return new BasicRepository<AccessToken>(AccessToken.class,accessTokenConvertor());
+		
+	}
+	/*
+	 * user
+	 */
+	@Bean
+	DBConvertor<User> userConvertor(){
+		return new DBConvertor<>(User.class);
+	}
+	@Bean
+	BasicRepository<User> userDao(){
+		return new BasicRepository<User>(User.class,userConvertor());
 		
 	}
 }

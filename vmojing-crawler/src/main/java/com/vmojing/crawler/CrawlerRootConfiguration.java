@@ -8,7 +8,7 @@ import com.vmojing.mongodb.MongoBeansConfiguration;
 import com.vmojing.mongodb.MongoConfiguration;
 
 @Configuration
-@ComponentScan({"com.vmojing.crawler"})
+@ComponentScan({"com.vmojing.crawler","com.vmojing.mongodb"})
 @Import({ MongoConfiguration.class ,MongoBeansConfiguration.class,CrawlerBeansConfiguration.class})
 public class CrawlerRootConfiguration {
 
