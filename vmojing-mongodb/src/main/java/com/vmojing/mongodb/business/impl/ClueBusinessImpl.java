@@ -12,44 +12,41 @@ import org.springframework.stereotype.Component;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.vmojing.mongodb.business.AbstractBusiness;
-import com.vmojing.mongodb.business.api.TopicBusiness;
+import com.vmojing.mongodb.business.api.ClueBusiness;
+import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.Topic;
+import com.vmojing.mongodb.exception.VmojingMongoException;
 import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
 @Component
-public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness {
+public class ClueBusinessImpl extends AbstractBusiness implements ClueBusiness{
 	@Autowired
-	@Qualifier("topicDao")
-	BasicRepository<Topic> topicDao;
+	@Qualifier("clueDao")
+	BasicRepository<Clue> clueDao;
 	@Autowired
-	@Qualifier("topicConvertor")
-	DBConvertor<Topic> topicConvertor;
+	@Qualifier("clueConvertor")
+	DBConvertor<Clue> clueConvertor;
 	@Override
-	public boolean save(Topic t) {
+	public boolean save(Clue c) {
 		// TODO Auto-generated method stub
-		try {
-			topicDao.saveAndUpdate(t);
-			return true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			getLogger().error("save topic fail "+e.toString());
-		}
 		return false;
 	}
+
 	@Override
-	public List<Topic> getAll() {
+	public List<Clue> getAll() {
 		// TODO Auto-generated method stub
 		DBCursor cursor = null;
-		List<Topic> res = new ArrayList<Topic>();
+		List<Clue> res = new ArrayList<Clue>();
 		try{
-			cursor = topicDao.findByAll();
+			cursor = clueDao.findByAll();
 			while(cursor.hasNext()){
 				DBObject obj = cursor.next();
-				res.add(topicConvertor.convertToPojo(obj));
+				res.add(clueConvertor.convertToPojo(obj));
 			}
 		}catch(Exception e){
-			getLogger().error("topic getAll throw error " +e);
-			res = null;
+			getLogger().error("clue getAll throw error " +e);
+			//throw new VmojingMongoException("clue getAll throw error",e);
+			return null;
 		}finally{
 			if(cursor != null){
 				cursor.close();
@@ -57,4 +54,5 @@ public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness
 		}
 		return res;
 	}
+
 }

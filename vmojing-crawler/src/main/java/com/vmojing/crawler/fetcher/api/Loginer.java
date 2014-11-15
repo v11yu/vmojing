@@ -1,4 +1,4 @@
-package com.vmojing.crawler.fetcher;
+package com.vmojing.crawler.fetcher.api;
 
 import org.apache.http.client.HttpClient;
 

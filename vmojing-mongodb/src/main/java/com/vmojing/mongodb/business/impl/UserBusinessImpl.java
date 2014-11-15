@@ -6,11 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.vmojing.mongodb.business.AbstractBusiness;
 import com.vmojing.mongodb.business.api.UserBusiness;
 import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.repository.BasicRepository;
 @Component
-public class UserBusinessImpl implements UserBusiness{
+public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	@Autowired
 	@Qualifier("userDao")
 	BasicRepository<User> userDao;

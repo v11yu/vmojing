@@ -15,9 +15,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+
 import com.vmojing.crawler.fetcher.BasicHttpMethod;
-import com.vmojing.crawler.fetcher.Loginer;
-import com.vmojing.crawler.fetcher.TopicFetcher;
+import com.vmojing.crawler.fetcher.api.Loginer;
+import com.vmojing.crawler.fetcher.api.TopicFetcher;
 import com.vmojing.crawler.fetcher.util.IdTransferUtil;
 
 
@@ -30,6 +31,7 @@ import com.vmojing.crawler.fetcher.util.IdTransferUtil;
 
 public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 	private final static Integer MaxPageNum = 100;
+	private final static Integer DefaultNum = 3;
 	private HttpClient client;
 	/**
 	 * 

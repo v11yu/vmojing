@@ -1,7 +1,9 @@
 package com.vmojing.crawler.sina;
 
-import org.junit.Test;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,30 +36,13 @@ import static org.junit.Assert.*;
 @ContextConfiguration(classes={CrawlerRootConfiguration.class})
 public class TimelineTest {
 	private static Logger log = LoggerFactory.getLogger(TimelineTest.class);
-	//@Test
-	public void testUsersWeibo(){
-		Timeline tm = new Timeline();
-		tm.setToken(AccessTokenAllocation.getAccessToken());
-		try {
-			StatusWapper sw = tm.getUserTimelineBatchByUids("2161243971,2144684673",200,1);
-			assertNotNull(sw);
-			assertNotNull(sw.getStatuses());
-			log.info(""+sw.getStatuses().size());
-			assertTrue(sw.getStatuses().size()<201);
 
-		} catch (WeiboException e) {
-			// TODO Auto-generated catch block
-			System.out.println(""+e);
-		}
-	}
 	@Test
 	public void testUserWeiboPage(){
 		Timeline tm = new Timeline();
 		tm.setToken(AccessTokenAllocation.getAccessToken());
 		try {
-			//baozoumanhua
-			
-			for(int i=1;i<3;i++){
+			for(int i=1;i<10;i++){
 				StatusWapper sw = tm.getUserTimelineBatchByUids("2144684673",200,i);
 				assertNotNull(sw);
 				assertNotNull(sw.getStatuses());
@@ -69,17 +54,26 @@ public class TimelineTest {
 		}
 	}
 	@Test
-	/**最多2000条 */
+	/**最多2000条 ,页码从1开始*/
 	public void testRetweet(){
 		String mid = "BupvaEcDV";
 		Timeline tm = new Timeline();
 		tm.setToken(AccessTokenAllocation.getAccessToken());
 		String wid = IdTransferUtil.mid2Id(mid);
+		Map<String, Integer> mm = new HashMap<String, Integer>();
 		try {
-			for(int i=1;i<10;i++){
+			for(int i=1;i<11;i++){
+				int pre = mm.size();
 				StatusWapper sw = tm.getRepostTimeline(wid,200,i);
 				assertNotNull(sw);
 				assertNotNull(sw.getStatuses());
+				for(Status st :sw.getStatuses()){
+					mm.put(st.getId(), 1);
+				}
+				if(pre == mm.size()){
+					System.out.println("break...."+i);
+					break;
+				}
 				log.info(i+" "+sw.getStatuses().size());
 			}
 

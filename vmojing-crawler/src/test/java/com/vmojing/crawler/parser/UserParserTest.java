@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vmojing.crawler.CrawlerRootConfiguration;
+import com.vmojing.crawler.parser.api.UserParser;
 import com.vmojing.mongodb.business.api.UserBusiness;
 import com.vmojing.mongodb.domain.User;
 

@@ -18,7 +18,8 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
-import com.vmojing.crawler.parser.WeiboParser;
+import com.vmojing.crawler.parser.WeiboExceptionHandle;
+import com.vmojing.crawler.parser.api.WeiboParser;
 import com.vmojing.crawler.parser.convert.Converter;
 import com.vmojing.crawler.parser.convert.WeiboConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
@@ -28,7 +29,7 @@ import com.vmojing.mongodb.domain.Weibo;
 public class WeiboParserImpl implements WeiboParser {
 	private static final Logger log = LoggerFactory
 			.getLogger(WeiboParserImpl.class);
-	private static int MaxRetWeetPage = 10;
+	private static int MaxRetWeetPage = 11;
 	private static int MaxRetWeetSize = 200;
 	private static int MaxUserWeiboSize = 200;
 	private static int MaxWidsSize = 50;
@@ -64,7 +65,7 @@ public class WeiboParserImpl implements WeiboParser {
 					
 				} catch (WeiboException e) {
 					// TODO Auto-generated catch block
-					log.error(e.toString());
+					log.error(WeiboExceptionHandle.getErrorString(e, ""));
 					return null;
 				}
 				idsStr = "";
@@ -92,7 +93,7 @@ public class WeiboParserImpl implements WeiboParser {
 				res.addAll(weibos);
 			} catch (WeiboException e) {
 				// TODO Auto-generated catch block
-				log.error(""+e);
+				log.error(WeiboExceptionHandle.getErrorString(e, ""));
 				return null;
 			}
 		}
@@ -107,7 +108,7 @@ public class WeiboParserImpl implements WeiboParser {
 			sw = tm.getUserTimelineBatchByUids(uid, MaxUserWeiboSize, 1); // max page
 		} catch (WeiboException e) {
 			// TODO Auto-generated catch block
-			log.error(""+e);
+			log.error(WeiboExceptionHandle.getErrorString(e, ""));
 			return null;
 		}
 		return getWeiboAfterTime(sw,lastUpdateWeiboTime);

@@ -3,7 +3,7 @@ package com.vmojing.crawler.crawler;
 import java.util.List;
 import java.util.Set;
 
-import com.vmojing.crawler.fetcher.TopicFetcher;
+import com.vmojing.crawler.fetcher.api.TopicFetcher;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.domain.Weibo;
 

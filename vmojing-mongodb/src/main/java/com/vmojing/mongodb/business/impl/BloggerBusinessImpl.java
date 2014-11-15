@@ -12,43 +12,39 @@ import org.springframework.stereotype.Component;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.vmojing.mongodb.business.AbstractBusiness;
-import com.vmojing.mongodb.business.api.TopicBusiness;
+import com.vmojing.mongodb.business.api.BloggerBusiness;
+import com.vmojing.mongodb.domain.Blogger;
+import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
 @Component
-public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness {
+public class BloggerBusinessImpl extends AbstractBusiness implements BloggerBusiness {
 	@Autowired
-	@Qualifier("topicDao")
-	BasicRepository<Topic> topicDao;
+	@Qualifier("bloggerDao")
+	BasicRepository<Blogger> bloggerDao;
 	@Autowired
-	@Qualifier("topicConvertor")
-	DBConvertor<Topic> topicConvertor;
+	@Qualifier("bloggerConvertor")
+	DBConvertor<Blogger> bloggerConvertor;
 	@Override
-	public boolean save(Topic t) {
+	public boolean save(Blogger c) {
 		// TODO Auto-generated method stub
-		try {
-			topicDao.saveAndUpdate(t);
-			return true;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			getLogger().error("save topic fail "+e.toString());
-		}
 		return false;
 	}
+
 	@Override
-	public List<Topic> getAll() {
+	public List<Blogger> getAll() {
 		// TODO Auto-generated method stub
 		DBCursor cursor = null;
-		List<Topic> res = new ArrayList<Topic>();
+		List<Blogger> res = new ArrayList<Blogger>();
 		try{
-			cursor = topicDao.findByAll();
+			cursor = bloggerDao.findByAll();
 			while(cursor.hasNext()){
 				DBObject obj = cursor.next();
-				res.add(topicConvertor.convertToPojo(obj));
+				res.add(bloggerConvertor.convertToPojo(obj));
 			}
 		}catch(Exception e){
-			getLogger().error("topic getAll throw error " +e);
+			getLogger().error("blogger getAll throw error " +e);
 			res = null;
 		}finally{
 			if(cursor != null){
@@ -57,4 +53,5 @@ public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness
 		}
 		return res;
 	}
+
 }

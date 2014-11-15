@@ -15,8 +15,8 @@ import weibo4j.Comments;
 import weibo4j.model.CommentWapper;
 import weibo4j.model.WeiboException;
 
-import com.vmojing.crawler.parser.CommentParser;
 import com.vmojing.crawler.parser.WeiboExceptionHandle;
+import com.vmojing.crawler.parser.api.CommentParser;
 import com.vmojing.crawler.parser.convert.CommentConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Comment;
@@ -46,6 +46,7 @@ public class CommentParserImpl implements CommentParser{
 			}
 		} catch (WeiboException e) {
 			log.error(WeiboExceptionHandle.getErrorString(e,wid+"评论获取错误"));
+			return null;
 		}
 		return res;
 	}

@@ -16,8 +16,8 @@ import weibo4j.Users;
 import weibo4j.model.UserWapper;
 import weibo4j.model.WeiboException;
 
-import com.vmojing.crawler.parser.UserParser;
 import com.vmojing.crawler.parser.WeiboExceptionHandle;
+import com.vmojing.crawler.parser.api.UserParser;
 import com.vmojing.crawler.parser.convert.UserConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.business.api.UserBusiness;
@@ -105,6 +105,7 @@ public class UserParserImpl implements UserParser{
 			} catch (WeiboException e) {
 				// TODO Auto-generated catch block
 				log.error(WeiboExceptionHandle.getErrorString(e, "获取用户"+uid+"粉丝出错"));
+				return null;
 			}
 		}
 		// check List of pre

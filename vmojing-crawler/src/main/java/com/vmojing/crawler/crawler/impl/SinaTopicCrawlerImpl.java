@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 import com.vmojing.crawler.crawler.Command;
 import com.vmojing.crawler.crawler.SinaTopicCrawler;
-import com.vmojing.crawler.fetcher.Loginer;
-import com.vmojing.crawler.fetcher.TopicFetcher;
+import com.vmojing.crawler.fetcher.api.Loginer;
+import com.vmojing.crawler.fetcher.api.TopicFetcher;
 import com.vmojing.crawler.fetcher.mobile.MobileSinaLoginer;
 import com.vmojing.crawler.fetcher.mobile.MobileTopicFetcher;
 import com.vmojing.mongodb.domain.Topic;

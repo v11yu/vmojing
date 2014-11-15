@@ -30,7 +30,7 @@ import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
 import com.vmojing.crawler.fetcher.BasicHttpMethod;
-import com.vmojing.crawler.fetcher.Loginer;
+import com.vmojing.crawler.fetcher.api.Loginer;
 /**
  * 新浪手机web端登陆器
  * @author v11
@@ -102,6 +102,7 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 	@Override
 	public HttpClient getClient() {
 		// TODO Auto-generated method stub
+		if(client != null) return client;
 		login();
 		if(client == null){
 			for(int i=0;i<TRY_NUM&&!login();i++){
