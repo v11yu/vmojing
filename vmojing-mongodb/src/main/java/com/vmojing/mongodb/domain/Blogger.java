@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Blogger {
 	@Id
-	private Long id;
+	private String id;
 	/** 用户详细信息 */
 	private User user;
 	/** 检测开始时间*/
@@ -21,10 +21,10 @@ public class Blogger {
 	private Date lastUpdateFansTime;
 	/** 最后更新微博的时间*/
 	private Date lastUpdateWeiboTime;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public User getUser() {

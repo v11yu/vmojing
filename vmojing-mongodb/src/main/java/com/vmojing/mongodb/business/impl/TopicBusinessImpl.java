@@ -3,6 +3,7 @@ package com.vmojing.mongodb.business.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import com.mongodb.DBObject;
 import com.vmojing.mongodb.business.AbstractBusiness;
 import com.vmojing.mongodb.business.api.TopicBusiness;
 import com.vmojing.mongodb.domain.Topic;
+import com.vmojing.mongodb.domain.Weibo;
 import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
+import com.vmojing.mongodb.repository.DBQuery;
 @Component
 public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness {
 	@Autowired
@@ -24,6 +27,9 @@ public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness
 	@Autowired
 	@Qualifier("topicConvertor")
 	DBConvertor<Topic> topicConvertor;
+	@Autowired
+	@Qualifier("weiboDao")
+	BasicRepository<Weibo> weiboDao;
 	@Override
 	public boolean save(Topic t) {
 		// TODO Auto-generated method stub
@@ -56,5 +62,27 @@ public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness
 			}
 		}
 		return res;
+	}
+	@Override
+	public boolean saveWeibo(Topic t, Weibo weibo) {
+		// TODO Auto-generated method stub
+		Weibo w = weiboDao.findById(weibo.getId());
+		if(w == null){
+			// 之前没有该微博信息
+			w = weibo;
+		}
+		List<ObjectId> topicIds = w.getTopicIds();
+		if(topicIds == null){
+			topicIds = new ArrayList<ObjectId>();
+		}
+		topicIds.add(t.getId());
+		try {
+			weiboDao.saveAndUpdate(w);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			getLogger().error("save weibo&topic fail");
+			return false;
+		}
+		return true;
 	}
 }

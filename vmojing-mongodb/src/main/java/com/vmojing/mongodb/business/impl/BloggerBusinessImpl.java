@@ -16,6 +16,8 @@ import com.vmojing.mongodb.business.api.BloggerBusiness;
 import com.vmojing.mongodb.domain.Blogger;
 import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.Topic;
+import com.vmojing.mongodb.domain.User;
+import com.vmojing.mongodb.domain.Weibo;
 import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
 @Component
@@ -26,9 +28,22 @@ public class BloggerBusinessImpl extends AbstractBusiness implements BloggerBusi
 	@Autowired
 	@Qualifier("bloggerConvertor")
 	DBConvertor<Blogger> bloggerConvertor;
+	@Autowired
+	@Qualifier("weiboDao")
+	BasicRepository<Weibo> weiboDao;
+	@Autowired
+	@Qualifier("userDao")
+	BasicRepository<User> userDao;
 	@Override
 	public boolean save(Blogger c) {
 		// TODO Auto-generated method stub
+		try {
+			bloggerDao.saveAndUpdate(c);
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			getLogger().error("保存blogger:"+c+" 失败");
+		}
 		return false;
 	}
 
@@ -52,6 +67,50 @@ public class BloggerBusinessImpl extends AbstractBusiness implements BloggerBusi
 			}
 		}
 		return res;
+	}
+
+	@Override
+	public boolean saveWeibo(Weibo weibo, Blogger b) {
+		// TODO Auto-generated method stub
+		Weibo w = weiboDao.findById(weibo.getId());
+		if(w == null){
+			try {
+				weiboDao.saveAndUpdate(weibo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				getLogger().error("保存weibo"+weibo+"出错");
+				return false;
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public boolean saveFans(User fan, Blogger b) {
+		// TODO Auto-generated method stub
+		User u = userDao.findById(fan.getId());
+		if(u == null){
+			u = fan;
+		}
+		List<String> ls = u.getFriendsList();
+		if(ls == null){
+			ls = new ArrayList<String>();
+		}
+		// use to test system run
+		if(ls.contains(b.getId())){
+			getLogger().error("已经存在粉丝："+fan+"，在博主："+b.getUser().getName()+",这是系统异常");
+			return false;
+		}
+		ls.add(b.getId());
+		u.setFriendsList(ls);
+		try {
+			userDao.saveAndUpdate(u);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			getLogger().error("保存更新粉丝："+fan+",在博主："+b.getUser().getName()+",保存失败");
+			return false;
+		}
+		return true;
 	}
 
 }

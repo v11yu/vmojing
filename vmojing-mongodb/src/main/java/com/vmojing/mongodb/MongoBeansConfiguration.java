@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import com.vmojing.mongodb.domain.AccessToken;
 import com.vmojing.mongodb.domain.Blogger;
 import com.vmojing.mongodb.domain.Clue;
+import com.vmojing.mongodb.domain.Comment;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.domain.User;
+import com.vmojing.mongodb.domain.Weibo;
 import com.vmojing.mongodb.repository.BasicRepository;
 import com.vmojing.mongodb.repository.DBConvertor;
 
@@ -67,5 +69,27 @@ public class MongoBeansConfiguration {
 	@Bean
 	BasicRepository<Blogger> bloggerDao(){
 		return new BasicRepository<Blogger>(Blogger.class,bloggerConvertor());
+	}
+	/*
+	 * weibo
+	 */
+	@Bean
+	DBConvertor<Weibo> weiboConvertor(){
+		return new DBConvertor<Weibo>(Weibo.class);
+	}
+	@Bean
+	BasicRepository<Weibo> weiboDao(){
+		return new BasicRepository<Weibo>(Weibo.class,weiboConvertor());
+	}
+	/*
+	 * comment
+	 */
+	@Bean
+	DBConvertor<Comment> commentConvertor(){
+		return new DBConvertor<Comment>(Comment.class);
+	}
+	@Bean
+	BasicRepository<Comment> commentDao(){
+		return new BasicRepository<Comment>(Comment.class, commentConvertor());
 	}
 }

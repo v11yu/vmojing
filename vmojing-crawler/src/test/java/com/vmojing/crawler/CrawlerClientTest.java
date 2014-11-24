@@ -13,7 +13,6 @@ public class CrawlerClientTest {
 	CrawlerClient cclient;
 	@Test
 	public void testConfig(){
-		System.out.println(cclient.myProperties.getProperty("MaxTopic"));
-		System.out.println(cclient.myProperties.getProperty("ip"));
+		System.out.println(cclient.maxBlogger);
 	}
 }

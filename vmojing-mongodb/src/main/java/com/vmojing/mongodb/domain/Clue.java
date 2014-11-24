@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Clue {
 	@Id
-	private Long id;
+	private String id;
 	/** 微博详细信息 */
 	private Weibo weibo;
 	/** 监测开始时间 */
@@ -20,10 +20,10 @@ public class Clue {
 	private Date lastUpdateRetweetTime;
 	/** 最后更新评论微博的时间*/
 	private Date lastUpdateCommentTime;
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public Weibo getWeibo() {

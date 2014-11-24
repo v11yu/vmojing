@@ -33,6 +33,15 @@ public class Topic {
 	private Date beginTime;
 	/** 初始化采集，已经到达的时间*/
 	private Date initAtTime;
+	/** 已采集的总数 */
+	private Integer sum;
+	public Integer getSum() {
+		return sum;
+	}
+	public void setSum(Integer sum) {
+		this.sum = sum;
+	}
+
 	public Date getBeginTime() {
 		return beginTime;
 	}
@@ -110,6 +119,7 @@ public class Topic {
 		this.operateStatus = 0;
 		this.lastUpdateTime = new Date(0);
 		this.initAtTime = new Date(0);
+		this.sum = 0;
 	}
 
 	public Topic( Date createAtTime, Date lastUpdateTime,
@@ -124,8 +134,8 @@ public class Topic {
 		this.type = type;
 		this.beginTime = beginTime;
 		this.initAtTime = new Date(0);
+		this.sum = 0;
 	}
-
 	@Override
 	public String toString() {
 		return "Topic [id=" + id + ", createAtTime=" + createAtTime
@@ -133,7 +143,9 @@ public class Topic {
 				+ operateStatus + ", updateFrequency=" + updateFrequency
 				+ ", topicName=" + topicName + ", type=" + type
 				+ ", beginTime=" + beginTime + ", initAtTime=" + initAtTime
-				+ "]";
+				+ ", sum=" + sum + "]";
 	}
+
+	
 	
 }

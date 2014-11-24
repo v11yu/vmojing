@@ -21,6 +21,11 @@ public class ClueQueue {
 	public synchronized static int size(){
 		return queue.size();
 	}
+	/**
+     * Returns <tt>true</tt> if this collection contains no elements.
+     *
+     * @return <tt>true</tt> if this collection contains no elements
+     */
 	public synchronized static boolean isEmpty(){
 		return queue.isEmpty();
 	}

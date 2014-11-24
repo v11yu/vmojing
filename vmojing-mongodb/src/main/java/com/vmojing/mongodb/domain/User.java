@@ -72,7 +72,7 @@ public class User {
 	/*--------博主粉丝-------*/
 	/** 该用户关注的博主列表 */
 	@ManualField
-	private List<Long> friendsList;
+	private List<String> friendsList;
 	public String getId() {
 		return id;
 	}
@@ -235,10 +235,10 @@ public class User {
 	public void setLastUpdateTime(Date lastUpdateTime) {
 		this.lastUpdateTime = lastUpdateTime;
 	}
-	public List<Long> getFriendsList() {
+	public List<String> getFriendsList() {
 		return friendsList;
 	}
-	public void setFriendsList(List<Long> friendsList) {
+	public void setFriendsList(List<String> friendsList) {
 		this.friendsList = friendsList;
 	}
 	@Override

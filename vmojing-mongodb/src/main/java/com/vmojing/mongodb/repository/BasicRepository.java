@@ -180,7 +180,30 @@ public class BasicRepository<T> implements DAO<T>{
 		// TODO Auto-generated method stub
 		mongoTemplate.save(convertor.convertToPojo(obj));
 	}
-
-	
-
+	@Override
+	public T findOne(DBCursor cursor) {
+		// TODO Auto-generated method stub
+		if(cursor == null) return null;
+		T t = null;
+		try{
+			while(cursor.hasNext()){
+				DBObject obj = cursor.next();
+				t = convertor.convertToPojo(obj);
+				break;
+			}
+		}catch(Exception e){
+			getLogger().error("find one by cursor throw error:"+e);
+		}finally{
+			if(cursor != null) cursor.close();
+		}
+		return t;
+	}
+	@Override
+	public T findById(Object id) {
+		// TODO Auto-generated method stub
+		DBQuery query  = new DBQuery();
+		query.equalsOperation("_id", id);
+		T t = findOne(findQuery(query));
+		return t;
+	}
 }

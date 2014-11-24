@@ -24,7 +24,9 @@
         </layout>
     </appender>
 
-
+	<logger name="org.apache.commons.httpclient">
+		<level value="error" />
+	</logger>
     <!-- 根logger的设置-->
     <root>
         <priority value ="debug"/>

@@ -10,6 +10,7 @@ import com.vmojing.mongodb.business.AbstractBusiness;
 import com.vmojing.mongodb.business.api.UserBusiness;
 import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.repository.BasicRepository;
+import com.vmojing.mongodb.repository.DBQuery;
 @Component
 public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	@Autowired
@@ -18,6 +19,16 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	@Override
 	public boolean exitFans(String uid, String fid) {
 		// TODO Auto-generated method stub
+		User fan = userDao.findById(fid);
+		if(fan == null){
+			return false;
+		}else{
+			List<String> ls = fan.getFriendsList();
+			for(String str:ls){
+				if(str.equals(uid))
+					return true;
+			}
+		}
 		return false;
 	}
 }

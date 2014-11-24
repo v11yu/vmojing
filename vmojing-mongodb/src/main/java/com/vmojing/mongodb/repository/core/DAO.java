@@ -73,5 +73,17 @@ public interface DAO<T>{
 	 * 任意获取一个
 	 */
 	public T findOne();
-	
+	/**
+	 * 从cursor中获取第一个实体，一般用于查找仅有一个的时候<p />
+	 * 并关闭cursor流
+	 * @param cursor 
+	 * @return if Cusor.size>0,返回第一个元素，or 返回 null
+	 */
+	public T findOne(DBCursor cursor);
+	/**
+	 * 查找通过主键Id
+	 * @param id 主键值
+	 * @return 对应的值,or Null if no exist
+	 */
+	public T findById(Object id);
 }
