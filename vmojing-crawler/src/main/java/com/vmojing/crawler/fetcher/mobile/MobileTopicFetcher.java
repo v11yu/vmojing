@@ -19,7 +19,8 @@ import org.springframework.stereotype.Component;
 import com.vmojing.crawler.fetcher.BasicHttpMethod;
 import com.vmojing.crawler.fetcher.api.Loginer;
 import com.vmojing.crawler.fetcher.api.TopicFetcher;
-import com.vmojing.crawler.fetcher.util.IdTransferUtil;
+import com.vmojing.mongodb.utils.IdTransferUtil;
+
 
 
 

@@ -1,4 +1,4 @@
-package com.vmojing.crawler.fetcher.util;
+package com.vmojing.mongodb.utils;
 
 public class IdTransferUtil {
 	private static String[] str62keys = { "0", "1", "2", "3", "4", "5", "6",
@@ -115,7 +115,20 @@ public class IdTransferUtil {
             return (TentoN(value / number, number) + str62keys[(int)n]);     
         }     
     }     
-
+    /**
+     * tranfer url to mid
+     * @param url 微博链接
+     * @return mid,or null if fail
+     */
+    public static String url2Mid(String url){
+    	try{
+    		String ls[] = url.split("[?]")[0].split("/");
+    		return ls[ls.length-1];
+    	}catch (Exception e) {
+			// TODO: handle exception
+    		return null;
+		}
+    }
 	public static void main(String[] args) {
 		System.out.println(id2Mid("3474920895989800"));
 		System.out.println(mid2Id("yvr29p8dG"));

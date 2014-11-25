@@ -62,6 +62,12 @@ public class Clue {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public Clue(){
+		this.lastUpdateCommentTime = new Date(0);
+		this.lastUpdateRetweetTime = new Date(0);
+		this.operateStatus = 0;
+		this.status = 0;
+	}
 	@Override
 	public String toString() {
 		return "Clue [id=" + id + ", weibo=" + weibo + ", createAt=" + createAt

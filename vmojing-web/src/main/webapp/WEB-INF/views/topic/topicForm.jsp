@@ -1,54 +1,36 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:if test="${!ajaxRequest}">
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-<title>topic form</title>
-<link href="<c:url value="/resources/form.css" />" rel="stylesheet"  type="text/css" />		
-<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
-<meta name="decorator" content="no" />
+<title>创建话题</title>
+
 </head>
 <body>
-</c:if>
-<div id="formsContent">
-		<h2>Forms</h2>
-		<form:form id="form" action="topic/create" method="post" modelAttribute="topicBean" cssClass="cleanform">
-		<fieldset>
-		<form:label path="updateFrequency">
-		  			更新频率 <form:errors path="updateFrequency" cssClass="error" />
-		</form:label>
-		<form:input path="updateFrequency" />
-		<form:label path="beginTime">
-		  			采集最早时间： (in form yyyy-mm-dd) <form:errors path="beginTime" cssClass="error" />
-		 		</form:label>
-		  		<form:input path="beginTime" />
-		  		<form:label path="topicName">
-		  			话题名称 <form:errors path="topicName" cssClass="error" />
-		</form:label>
-		<form:input path="topicName" />
-		<form:label path="type">
-		  			话题类型 <form:errors path="type" cssClass="error" />
-		</form:label>
-		<form:input path="type" />
-		</fieldset>
-		<p><button type="submit">Submit</button></p>
+	<div class="jumbotron">
+		<form:form role="form" action="${ctx }/topic/${action}" method="post"
+			modelAttribute="topicBean">
+			<div class="form-group">
+				<label>话题名称</label> 
+				<form:input type="text" class="form-control" path="topicName" placeholder="TopicName" />
+			</div>
+			<div class="form-group">
+				<label>更新频率</label> <form:input type="text" class="form-control"
+					path="updateFrequency" placeholder="分钟" />
+			</div>
+			<div class="form-group">
+				<label>采集最早时间</label> <form:input type="text" class="form-control"
+					path="beginTime" placeholder="yyyy-mm-dd"/>
+			</div>
+			<div class="form-group">
+				<label>话题类型</label> <form:input type="text" class="form-control"
+					path="type" placeholder="type"/>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		
 		</form:form>
-</div>
-<script type="text/javascript">
-			$(function() {
-				$("#form").submit(function() {  
-					$.post($(this).attr("action"), $(this).serialize(), function(html) {
-						
-					});
-					return false;  
-				});			
-			});
-		</script>
-<c:if test="${!ajaxRequest}">
+	</div>
 </body>
 </html>
-</c:if>

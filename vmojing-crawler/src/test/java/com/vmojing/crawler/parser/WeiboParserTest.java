@@ -21,13 +21,13 @@ import weibo4j.model.WeiboException;
 
 import com.vmojing.crawler.CrawlerRootConfiguration;
 import com.vmojing.crawler.fetcher.api.TopicFetcher;
-import com.vmojing.crawler.fetcher.util.IdTransferUtil;
 import com.vmojing.crawler.parser.api.WeiboParser;
 import com.vmojing.crawler.parser.convert.Converter;
 import com.vmojing.crawler.parser.convert.WeiboConverter;
 import com.vmojing.crawler.parser.impl.WeiboParserImpl;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Weibo;
+import com.vmojing.mongodb.utils.IdTransferUtil;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {CrawlerRootConfiguration.class})
 public class WeiboParserTest {

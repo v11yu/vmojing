@@ -6,8 +6,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.vmojing.crawler.fetcher.util.IdTransferUtil;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
+import com.vmojing.mongodb.utils.IdTransferUtil;
 
 import weibo4j.Comments;
 import weibo4j.model.Comment;
@@ -26,8 +26,9 @@ public class CommentsTest {
 	 * start 1 to 9
 	 */
 	public void testGetComments(){
-		String mid = "BuzmOFn7z";
+		String mid = "BxRRbc2TE";
 		String wid = IdTransferUtil.mid2Id(mid);
+		System.out.println(wid);
 		Map<Long, Integer> mp = new HashMap<Long, Integer>();
 		try {
 			for(int i=1;i<11;i++){
