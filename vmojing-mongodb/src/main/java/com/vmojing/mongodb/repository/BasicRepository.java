@@ -16,6 +16,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
+import com.mongodb.WriteResult;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.repository.core.DAO;
 import com.vmojing.mongodb.utils.MongoDbUtil;
@@ -31,7 +32,7 @@ public class BasicRepository<T> implements DAO<T>{
 	@Autowired
     private MongoTemplate mongoTemplate;
 	protected final DBConvertor<T> convertor;
-	protected DBCollection Collection;
+	protected DBCollection collection;
 	/**
 	 * 构造函数<p/>Example:
 	 * <pre>
@@ -48,7 +49,7 @@ public class BasicRepository<T> implements DAO<T>{
 	}
 	@PostConstruct
 	private void init(){
-		Collection = MongoDbUtil.getCollection(getCollectionName());
+		collection = MongoDbUtil.getCollection(getCollectionName());
 	}
 	/**
 	 * 获取当前类的日志，用于继承情况：子类或父类<p/>
@@ -98,15 +99,15 @@ public class BasicRepository<T> implements DAO<T>{
 	@Override
 	public DBCursor findByAll() {
 		// TODO Auto-generated method stub
-		DBCursor cursor = Collection.find();
+		DBCursor cursor = collection.find();
 		getLogger().info("findByAll from "+getCollectionName()+" count:"+cursor.count());
-		return Collection.find();
+		return collection.find();
 	}
 	@Override
 	public DBCursor findQuery(DBObject query) {
 		// TODO Auto-generated method stub
 		getLogger().info("findQuery :"+query+" from "+getCollectionName());
-		return Collection.find(query);
+		return collection.find(query);
 	}
 	@Override
 	public DBCursor findQuery(DBQuery query) {
@@ -134,7 +135,7 @@ public class BasicRepository<T> implements DAO<T>{
         for(String keyName : names){
         	updateObj.append( keyName,obj.get(keyName));
         }
-        Collection.update(query, new BasicDBObject("$set", updateObj));
+        collection.update(query, new BasicDBObject("$set", updateObj));
 		
 	}
 	@Override
@@ -153,7 +154,7 @@ public class BasicRepository<T> implements DAO<T>{
 	@Override
 	public T findOne() {
 		// TODO Auto-generated method stub
-		DBObject obj = Collection.findOne();
+		DBObject obj = collection.findOne();
 		return convertor.convertToPojo(obj);
 	}
 	@Override
@@ -205,5 +206,13 @@ public class BasicRepository<T> implements DAO<T>{
 		query.equalsOperation("_id", id);
 		T t = findOne(findQuery(query));
 		return t;
+	}
+	@Override
+	public WriteResult dropById(Object id) {
+		// TODO Auto-generated method stub
+		BasicDBObject document = new BasicDBObject();
+		document.put("_id",id);
+		return collection.remove(document);
+
 	}
 }

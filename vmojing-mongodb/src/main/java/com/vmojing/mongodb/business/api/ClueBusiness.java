@@ -16,4 +16,6 @@ public interface ClueBusiness {
 	boolean saveRetweetWeibo(Weibo weibo ,Clue c);
 	boolean saveComment(Comment comment,Clue c);
 	List<Clue> getAll();
+	Clue getById(String id);
+	boolean delete(String id);
 }

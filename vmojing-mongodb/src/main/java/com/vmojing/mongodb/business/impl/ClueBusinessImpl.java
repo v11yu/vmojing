@@ -57,9 +57,11 @@ public class ClueBusinessImpl extends AbstractBusiness implements ClueBusiness{
 			cursor = clueDao.findByAll();
 			while(cursor.hasNext()){
 				DBObject obj = cursor.next();
+				System.out.println(obj);
 				res.add(clueConvertor.convertToPojo(obj));
 			}
 		}catch(Exception e){
+			e.printStackTrace();
 			getLogger().error("clue getAll throw error " +e);
 			//throw new VmojingMongoException("clue getAll throw error",e);
 			return null;
@@ -105,6 +107,20 @@ public class ClueBusinessImpl extends AbstractBusiness implements ClueBusiness{
 			// TODO Auto-generated catch block
 			return false;
 		}
+		return true;
+	}
+
+	@Override
+	public Clue getById(String id) {
+		// TODO Auto-generated method stub
+		Clue clue = clueDao.findById(id);
+		return clue;
+	}
+
+	@Override
+	public boolean delete(String id) {
+		// TODO Auto-generated method stub
+		clueDao.dropById(id);
 		return true;
 	}
 }

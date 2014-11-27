@@ -22,9 +22,11 @@ public class Weibo {
 	/** 微博内容*/
 	private String text;
 	/** 微博mid*/
+	@ManualField
 	private String mid;
 	/** 微博发布自哪个终端 */
-	private Source source;
+	@ManualField
+	private String source;
 	/** 微图 */
 	private String thumbnailPic;
 	/** 中图 */
@@ -80,10 +82,10 @@ public class Weibo {
 	public void setMid(String mid) {
 		this.mid = mid;
 	}
-	public Source getSource() {
+	public String getSource() {
 		return source;
 	}
-	public void setSource(Source source) {
+	public void setSource(String source) {
 		this.source = source;
 	}
 	public String getThumbnailPic() {

@@ -76,6 +76,7 @@
 		<module>vmojing-mongodb</module>
 		<module>vmojing-crawler</module>
 		<module>vmojing-web</module>
+		<module>vmojing-core</module>
 	</modules>
 	<build>
 		<plugins>

@@ -114,7 +114,7 @@ public class UserParserImpl implements UserParser{
 	}
 
 	@Override
-	public User getIdByName(String name) {
+	public User getUserByName(String name) {
 		// TODO Auto-generated method stub
 		weibo4j.model.User u = null;
 		try {

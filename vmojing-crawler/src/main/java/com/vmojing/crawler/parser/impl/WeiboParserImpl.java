@@ -124,5 +124,20 @@ public class WeiboParserImpl implements WeiboParser {
 		}
 		return weibos;
 	}
-
+	@Override
+	public Weibo getWeiboById(String wid) {
+		// TODO Auto-generated method stub
+		try {
+			List<Weibo> weibos = getWeiboAfterTime(tm.getStatusByIds(wid, 0),new Date(0));
+			if(weibos.size() == 1){
+				return weibos.get(0);
+			}
+		} catch (WeiboException e) {
+			// TODO Auto-generated catch block
+			log.error(WeiboExceptionHandle.getErrorString(e, ""));
+		} catch (Exception e){
+			log.error(""+e);
+		}
+		return null;
+	}
 }

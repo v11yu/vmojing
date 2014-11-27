@@ -5,6 +5,7 @@ import java.util.List;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
+import com.mongodb.WriteResult;
 import com.vmojing.mongodb.repository.DBQuery;
 
 public interface DAO<T>{
@@ -86,4 +87,5 @@ public interface DAO<T>{
 	 * @return 对应的值,or Null if no exist
 	 */
 	public T findById(Object id);
+	public WriteResult dropById(Object id);
 }

@@ -10,6 +10,7 @@ import weibo4j.model.Status;
 
 import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.domain.Weibo;
+import com.vmojing.mongodb.utils.IdTransferUtil;
 @Component
 public class WeiboConverter extends Converter<Weibo, Status>{
 
@@ -22,7 +23,8 @@ public class WeiboConverter extends Converter<Weibo, Status>{
 		to.setLastUpdateTime(new Date(0));
 		to.setRetweetWeiboId(from.getRetweetedStatus() == null?null:from.getRetweetedStatus().getId());
 		to.setTopicIds(null);
-		
+		to.setMid(IdTransferUtil.id2Mid(from.getId()));
+		to.setSource(from.getSource().toString());
 	}
 
 }

@@ -1,13 +1,16 @@
 package com.vmojing.mongodb.business;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vmojing.mongodb.domain.Blogger;
 
-public abstract class AbstractBusiness {
+
+public abstract class AbstractBusiness<T> {
 	/** 日志容器*/
 	private static final Map<Class<?>,Logger> loggers = new HashMap<Class<?>,Logger>();
 	/**
@@ -23,4 +26,8 @@ public abstract class AbstractBusiness {
 		}
 		return loggers.get(type);
 	}
+//	public abstract boolean save(T t);
+//	public abstract List<T> getAll();
+//	public abstract T getById(String id);
+//	public abstract boolean delete(String id);
 }

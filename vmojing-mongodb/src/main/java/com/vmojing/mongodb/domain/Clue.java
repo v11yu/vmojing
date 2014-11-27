@@ -20,6 +20,13 @@ public class Clue {
 	private Date lastUpdateRetweetTime;
 	/** 最后更新评论微博的时间*/
 	private Date lastUpdateCommentTime;
+	public Clue(){
+		this.createAt = new Date();
+		this.lastUpdateCommentTime = new Date(0);
+		this.lastUpdateRetweetTime = new Date(0);
+		this.operateStatus = 0;
+		this.status = 0;
+	}
 	public String getId() {
 		return id;
 	}
@@ -62,12 +69,7 @@ public class Clue {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	public Clue(){
-		this.lastUpdateCommentTime = new Date(0);
-		this.lastUpdateRetweetTime = new Date(0);
-		this.operateStatus = 0;
-		this.status = 0;
-	}
+	
 	@Override
 	public String toString() {
 		return "Clue [id=" + id + ", weibo=" + weibo + ", createAt=" + createAt

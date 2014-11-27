@@ -41,6 +41,11 @@
 			<artifactId>vmojing-mongodb</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.ict</groupId>
+			<artifactId>vmojing-crawler</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- End:databaseAccessObject -->
 	</dependencies>
 	

@@ -15,7 +15,7 @@ public interface UserParser {
 	/**
 	 * 获取用户Id，通过用户名
 	 * @param name 用户名
-	 * @return 用户id
+	 * @return 用户,or null if fail
 	 */
-	public User getIdByName(String name);
+	public User getUserByName(String name);
 }

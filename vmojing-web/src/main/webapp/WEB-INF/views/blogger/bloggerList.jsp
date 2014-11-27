@@ -14,36 +14,55 @@
 <table id="blogger" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>
-				<th>博主Id</th>
-				<th>昵称</th>
-				<th>内容</th>
-				<th>创建时间</th>
+				<th>博主昵称</th>
+				<th>微博数</th>
+				<th>粉丝数</th>
+				<th>开始时间</th>
 				<th>粉丝最后更新</th>
 				<th>微博最后更新</th>
 				<th>运行状态</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tfoot>
 			<tr>
-				<th>博主Id</th>
-				<th>昵称</th>
-				<th>内容</th>
-				<th>创建时间</th>
+				<th>博主昵称</th>
+				<th>微博数</th>
+				<th>粉丝数</th>
+				<th>开始时间</th>
 				<th>粉丝最后更新</th>
 				<th>微博最后更新</th>
 				<th>运行状态</th>
+				<th>操作</th>
 			</tr>
 		</tfoot>
 		<tbody>
 		<c:forEach items="${bloggers}" var = "blogger">
 				<tr>
-					<td>${blogger.id}</td>
-					<td>5656564</td>
-					<td>13232</td>
-					<td>no1</td>
-					<td>apple</td>
-					<td>apple</td>
-					<td>apple</td>
+					<td>
+					<a href = "http://weibo.com/u/${blogger.user.id}" target="_blank">${blogger.user.name}</a>
+					</td>
+					<td>${blogger.user.statusesCount}</td>
+					<td>${blogger.user.followersCount}</td>
+					<td>
+					<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" 
+            value="${blogger.createAt}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" 
+            value="${blogger.lastUpdateFansTime}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" 
+            value="${blogger.lastUpdateWeiboTime}" /></td>
+					<td>
+					<c:if test="${blogger.operateStatus eq 0}">
+					<button type="button" class="btn btn-success disabled">运行</button>
+					</c:if>
+					<c:if test="${blogger.operateStatus eq 1}">
+					<button type="button" class="btn btn-warning disabled">暂停</button>
+					</c:if>					
+					</td>
+					<td>
+					<a href="${ctx}/blogger/delete/${blogger.id}">删除</a>
+					<a href="${ctx}/blogger/transfer/${blogger.id}">暂停/开始</a>
+					</td>
 				</tr>
 		</c:forEach>
 

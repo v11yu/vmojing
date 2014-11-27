@@ -2,6 +2,7 @@ package com.vmojing.mongodb.business.api;
 
 import java.util.List;
 
+import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.domain.Weibo;
 
@@ -20,4 +21,6 @@ public interface TopicBusiness {
 	 */
 	boolean saveWeibo(Topic t,Weibo weibo);
 	List<Topic> getAll();
+	Topic getById(String id);
+	boolean delete(String id);
 }

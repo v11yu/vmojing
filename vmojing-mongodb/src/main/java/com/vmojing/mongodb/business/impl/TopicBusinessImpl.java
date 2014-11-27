@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import com.mongodb.WriteResult;
 import com.vmojing.mongodb.business.AbstractBusiness;
 import com.vmojing.mongodb.business.api.TopicBusiness;
 import com.vmojing.mongodb.domain.Topic;
@@ -83,6 +84,18 @@ public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness
 			getLogger().error("save weibo&topic fail");
 			return false;
 		}
+		return true;
+	}
+	@Override
+	public Topic getById(String id) {
+		// TODO Auto-generated method stub
+		return topicDao.findById(new ObjectId(id));
+	}
+	@Override
+	public boolean delete(String id) {
+		// TODO Auto-generated method stub
+		WriteResult wr = topicDao.dropById(new ObjectId(id));
+		getLogger().info("删除"+wr);
 		return true;
 	}
 }

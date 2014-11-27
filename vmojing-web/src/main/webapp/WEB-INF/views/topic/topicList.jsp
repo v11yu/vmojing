@@ -20,6 +20,7 @@
 				<th>最后更新时间</th>
 				<th>话题总数</th>
 				<th>运行状态</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tfoot>
@@ -29,16 +30,30 @@
 				<th>最后更新时间</th>
 				<th>话题总数</th>
 				<th>运行状态</th>
+				<th>操作</th>
 			</tr>
 		</tfoot>
 		<tbody>
 			<c:forEach items="${topics}" var="topic">
 				<tr>
 					<td>${topic.topicName}</td>
-					<td>${topic.createAtTime}</td>
-					<td>${topic.lastUpdateTime }</td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" 
+            value="${topic.createAtTime}" /></td>
+					<td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" 
+            value="${topic.lastUpdateTime}" /></td>
 					<td>${topic.sum }</td>
-					<td>${topic.operateStatus }</td>
+					<td>
+					<c:if test="${topic.operateStatus eq 0}">
+					<button type="button" class="btn btn-success disabled">运行</button>
+					</c:if>
+					<c:if test="${topic.operateStatus eq 1}">
+					<button type="button" class="btn btn-warning disabled">暂停</button>
+					</c:if>					
+					</td>
+					<td>
+					<a href="${ctx}/topic/delete/${topic.id}">删除</a>
+					<a href="${ctx}/topic/transfer/${topic.id}">暂停/开始</a>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>

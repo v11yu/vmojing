@@ -113,4 +113,17 @@ public class BloggerBusinessImpl extends AbstractBusiness implements BloggerBusi
 		return true;
 	}
 
+	@Override
+	public Blogger getById(String id) {
+		// TODO Auto-generated method stub
+		return bloggerDao.findById(id);
+	}
+
+	@Override
+	public boolean delete(String id) {
+		// TODO Auto-generated method stub
+		bloggerDao.dropById(id);
+		return true;
+	}
+
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 
 
+
 import com.vmojing.mongodb.domain.Comment;
 import com.vmojing.mongodb.domain.Weibo;
 
@@ -33,5 +34,10 @@ public interface WeiboParser {
 	 * @return weibo 微博列表
 	 */
 	public List<Weibo> getWeiboByUid (String uid,Date lastUpdateWeiboTime);
-	
+	/**
+	 * 通过wid获取微博完整信息
+	 * @param wid 微博id
+	 * @return 完整微博信息
+	 */
+	public Weibo getWeiboById(String wid);
 }

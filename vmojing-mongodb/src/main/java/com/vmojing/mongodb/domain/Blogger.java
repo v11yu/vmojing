@@ -21,6 +21,13 @@ public class Blogger {
 	private Date lastUpdateFansTime;
 	/** 最后更新微博的时间*/
 	private Date lastUpdateWeiboTime;
+	public Blogger(){
+		this.createAt = new Date();
+		this.lastUpdateFansTime = new Date(0);
+		this.lastUpdateWeiboTime = new Date(0);
+		this.operateStatus = 0;
+		this.status = 0;
+	}
 	public String getId() {
 		return id;
 	}

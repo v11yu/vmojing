@@ -21,13 +21,13 @@ public class UserParserTest {
 	UserParser userParser;
 	@Test
 	public void testGetUser(){
-		User u = userParser.getIdByName("v11yu");
+		User u = userParser.getUserByName("v11yu");
 		System.out.println(u);
 		assertNotNull(u);
 	}
 	@Test
 	public void testGetFans(){
-		User u = userParser.getIdByName("v11yu");
+		User u = userParser.getUserByName("v11yu");
 		List<User> fans = userParser.getFans(u.getId());
 		System.out.println("fans list size:"+fans.size());
 	}
