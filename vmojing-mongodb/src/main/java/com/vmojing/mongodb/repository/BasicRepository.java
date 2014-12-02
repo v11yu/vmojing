@@ -43,7 +43,7 @@ public class BasicRepository<T> implements DAO<T>{
 	 */
 	
 	public BasicRepository(Class<?> entityType,DBConvertor<T> convertor){
-		getLogger().info("create a Object of BasicRepository,type of "+entityType);
+		getLogger().debug("create a Object of BasicRepository,type of "+entityType);
 		this.entityType = entityType;
 		this.convertor = convertor;
 	}
@@ -80,9 +80,9 @@ public class BasicRepository<T> implements DAO<T>{
 	 * @param t
 	 */
 	public void createCollection() {
-		getLogger().info("operation of creating "+entityType);
+		getLogger().debug("operation of creating "+entityType);
         if (!mongoTemplate.collectionExists(entityType)) {
-        	getLogger().info("create collection with a name based on "+entityType);
+        	getLogger().debug("create collection with a name based on "+entityType);
             mongoTemplate.createCollection(entityType);
         }
     }
@@ -90,9 +90,9 @@ public class BasicRepository<T> implements DAO<T>{
 	 * Drop the collection with the name indicated by the entity class. 
 	 */
 	public void dropCollection(){
-		getLogger().info("operation of dropping "+entityType);
+		getLogger().debug("operation of dropping "+entityType);
 		if (mongoTemplate.collectionExists(entityType)) {
-			getLogger().info("drop collection with a name based on "+entityType);
+			getLogger().debug("drop collection with a name based on "+entityType);
             mongoTemplate.dropCollection(entityType);
         }
 	}
@@ -100,13 +100,13 @@ public class BasicRepository<T> implements DAO<T>{
 	public DBCursor findByAll() {
 		// TODO Auto-generated method stub
 		DBCursor cursor = collection.find();
-		getLogger().info("findByAll from "+getCollectionName()+" count:"+cursor.count());
+		getLogger().debug("findByAll from "+getCollectionName()+" count:"+cursor.count());
 		return collection.find();
 	}
 	@Override
 	public DBCursor findQuery(DBObject query) {
 		// TODO Auto-generated method stub
-		getLogger().info("findQuery :"+query+" from "+getCollectionName());
+		getLogger().debug("findQuery :"+query+" from "+getCollectionName());
 		return collection.find(query);
 	}
 	@Override
@@ -166,7 +166,7 @@ public class BasicRepository<T> implements DAO<T>{
 	public void saveAndUpdate(T obj) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			getLogger().info(
+			getLogger().debug(
 					"saveAndUpdate :" + obj + " in " + getCollectionName());
 			mongoTemplate.save(obj);
 		} catch (Exception e) {

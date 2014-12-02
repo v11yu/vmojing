@@ -18,13 +18,19 @@ public class WeiboConverter extends Converter<Weibo, Status>{
 	protected void setManualField(Status from, Weibo to) {
 		// TODO Auto-generated method stub
 		UserConverter userConverter = new UserConverter();
-		User u = userConverter.convert(from.getUser());
-		to.setUser(u);
+		if(from.getUser() != null){
+			User u = userConverter.convert(from.getUser());
+			to.setUser(u);
+		}
 		to.setLastUpdateTime(new Date(0));
 		to.setRetweetWeiboId(from.getRetweetedStatus() == null?null:from.getRetweetedStatus().getId());
 		to.setTopicIds(null);
 		to.setMid(IdTransferUtil.id2Mid(from.getId()));
-		to.setSource(from.getSource().toString());
+		if(from.getSource() == null){
+			to.setSource(null);
+		}else{
+			to.setSource(from.getSource().toString());
+		}
 	}
 
 }

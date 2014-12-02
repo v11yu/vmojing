@@ -99,26 +99,27 @@ public class CrawlerClient {
 	}
 
 	public void work() {
-		while (true) {
+//		while (true) {
 			initialize();
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < maxTopic; i++) {
 				SinaTopicWorker c = context.getBean(SinaTopicWorker.class);
 				taskExecutor.execute(c);
 			}
-//			for (int i = 0; i < maxClue; i++) {
-//				SinaClueWorker c = context.getBean(SinaClueWorker.class);
-//				taskExecutor.execute(c);
-//			}
-//			for (int i = 0; i < maxBlogger; i++) {
-//				SinaBloggerWorker c = context.getBean(SinaBloggerWorker.class);
-//				taskExecutor.execute(c);
-//			}
+			for (int i = 0; i < maxClue; i++) {
+				SinaClueWorker c = context.getBean(SinaClueWorker.class);
+				taskExecutor.execute(c);
+			}
+			for (int i = 0; i < maxBlogger; i++) {
+				SinaBloggerWorker c = context.getBean(SinaBloggerWorker.class);
+				taskExecutor.execute(c);
+			}
 			while (taskExecutor.getActiveCount() > 0) {
 				log.info("thread active count:" + taskExecutor.getActiveCount());
 				sleep(30);
 			}
-			//taskExecutor.shutdown();
-		}
+			log.info("一次work结束");
+			taskExecutor.shutdown();
+//		}
 		//int t = taskExecutor.getActiveCount();
 		
 	}

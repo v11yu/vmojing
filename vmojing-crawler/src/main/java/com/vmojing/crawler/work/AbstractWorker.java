@@ -57,10 +57,12 @@ public abstract class AbstractWorker<T> implements Runnable {
 				}
 				if(!running) break;
 				if(t == null) {
-					getLogger().error("Thread runtime error, when pop element equal null.");
+					getLogger().error("线程运行出错, when pop element equal null.");
+					break;
 				}
 				work(t);	
 			}
+			getLogger().info("线程真正退出了！");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			getLogger().error("Thread throw interruptException" +e);

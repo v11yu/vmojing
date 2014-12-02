@@ -26,9 +26,9 @@ import com.vmojing.mongodb.domain.User;
 public class UserParserImpl implements UserParser{
 	private static final Logger log = LoggerFactory
 			.getLogger(UserParserImpl.class);
-	private static final Integer MaxFan = 200;
+	private static final Integer MaxFan = 200; // 每次取最大粉丝数来判重
 	private static final Integer MaxPage = 10;
-	private static final Integer FindNum = 10;//每次取前多少段，去判重
+	private static final Integer FindNum = 20;//每次取前多少段，去判重
 	@Autowired
 	private UserConverter userConverter;
 	@Autowired
@@ -50,7 +50,7 @@ public class UserParserImpl implements UserParser{
 	 * @return
 	 */
 	private boolean checkFansListExit(String uid,List<User> us){
-		for(int i=0;i<MaxFan&&i<us.size();i++){
+		for(int i=0;i<FindNum&&i<us.size();i++){
 			if(!userBusiness.exitFans(uid, us.get(i).getId()))
 				return true;
 		}
@@ -69,7 +69,7 @@ public class UserParserImpl implements UserParser{
 		return res;
 	}
 	/**
-	 * 添加新粉丝list
+	 * 添加剩余的新粉丝list To res
 	 * @param uid 博主id
 	 * @param res 最终更新的粉丝list
 	 * @param pre 待添加的粉丝list
@@ -77,7 +77,7 @@ public class UserParserImpl implements UserParser{
 	private void addSegmentToResLst(String uid, List<User> res, List<User> pre) {
 		for (User u : pre) {
 			int flag = 0;
-			if (flag > MaxFan)
+			if (flag > FindNum)
 				break;
 			if (userBusiness.exitFans(uid, u.getId())) {
 				flag++;
@@ -97,7 +97,7 @@ public class UserParserImpl implements UserParser{
 				UserWapper uw = fm.getFollowersById(uid, MaxFan, MaxFan*i);
 				List<User> userSegment = tranferUser(uw.getUsers());
 				if(checkFansListExit(uid,userSegment)){
-					res.addAll(pre);
+					res.addAll(pre);//next segment is ok --> pre can add
 					pre = userSegment;
 				}else{
 					break;

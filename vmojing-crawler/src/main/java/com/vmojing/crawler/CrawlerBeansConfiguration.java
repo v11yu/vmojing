@@ -36,10 +36,12 @@ public class CrawlerBeansConfiguration {
 	 * fetcher
 	 */
 	@Bean
+	@Scope("prototype")
 	Loginer mobileSinaLoginer(){
 		return new MobileSinaLoginer();
 	}
 	@Bean
+	@Scope("prototype")
 	MobileTopicFetcher mobileTopicFetcher(){
 		Loginer loginer = mobileSinaLoginer();
 		if(loginer.getClient() == null){
@@ -67,6 +69,7 @@ public class CrawlerBeansConfiguration {
 	 * thread pool
 	 */
 	@Bean
+	@Scope("prototype")
 	public ThreadPoolTaskExecutor taskExecutor() {
 		ThreadPoolTaskExecutor pool = new ThreadPoolTaskExecutor();
 		pool.setCorePoolSize(100);
