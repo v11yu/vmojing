@@ -86,10 +86,7 @@ public class WeiboParserImpl implements WeiboParser {
 					log.error("微博"+wid +" getRetweet出错，StatusWapper is null");
 					continue;
 				}
-				if(0 == weibos.size()){
-					log.info("微博"+wid +" 转发列表已采集完成，采集至第"+(i-1));
-					break;
-				}
+				if(0 == weibos.size()) break;
 				res.addAll(weibos);
 			} catch (WeiboException e) {
 				// TODO Auto-generated catch block

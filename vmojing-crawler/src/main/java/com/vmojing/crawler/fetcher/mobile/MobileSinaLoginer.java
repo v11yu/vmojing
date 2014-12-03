@@ -56,11 +56,10 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 		HttpResponse res = null;
 		try {
 			res = tmpClient.execute(get);
-			release(res);
 			Document doc = Jsoup.parse(getResponseBody(res));
+			release(res);
 			Elements inputs = doc.getElementsByTag("input");
 			Element form = doc.getElementsByTag("form").get(0);
-			
 			for(Element input : inputs){
 				if(input.attr("type").equalsIgnoreCase("hidden")){
 					formParams.add(new BasicNameValuePair(input.attr("name"), input.attr("value")));
@@ -92,7 +91,11 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 			getLogger().error(e.getMessage());
 		} catch (IOException e) {
 			getLogger().error(e.getMessage());
-		}finally{
+		} catch(Exception e){
+			e.printStackTrace();
+			getLogger().error(e.getMessage()+" "+e.getStackTrace());
+		}
+		finally{
 			if(res != null){
 				release(res);
 			}
@@ -105,9 +108,17 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 		if(client != null) return client;
 		login();
 		if(client == null){
-			for(int i=0;i<TRY_NUM&&!login();i++){
-				getLogger().warn("httpClient登陆失败，正在尝试，尝试次数："+i);
+			int i = 0;
+			for(i=0;i<TRY_NUM&&!login();i++){
+				getLogger().warn("httpClient登陆失败，正在尝试，尝试次数："+i+"休眠30s");
+				try {
+					Thread.sleep(30*1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			if(i>TRY_NUM) return null;
 		}
 		return client;
 	}

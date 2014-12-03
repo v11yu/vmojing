@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.vmojing.crawler.Contants;
 import com.vmojing.crawler.queue.BasicQueue;
-import com.vmojing.crawler.queue.TopicQueue;
+
 import com.vmojing.crawler.work.push.PushStrategy;
 import com.vmojing.mongodb.domain.Topic;
 
@@ -46,8 +46,11 @@ public abstract class AbstractWorker<T> implements Runnable {
 			while (!Thread.interrupted()) {
 				delay();
 				T t = null;
+				getLogger().info("go here");
 				synchronized (queue) {
+					getLogger().info("go here2");
 					if(!queue.isEmpty()) {
+						getLogger().info("go here3");
 						t = queue.pop();
 						pushStrategy.push(queue, t);
 					}else {

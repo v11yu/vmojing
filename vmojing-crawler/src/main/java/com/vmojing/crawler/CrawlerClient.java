@@ -7,6 +7,7 @@ import java.util.Queue;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import com.vmojing.crawler.fetcher.api.Loginer;
+import com.vmojing.crawler.fetcher.mobile.MobileSinaLoginer;
 import com.vmojing.crawler.queue.*;
 import com.vmojing.crawler.work.SinaBloggerWorker;
 import com.vmojing.crawler.work.SinaClueWorker;
@@ -29,6 +33,7 @@ import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.Topic;
 
 @Component
+@Scope("prototype")
 public class CrawlerClient {
 	/*
 	 * logger
@@ -71,8 +76,10 @@ public class CrawlerClient {
 
 	public static void main(String[] args) {
 		ApplicationContext context = new AnnotationConfigApplicationContext(CrawlerRootConfiguration.class);
-		CrawlerClient client = context.getBean(CrawlerClient.class);
-		client.work();
+		while(true){
+			CrawlerClient client = context.getBean(CrawlerClient.class);
+			client.work();
+		}
 	}
 
 	private void initialize() {
@@ -86,8 +93,11 @@ public class CrawlerClient {
 		checkAndFill(clueQueue, clues);
 		checkAndFill(topicQueue, topics);
 		checkAndFill(bloggerQueue, bloggers);
+		Loginer loginer = new MobileSinaLoginer();
 	}
-
+	private void after(){
+		taskExecutor.shutdown();
+	}
 	private <T> void checkAndFill(BasicQueue<T> queue, List<T> ls) {
 		if (!queue.isEmpty()) {
 			log.error("队列非空,系统异常");
@@ -99,29 +109,27 @@ public class CrawlerClient {
 	}
 
 	public void work() {
-//		while (true) {
-			initialize();
-			for (int i = 0; i < maxTopic; i++) {
-				SinaTopicWorker c = context.getBean(SinaTopicWorker.class);
-				taskExecutor.execute(c);
-			}
-			for (int i = 0; i < maxClue; i++) {
-				SinaClueWorker c = context.getBean(SinaClueWorker.class);
-				taskExecutor.execute(c);
-			}
-			for (int i = 0; i < maxBlogger; i++) {
-				SinaBloggerWorker c = context.getBean(SinaBloggerWorker.class);
-				taskExecutor.execute(c);
-			}
-			while (taskExecutor.getActiveCount() > 0) {
-				log.info("thread active count:" + taskExecutor.getActiveCount());
-				sleep(30);
-			}
-			log.info("一次work结束");
-			taskExecutor.shutdown();
-//		}
-		//int t = taskExecutor.getActiveCount();
-		
+		initialize();
+		for (int i = 0; i < maxTopic; i++) {
+			SinaTopicWorker c = context.getBean(SinaTopicWorker.class);
+			taskExecutor.execute(c);
+		}
+		for (int i = 0; i < maxClue; i++) {
+			SinaClueWorker c = context.getBean(SinaClueWorker.class);
+			taskExecutor.execute(c);
+		}
+		for (int i = 0; i < maxBlogger; i++) {
+			SinaBloggerWorker c = context.getBean(SinaBloggerWorker.class);
+			taskExecutor.execute(c);
+		}
+		while (taskExecutor.getActiveCount() > 0) {
+			log.info("thread active count:" + taskExecutor.getActiveCount());
+			sleep(30);
+		}
+		log.info("一次work结束");
+		after();
+		// int t = taskExecutor.getActiveCount();
+
 	}
 	private void sleep(int second){
 		try {

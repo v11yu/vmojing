@@ -13,7 +13,6 @@ import com.vmojing.crawler.fetcher.api.Loginer;
 import com.vmojing.crawler.fetcher.api.TopicFetcher;
 import com.vmojing.crawler.parser.api.WeiboParser;
 import com.vmojing.crawler.queue.BasicQueue;
-import com.vmojing.crawler.queue.TopicQueue;
 import com.vmojing.crawler.work.push.PushStrategy;
 import com.vmojing.mongodb.business.api.TopicBusiness;
 import com.vmojing.mongodb.domain.Topic;
@@ -39,6 +38,10 @@ public class SinaTopicWorker extends AbstractWorker<Topic> {
 		Date begin = new Date();
 		Date lastTime = t.getLastUpdateTime();
 		getLogger().info("话题获取线程开始:"+t.getTopicName());
+		if(topicFetcher == null){
+			getLogger().info("话题获取线程异常:"+t.getTopicName()+",httpclient = null,结束等待下次抓取");
+			return ;
+		}
 		Set<String> wids = topicFetcher.getIds(t.getTopicName());
 		List<Weibo> weibos = weiboParser.getWeiboByWids(wids, t.getLastUpdateTime());
 		Integer updateWeiboNums = 0;

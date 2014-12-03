@@ -90,6 +90,9 @@ public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 					getLogger().error(e.getMessage());
 				} catch (IOException e) {
 					getLogger().error(e.getMessage());
+				} catch(Exception e){
+					e.printStackTrace();
+					getLogger().error(e.getMessage()+" "+e.getStackTrace());
 				}finally{
 					if(res != null){
 						release(res);

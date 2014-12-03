@@ -13,7 +13,7 @@ import com.vmojing.crawler.Contants;
 import com.vmojing.crawler.parser.api.CommentParser;
 import com.vmojing.crawler.parser.api.WeiboParser;
 import com.vmojing.crawler.queue.BasicQueue;
-import com.vmojing.crawler.queue.ClueQueue;
+
 import com.vmojing.crawler.work.push.PushStrategy;
 import com.vmojing.mongodb.business.api.ClueBusiness;
 import com.vmojing.mongodb.domain.Clue;
