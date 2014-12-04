@@ -1,4 +1,4 @@
-package com.vmojing.core.parser.sina.impl;
+package com.vmojing.core.parser.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,10 +19,10 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
-import com.vmojing.core.parser.sina.WeiboExceptionHandle;
-import com.vmojing.core.parser.sina.api.WeiboParser;
-import com.vmojing.core.parser.sina.convert.Converter;
-import com.vmojing.core.parser.sina.convert.WeiboConverter;
+import com.vmojing.core.parser.WeiboExceptionHandle;
+import com.vmojing.core.parser.api.WeiboParser;
+import com.vmojing.core.parser.convert.Converter;
+import com.vmojing.core.parser.convert.WeiboConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Weibo;
 
@@ -88,10 +88,7 @@ public class WeiboParserImpl implements WeiboParser {
 					log.error("微博"+wid +" getRetweet出错，StatusWapper is null");
 					continue;
 				}
-				if(0 == weibos.size()){
-					log.info("微博"+wid +" 转发列表已采集完成，采集至第"+(i-1));
-					break;
-				}
+				if(0 == weibos.size()) break;
 				res.addAll(weibos);
 			} catch (WeiboException e) {
 				// TODO Auto-generated catch block
@@ -116,17 +113,6 @@ public class WeiboParserImpl implements WeiboParser {
 		return getWeiboAfterTime(sw,lastUpdateWeiboTime);
 		
 	}
-
-	private List<Weibo> getWeiboAfterTime(StatusWapper sw,Date tim){
-		List<Weibo> weibos = new ArrayList<Weibo>();
-		if(sw == null || sw.getStatuses() == null) return weibos; 
-		for(Status st: sw.getStatuses()){
-			if(st.getCreatedAt().after(tim)){
-				weibos.add(weiboConverter.convert(st));
-			}
-		}
-		return weibos;
-	}
 	@Override
 	public Weibo getWeiboById(String wid) {
 		// TODO Auto-generated method stub
@@ -143,5 +129,14 @@ public class WeiboParserImpl implements WeiboParser {
 		}
 		return null;
 	}
-
+	private List<Weibo> getWeiboAfterTime(StatusWapper sw,Date tim){
+		List<Weibo> weibos = new ArrayList<Weibo>();
+		if(sw == null || sw.getStatuses() == null) return weibos; 
+		for(Status st: sw.getStatuses()){
+			if(st.getCreatedAt().after(tim)){
+				weibos.add(weiboConverter.convert(st));
+			}
+		}
+		return weibos;
+	}
 }

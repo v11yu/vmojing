@@ -51,7 +51,7 @@ public class UserParserImpl implements UserParser{
 	 */
 	private boolean checkFansListExit(String uid,List<User> us){
 		for(int i=0;i<FindNum&&i<us.size();i++){
-			if(!userBusiness.exitFans(uid, us.get(i).getId()))
+			if(!userBusiness.existFans(uid, us.get(i).getId()))
 				return true;
 		}
 		return false;
@@ -79,7 +79,7 @@ public class UserParserImpl implements UserParser{
 			int flag = 0;
 			if (flag > FindNum)
 				break;
-			if (userBusiness.exitFans(uid, u.getId())) {
+			if (userBusiness.existFans(uid, u.getId())) {
 				flag++;
 			} else {
 				flag = 0;

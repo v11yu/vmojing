@@ -1,4 +1,4 @@
-package com.vmojing.core.parser.sina;
+package com.vmojing.core.parser;
 
 import weibo4j.model.WeiboException;
 

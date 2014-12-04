@@ -1,4 +1,5 @@
-package com.vmojing.core.parser.sina.api;
+package com.vmojing.core.parser.api;
+
 import java.util.Date;
 import java.util.List;
 

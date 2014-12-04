@@ -89,10 +89,11 @@ public class BasicRepositoryTest {
 	@Test
 	@UsingDataSet(locations = "multipleTopicData.json", loadStrategy = LoadStrategyEnum.CLEAN_INSERT)
 	public void testFindByGreaterThan(){
-		System.out.println(topicDao.countAndClose(topicDao.findByAll()));
+		System.out.println("sum:"+topicDao.countAndClose(topicDao.findByAll()));
 		DBQuery query = new DBQuery();
 		query.greaterThan("type", 20);
 		query.greaterThan("operateStatus", 1);
+		System.out.println("num:"+topicDao.countAndClose(topicDao.findQuery(query)));
 		assertEquals(topicDao.countAndClose(topicDao.findQuery(query)), 1);
 
 	}

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.vmojing.crawler.parser.api.UserParser;
+import com.vmojing.core.parser.api.UserParser;
 import com.vmojing.mongodb.business.api.BloggerBusiness;
 import com.vmojing.mongodb.business.api.ClueBusiness;
 import com.vmojing.mongodb.domain.Blogger;

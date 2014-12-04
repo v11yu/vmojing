@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Import;
 
 
 @Configuration
-@ComponentScan({"com.vmojing.core"})
+@ComponentScan({"com.vmojing.core","com.vmojing.mongodb"})
 @Import({ CoreBeansConfiguration.class})
 public class CoreRootConfiguration {
 

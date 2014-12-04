@@ -43,7 +43,7 @@
 		</dependency>
 		<dependency>
 			<groupId>cn.ict</groupId>
-			<artifactId>vmojing-crawler</artifactId>
+			<artifactId>vmojing-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<!-- End:databaseAccessObject -->
@@ -61,10 +61,8 @@
 				<version>1.4.4</version>
 				<configuration>
 					<container>
-						<container>
 							<containerId>tomcat7x</containerId>
 							<type>remote</type>
-						</container>
 					</container>
 					<configuration>
 						<type>runtime</type>

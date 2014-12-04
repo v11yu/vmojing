@@ -1,4 +1,4 @@
-package com.vmojing.core.parser.sina.impl;
+package com.vmojing.core.parser.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,9 +16,9 @@ import weibo4j.Comments;
 import weibo4j.model.CommentWapper;
 import weibo4j.model.WeiboException;
 
-import com.vmojing.core.parser.sina.WeiboExceptionHandle;
-import com.vmojing.core.parser.sina.api.CommentParser;
-import com.vmojing.core.parser.sina.convert.CommentConverter;
+import com.vmojing.core.parser.WeiboExceptionHandle;
+import com.vmojing.core.parser.api.CommentParser;
+import com.vmojing.core.parser.convert.CommentConverter;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Comment;
 @Component

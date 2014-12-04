@@ -1,4 +1,4 @@
-package com.vmojing.core.parser.sina.convert;
+package com.vmojing.core.parser.convert;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

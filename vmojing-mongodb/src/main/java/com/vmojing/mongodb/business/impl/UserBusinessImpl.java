@@ -1,5 +1,6 @@
 package com.vmojing.mongodb.business.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	@Qualifier("userDao")
 	BasicRepository<User> userDao;
 	@Override
-	public boolean exitFans(String uid, String fid) {
+	public boolean existFans(String uid, String fid) {
 		// TODO Auto-generated method stub
 		User fan = userDao.findById(fid);
 		if(fan == null){
@@ -30,5 +31,9 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 			}
 		}
 		return false;
+	}
+	public List<User> filterUserList(List<User> all){
+		List<User> newList = new ArrayList<User>();
+		return newList;
 	}
 }

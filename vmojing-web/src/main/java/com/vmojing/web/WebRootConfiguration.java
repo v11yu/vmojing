@@ -9,7 +9,7 @@ import com.vmojing.mongodb.MongoConfiguration;
 
 @Configuration
 @Import({WebAppConfiguration.class,MongoConfiguration.class ,MongoBeansConfiguration.class})
-@ComponentScan({"com.vmojing.web","com.vmojing.mongodb","com.vmojing.crawler"})
+@ComponentScan({"com.vmojing.web","com.vmojing.mongodb","com.vmojing.core"})
 public class WebRootConfiguration {
 
 }

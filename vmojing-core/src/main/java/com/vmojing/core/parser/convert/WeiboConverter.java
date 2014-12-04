@@ -1,4 +1,4 @@
-package com.vmojing.core.parser.sina.convert;
+package com.vmojing.core.parser.convert;
 
 import java.util.Date;
 import java.util.List;
@@ -11,6 +11,7 @@ import weibo4j.model.Status;
 
 import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.domain.Weibo;
+import com.vmojing.mongodb.utils.IdTransferUtil;
 @Component
 @Scope("prototype")
 public class WeiboConverter extends Converter<Weibo, Status>{
@@ -19,12 +20,19 @@ public class WeiboConverter extends Converter<Weibo, Status>{
 	protected void setManualField(Status from, Weibo to) {
 		// TODO Auto-generated method stub
 		UserConverter userConverter = new UserConverter();
-		User u = userConverter.convert(from.getUser());
-		to.setUser(u);
+		if(from.getUser() != null){
+			User u = userConverter.convert(from.getUser());
+			to.setUser(u);
+		}
 		to.setLastUpdateTime(new Date(0));
 		to.setRetweetWeiboId(from.getRetweetedStatus() == null?null:from.getRetweetedStatus().getId());
 		to.setTopicIds(null);
-		
+		to.setMid(IdTransferUtil.id2Mid(from.getId()));
+		if(from.getSource() == null){
+			to.setSource(null);
+		}else{
+			to.setSource(from.getSource().toString());
+		}
 	}
 
 }

@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import com.vmojing.mongodb.domain.Blogger;
 
 
-public abstract class AbstractBusiness<T> {
+public abstract class AbstractBusiness{
 	/** 日志容器*/
 	private static final Map<Class<?>,Logger> loggers = new HashMap<Class<?>,Logger>();
 	/**

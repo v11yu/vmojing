@@ -1,8 +1,9 @@
-package com.vmojing.core.parser.sina.api;
+package com.vmojing.core.parser.api;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
 
 
 
@@ -39,5 +40,4 @@ public interface WeiboParser {
 	 * @return 完整微博信息
 	 */
 	public Weibo getWeiboById(String wid);
-	
 }

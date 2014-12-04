@@ -7,5 +7,5 @@ public interface UserBusiness {
 	 * @param fid 粉丝id
 	 * @return {@code true} if the exit 粉丝fid,{@code false} otherwise
 	 */
-	boolean exitFans(String uid,String fid);
+	boolean existFans(String uid,String fid);
 }

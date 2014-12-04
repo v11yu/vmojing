@@ -1,4 +1,4 @@
-package com.vmojing.core.parser.sina.convert;
+package com.vmojing.core.parser.convert;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -39,9 +39,9 @@ public abstract class Converter <T,F>{
 				} catch (IllegalAccessException | InvocationTargetException
 						| NoSuchMethodException e) {
 					// TODO Auto-generated catch block
-					getLogger().error(""+e);
+					getLogger().error("converter内部错误："+e+"from:"+from+"to:"+to+"属性："+f.getName());
 				}catch (Exception e) {
-					getLogger().error(""+e);
+					getLogger().error("converter外部错误："+e+"from:"+from+"to:"+to+"属性："+f.getName());
 				}
 			}
 		}
