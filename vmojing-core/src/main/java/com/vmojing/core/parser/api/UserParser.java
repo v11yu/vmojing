@@ -9,13 +9,13 @@ public interface UserParser {
 	/**
 	 * 获取用户未更新粉丝信息,都是需要直接更新的粉丝信息
 	 * @param uid 博主id
-	 * @return 最新的粉丝列表
+	 * @return 最新的粉丝列表,or null if get failure
 	 */
 	public List<User> getNewFans(String uid);
 	/**
 	 * 获取用户所有的能获取的粉丝信息
 	 * @param uid 用户id
-	 * @return 粉丝列表
+	 * @return 粉丝列表,or null if get failure
 	 */
 	public List<User> getAllFans(String uid);
 	/**

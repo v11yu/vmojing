@@ -45,23 +45,32 @@ public class SinaClueWorker extends AbstractWorker<Clue>{
 		getLogger().info("线索抓取线程开始："+t.getId());
 		List<Weibo> weibos = weiboParser.getRetweet(t.getId(), t.getLastUpdateRetweetTime());
 		List<Comment> comments = commentParser.getComment(t.getId(), t.getLastUpdateCommentTime());
-		Integer updateCommentNums = comments.size();
-		Integer updateWeiboNums = weibos.size();
-		for(Weibo w : weibos){
-			clueBusiness.saveRetweetWeibo(w, t);
-			if(w.getCreatedAt().after(updateTime)){
-				updateTime = w.getCreatedAt();
+		Integer updateWeiboNums = -1;
+		Integer updateCommentNums = -1;
+		//---retweet weibos doing
+		if (weibos != null) {
+			updateWeiboNums = weibos.size();
+			for (Weibo w : weibos) {
+				clueBusiness.saveRetweetWeibo(w, t);
+				if (w.getCreatedAt().after(updateTime)) {
+					updateTime = w.getCreatedAt();
+				}
 			}
+			t.setLastUpdateRetweetTime(updateTime);
 		}
-		t.setLastUpdateRetweetTime(updateTime);
-		updateTime = t.getLastUpdateCommentTime();
-		for(Comment c :comments){
-			clueBusiness.saveComment(c,t);
-			if(c.getCreatedAt().after(updateTime)){
-				updateTime = c.getCreatedAt();
+		//---commet doing
+		if (comments != null) {
+			updateCommentNums = comments.size();
+			updateTime = t.getLastUpdateCommentTime();
+			for (Comment c : comments) {
+				clueBusiness.saveComment(c, t);
+				if (c.getCreatedAt().after(updateTime)) {
+					updateTime = c.getCreatedAt();
+				}
 			}
+			t.setLastUpdateCommentTime(updateTime);
 		}
-		t.setLastUpdateCommentTime(updateTime);
+		
 		clueBusiness.save(t);
 		long useTime = new Date().getTime() - begin.getTime();
 		getLogger().info("线索抓取线程结束："+t.getId()+",用时："+useTime / 1000 +

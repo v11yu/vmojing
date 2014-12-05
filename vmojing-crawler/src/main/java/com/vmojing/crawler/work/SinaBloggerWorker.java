@@ -40,21 +40,29 @@ public class SinaBloggerWorker extends AbstractWorker<Blogger>{
 		getLogger().info("博主抓取线程开始："+t.getUser().getName());
 		List<Weibo> weibos = weiboParser.getWeiboByUid(t.getId(), t.getLastUpdateWeiboTime());
 		List<User> fans = userParser.getNewFans(t.getId());
-		Integer updateFanNums = 0;
-		Integer updateWeiboNums = weibos.size();
-		for(Weibo weibo:weibos){
-			bloggerBusiness.saveWeibo(weibo, t);
-			if(weibo.getCreatedAt().after(update)){
-				update = weibo.getCreatedAt();
+		Integer updateFanNums = -1;
+		Integer updateWeiboNums = -1;
+		//---weibo doing
+		if (weibos != null) {
+			updateWeiboNums = weibos.size();
+			for (Weibo weibo : weibos) {
+				bloggerBusiness.saveWeibo(weibo, t);
+				if (weibo.getCreatedAt().after(update)) {
+					update = weibo.getCreatedAt();
+				}
 			}
+			t.setLastUpdateWeiboTime(update);
 		}
-		t.setLastUpdateWeiboTime(update);
-		for(User u:fans){
-			if(bloggerBusiness.saveFans(u, t)){
-				updateFanNums++;
+		//---fans doing
+		if (fans != null) {
+			updateFanNums = 0;
+			for (User u : fans) {
+				if (bloggerBusiness.saveFans(u, t)) {
+					updateFanNums++;
+				}
 			}
+			t.setLastUpdateFansTime(new Date());
 		}
-		t.setLastUpdateFansTime(new Date());
 		bloggerBusiness.save(t);
 		long useTime = new Date().getTime() - begin.getTime();
 		getLogger().info("博主抓取线程结束："+t.getUser().getName()+",用时："

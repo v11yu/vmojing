@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
-
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>\
+<!-- crawler log4j -->
 	<appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
 		<!--输出格式 -->
 		<layout class="org.apache.log4j.PatternLayout">
@@ -35,6 +35,7 @@
 	<logger name="org.apache.commons.httpclient">
 		<level value="error" />
 	</logger>
+	
 	<!-- 根logger的设置 -->
 	<root>
 		<priority value="debug" />

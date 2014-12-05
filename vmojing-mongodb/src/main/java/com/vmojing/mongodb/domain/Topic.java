@@ -35,6 +35,13 @@ public class Topic {
 	private Date initAtTime;
 	/** 已采集的总数 */
 	private Integer sum;
+	public Topic(){
+		this.createAtTime = new Date();
+		this.operateStatus = 0;
+		this.lastUpdateTime = new Date(0);
+		this.initAtTime = new Date(0);
+		this.sum = 0;
+	}
 	public Integer getSum() {
 		return sum;
 	}
@@ -114,13 +121,7 @@ public class Topic {
 		this.initAtTime = initAtTime;
 	}
 
-	public Topic(){
-		this.createAtTime = new Date();
-		this.operateStatus = 0;
-		this.lastUpdateTime = new Date(0);
-		this.initAtTime = new Date(0);
-		this.sum = 0;
-	}
+	
 
 	public Topic( Date createAtTime, Date lastUpdateTime,
 			Integer operateStatus, Integer updateFrequency, String topicName,

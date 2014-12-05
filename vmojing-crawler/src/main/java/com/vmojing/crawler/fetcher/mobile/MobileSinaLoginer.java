@@ -41,7 +41,7 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 	private final static Integer TRY_NUM = 3;
 	private final String LOGIN_URL = "http://login.weibo.cn/login/";
 	private HttpClient client ;
-	private String userName = "wow_haigui2@163.com";
+	private String userName = "wow_haigui3@163.com";
 	private String password = "vmojing";
 	public MobileSinaLoginer(){
 	}
