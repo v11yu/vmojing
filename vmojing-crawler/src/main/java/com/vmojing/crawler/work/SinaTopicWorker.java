@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.vmojing.crawler.fetcher.api.Loginer;
 import com.vmojing.crawler.fetcher.api.TopicFetcher;
-import com.vmojing.crawler.parser.api.WeiboParser;
+import com.vmojing.core.parser.api.WeiboParser;
 import com.vmojing.crawler.queue.BasicQueue;
 import com.vmojing.crawler.work.push.PushStrategy;
 import com.vmojing.mongodb.business.api.TopicBusiness;
@@ -43,7 +43,9 @@ public class SinaTopicWorker extends AbstractWorker<Topic> {
 			return ;
 		}
 		Set<String> wids = topicFetcher.getIds(t.getTopicName());
+		getLogger().info("话题:"+t.getTopicName()+"获取wids："+wids.size());
 		List<Weibo> weibos = weiboParser.getWeiboByWids(wids, t.getLastUpdateTime());
+		getLogger().info("话题:"+t.getTopicName()+"获取需更新weibos："+weibos.size());
 		Integer updateWeiboNums = 0;
 		for(Weibo weibo :weibos){
 			if(topicbusiness.saveWeibo(t,weibo)){

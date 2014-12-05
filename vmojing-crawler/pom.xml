@@ -22,7 +22,15 @@
 			<artifactId>vmojing-mongodb</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
 		<!-- End:databaseAccessObject -->
+		<!-- vmojing core start -->
+		<dependency>
+			<groupId>cn.ict</groupId>
+			<artifactId>vmojing-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<!-- vmojing core end -->
 		<!-- Start:http -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>

@@ -71,10 +71,11 @@ public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 				HttpResponse res = null;
 				try {
 					searchUrl = Url + i;
-					getLogger().debug(searchUrl);
+					getLogger().debug("搜索url:"+searchUrl);
 					HttpGet getSearch = addHttpGetWithHeader(searchUrl);
 					res = client.execute(getSearch);
-					doc = Jsoup.parse(getResponseBody(res));
+					String responseBodyString = getResponseBody(res);
+					doc = Jsoup.parse(responseBodyString);
 					release(res);
 					Elements es = doc.getElementsByTag("div");
 					for (Element e : es) {

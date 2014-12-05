@@ -46,11 +46,8 @@ public abstract class AbstractWorker<T> implements Runnable {
 			while (!Thread.interrupted()) {
 				delay();
 				T t = null;
-				getLogger().info("go here");
 				synchronized (queue) {
-					getLogger().info("go here2");
 					if(!queue.isEmpty()) {
-						getLogger().info("go here3");
 						t = queue.pop();
 						pushStrategy.push(queue, t);
 					}else {

@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.vmojing.crawler.Contants;
-import com.vmojing.crawler.parser.api.CommentParser;
-import com.vmojing.crawler.parser.api.WeiboParser;
+import com.vmojing.core.parser.api.CommentParser;
+import com.vmojing.core.parser.api.WeiboParser;
 import com.vmojing.crawler.queue.BasicQueue;
 
 import com.vmojing.crawler.work.push.PushStrategy;

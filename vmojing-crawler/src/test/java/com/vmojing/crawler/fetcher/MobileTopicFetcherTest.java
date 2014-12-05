@@ -25,7 +25,8 @@ public class MobileTopicFetcherTest {
 	}
 	@Test
 	public void testGetIds(){
-		Set<String> wids = topicFetcher.getIds("魔兽世界",2,"","");
+		Set<String> wids = topicFetcher.getIds("德拉诺",1,"","");
+		System.out.println("wids:"+wids.size());
 		assertTrue(wids.size()>0);
 	}
 }

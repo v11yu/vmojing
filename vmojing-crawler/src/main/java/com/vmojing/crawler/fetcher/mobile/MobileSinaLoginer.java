@@ -41,8 +41,8 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 	private final static Integer TRY_NUM = 3;
 	private final String LOGIN_URL = "http://login.weibo.cn/login/";
 	private HttpClient client ;
-	private String userName = "vmojing@163.com";
-	private String password = "0744ict0744";
+	private String userName = "wow_haigui2@163.com";
+	private String password = "vmojing";
 	public MobileSinaLoginer(){
 	}
 	@Override
@@ -72,6 +72,7 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 			actionName = form.attr("action");
 			formParams.add(new BasicNameValuePair("mobile", userName));
     		formParams.add(new BasicNameValuePair(inputPwdName, password));
+    		getLogger().info("username:"+userName+" password:"+password);
     		formParams.add(new BasicNameValuePair("submit", "登录"));
     		UrlEncodedFormEntity fromEntity = new UrlEncodedFormEntity(formParams, "uTF-8");
 			HttpPost post = addHttpPostWithHeader(LOGIN_URL+actionName);
@@ -82,9 +83,12 @@ public class MobileSinaLoginer extends BasicHttpMethod implements Loginer{
 			get = addHttpGetWithHeader(header.getValue());
 			res = tmpClient.execute(get);
 			release(res);
-			get = addHttpGetWithHeader("http://weibo.com/u/1744649233");
-			res = tmpClient.execute(get);
+//			get = addHttpGetWithHeader("http://weibo.com/u/1744649233");
+//			res = tmpClient.execute(get);
+//			getLogger().info(getResponseBody(res));
+//			release(res);
 			this.client = tmpClient;
+			getLogger().info("Loginer登陆成功");
 			return true;
 			
 		} catch (ClientProtocolException e) {

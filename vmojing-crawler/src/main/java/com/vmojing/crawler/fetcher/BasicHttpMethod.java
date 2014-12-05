@@ -68,7 +68,9 @@ public class BasicHttpMethod {
 		getResponseBody(res);
 	}
 	/**
-	 * 打印出response的页面信息
+	 * response的页面信息
+	 * 打印一次，res就被清空了，为什么？
+	 * 只能获取一次，因此获取后需保存
 	 * @param res
 	 */
 	protected String getResponseBody(HttpResponse res){
@@ -87,7 +89,7 @@ public class BasicHttpMethod {
 		return null;
 	}
 	/**
-	 * 打印response出报文头信息
+	 * response出报文头信息
 	 * @param response
 	 */
 	protected String getHeaders(HttpResponse response){

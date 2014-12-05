@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.vmojing.crawler.parser.api.UserParser;
-import com.vmojing.crawler.parser.api.WeiboParser;
+import com.vmojing.core.parser.api.UserParser;
+import com.vmojing.core.parser.api.WeiboParser;
 import com.vmojing.crawler.queue.BasicQueue;
 import com.vmojing.crawler.work.push.PushStrategy;
 import com.vmojing.mongodb.business.api.BloggerBusiness;
@@ -39,7 +39,7 @@ public class SinaBloggerWorker extends AbstractWorker<Blogger>{
 		Date update = t.getLastUpdateWeiboTime();
 		getLogger().info("博主抓取线程开始："+t.getUser().getName());
 		List<Weibo> weibos = weiboParser.getWeiboByUid(t.getId(), t.getLastUpdateWeiboTime());
-		List<User> fans = userParser.getFans(t.getId());
+		List<User> fans = userParser.getNewFans(t.getId());
 		Integer updateFanNums = 0;
 		Integer updateWeiboNums = weibos.size();
 		for(Weibo weibo:weibos){
