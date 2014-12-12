@@ -1,16 +1,25 @@
 package com.vmojing.crawler.work;
 
+import static org.junit.Assert.assertEquals;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vmojing.crawler.Contants;
-import com.vmojing.crawler.queue.BasicQueue;
 
+import com.vmojing.crawler.CrawlerConfig;
+import com.vmojing.crawler.queue.BasicQueue;
+import com.vmojing.crawler.work.check.CheckStrategy;
 import com.vmojing.crawler.work.push.PushStrategy;
+import com.vmojing.mongodb.annotation.Frequent;
+import com.vmojing.mongodb.annotation.LastTime;
 import com.vmojing.mongodb.domain.Topic;
 
 public abstract class AbstractWorker<T> implements Runnable {
@@ -23,19 +32,23 @@ public abstract class AbstractWorker<T> implements Runnable {
 	 */
 	private final long delayInInMilliseconds;
 	private long lastSuccessfulTime;
+	protected final static long minute = 1000*60;
 	/*
 	 * task queue
 	 */
 	private BasicQueue<T> queue ;
 	private PushStrategy pushStrategy; // push strategy
-	public AbstractWorker(BasicQueue<T> queue,PushStrategy pushStrategy) {
-		this(Contants.delayInInMilliseconds,queue,pushStrategy);
+	private CheckStrategy checkStrategy;
+	
+	public AbstractWorker(BasicQueue<T> queue,PushStrategy pushStrategy,CheckStrategy checkStrategy) {
+		this(CrawlerConfig.getNum("WorkerDelayTime")*minute,queue,pushStrategy,checkStrategy);
 	}
-	public AbstractWorker(long delayInInMilliseconds,BasicQueue<T> queue,PushStrategy pushStrategy) {
+	public AbstractWorker(long delayInInMilliseconds,BasicQueue<T> queue,PushStrategy pushStrategy,CheckStrategy checkStrategy) {
 		this.delayInInMilliseconds = delayInInMilliseconds;
-		this.lastSuccessfulTime = System.currentTimeMillis();
+		this.lastSuccessfulTime = new Date(0).getTime();
 		this.queue = queue;
 		this.pushStrategy = pushStrategy;
+		this.checkStrategy = checkStrategy;
 	}
 	protected abstract void work(T t);
 	@Override
@@ -60,7 +73,9 @@ public abstract class AbstractWorker<T> implements Runnable {
 					getLogger().error("线程运行出错, when pop element equal null.");
 					break;
 				}
-				work(t);	
+				if(checkStrategy.check(t)){
+					work(t);
+				}
 			}
 			getLogger().info("线程真正退出了！");
 		} catch (InterruptedException e) {
@@ -78,6 +93,12 @@ public abstract class AbstractWorker<T> implements Runnable {
 		}
 		return loggers.get(type);
 	}
+	/**
+	 * 每次work之前，至少间隔的时间
+	 * 在Contants里配置
+	 * 默认1分钟
+	 * @throws InterruptedException
+	 */
 	protected void delay() throws InterruptedException {
 		while ((System.currentTimeMillis() - lastSuccessfulTime) < delayInInMilliseconds) {
 			sleep();
@@ -87,7 +108,5 @@ public abstract class AbstractWorker<T> implements Runnable {
 	protected void sleep() throws InterruptedException {
 		Thread.sleep(100);
 	}
-	protected void waitTime() throws InterruptedException{
-		Thread.sleep(delayInInMilliseconds);
-	}
+
 }

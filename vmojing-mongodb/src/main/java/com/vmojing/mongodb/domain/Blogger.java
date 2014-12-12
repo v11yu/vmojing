@@ -5,6 +5,9 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.vmojing.mongodb.annotation.Frequent;
+import com.vmojing.mongodb.annotation.LastTime;
+
 @Document
 public class Blogger {
 	@Id
@@ -21,12 +24,20 @@ public class Blogger {
 	private Date lastUpdateFansTime;
 	/** 最后更新微博的时间*/
 	private Date lastUpdateWeiboTime;
+	/**更新频率 / 分钟*/
+	@Frequent
+	private Integer updateFrequency;
+	/**最后操作时间 */
+	@LastTime
+	private Date lastTime;
 	public Blogger(){
 		this.createAt = new Date();
 		this.lastUpdateFansTime = new Date(0);
 		this.lastUpdateWeiboTime = new Date(0);
 		this.operateStatus = 0;
 		this.status = 0;
+		this.lastTime = new Date(0);
+		this.updateFrequency = 20;
 	}
 	public String getId() {
 		return id;
@@ -70,13 +81,27 @@ public class Blogger {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	
+	public Integer getUpdateFrequency() {
+		return updateFrequency;
+	}
+	public void setUpdateFrequency(Integer updateFrequency) {
+		this.updateFrequency = updateFrequency;
+	}
+	public Date getLastTime() {
+		return lastTime;
+	}
+	public void setLastTime(Date lastTime) {
+		this.lastTime = lastTime;
+	}
 	@Override
 	public String toString() {
 		return "Blogger [id=" + id + ", user=" + user + ", createAt="
 				+ createAt + ", operateStatus=" + operateStatus + ", status="
 				+ status + ", lastUpdateFansTime=" + lastUpdateFansTime
-				+ ", lastUpdateWeiboTime=" + lastUpdateWeiboTime + "]";
+				+ ", lastUpdateWeiboTime=" + lastUpdateWeiboTime
+				+ ", updateFrequency=" + updateFrequency + ", lastTime="
+				+ lastTime + "]";
 	}
-	
-	
+
 }

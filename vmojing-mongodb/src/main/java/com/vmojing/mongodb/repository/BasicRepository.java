@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -146,6 +147,7 @@ public class BasicRepository<T> implements DAO<T>{
 			res = cursor.size();
 		}catch(Exception e){
 			getLogger().error("获取所有数据出错"+e.toString());
+			getLogger().error(ExceptionUtils.getStackTrace(e));
 		}finally{
 			if(cursor != null) cursor.close();
 		}
@@ -170,7 +172,8 @@ public class BasicRepository<T> implements DAO<T>{
 					"saveAndUpdate :" + obj + " in " + getCollectionName());
 			mongoTemplate.save(obj);
 		} catch (Exception e) {
-			getLogger().error("save failure");
+			getLogger().error("错误:save failure");
+			getLogger().error(ExceptionUtils.getStackTrace(e));
 			throw new Exception("save failure");
 		} finally {
 
@@ -193,7 +196,8 @@ public class BasicRepository<T> implements DAO<T>{
 				break;
 			}
 		}catch(Exception e){
-			getLogger().error("find one by cursor throw error:"+e);
+			getLogger().error("错误:find one by cursor throw error:"+cursor);
+			getLogger().error(ExceptionUtils.getStackTrace(e));
 		}finally{
 			if(cursor != null) cursor.close();
 		}

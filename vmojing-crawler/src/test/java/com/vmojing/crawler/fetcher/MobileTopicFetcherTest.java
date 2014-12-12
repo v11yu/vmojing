@@ -29,4 +29,8 @@ public class MobileTopicFetcherTest {
 		System.out.println("wids:"+wids.size());
 		assertTrue(wids.size()>0);
 	}
+	@Test
+	public void testEnd(){
+		topicFetcher.getIds("宁德",100,"20141208","20141209");
+	}
 }

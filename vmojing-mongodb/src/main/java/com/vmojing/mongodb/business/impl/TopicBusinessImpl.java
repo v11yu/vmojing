@@ -76,6 +76,10 @@ public class TopicBusinessImpl extends AbstractBusiness implements TopicBusiness
 		if(topicIds == null){
 			topicIds = new ArrayList<ObjectId>();
 		}
+		if(topicIds.contains(w.getId())){
+			getLogger().error("已经存在微博："+weibo+"，在话题："+t.getTopicName()+",这是系统异常");
+			return false;
+		}
 		topicIds.add(t.getId());
 		try {
 			weiboDao.saveAndUpdate(w);

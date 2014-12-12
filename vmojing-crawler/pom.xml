@@ -15,14 +15,24 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-
+		<!--spring framework start  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.framework.version}</version>
+		</dependency>
+		 <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+		<!-- spring framework end -->
 		<!-- Start:databaseAccessObject -->
 		<dependency>
 			<groupId>cn.ict</groupId>
 			<artifactId>vmojing-mongodb</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
 		<!-- End:databaseAccessObject -->
 		<!-- vmojing core start -->
 		<dependency>
@@ -43,13 +53,6 @@
 			<version>${jsoup.version}</version>
 		</dependency>
 		<!-- End:http -->
-		<!-- Start:sinaWeibo -->
-		<dependency>
-			<groupId>com.sina.weibo</groupId>
-			<artifactId>weibo4j</artifactId>
-			<version>${weibo4j.version}</version>
-		</dependency>
-		<!-- End:sinaWeibo -->
 		<!-- Start:reflection Api -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -57,12 +60,13 @@
 			<version>${commons-beanutils.version}</version>
 		</dependency>
 		<!-- End:reflection Api -->
-		<!-- TIMER -->
+		<!-- timer start -->
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>${quartz.version}</version>
 		</dependency>
+		<!-- timer end -->
 	</dependencies>
 	<!--  
 	<build>

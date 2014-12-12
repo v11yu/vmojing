@@ -31,7 +31,7 @@ import com.vmojing.mongodb.utils.IdTransferUtil;
  */
 
 public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
-	private final static Integer MaxPageNum = 100;
+	public final static Integer MaxPageNum = 100;
 	private final static Integer DefaultNum = 3;
 	private HttpClient client;
 	/**
@@ -44,7 +44,7 @@ public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 	
 	@Override
 	public Set<String> getIds(String words){
-		return getIds(words,100,"","");
+		return getIds(words,MaxPageNum,"","");
 	}
 	@Override
 	public Set<String> getIds(String words,Integer pageNum,String starttime,String endtime){
@@ -62,16 +62,17 @@ public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 			String Url = "http://weibo.cn/search/mblog?hideSearchFrame=&keyword="
 					+ wordUrlEncode
 					+ "&advancedfilter=1&hasori=1&starttime="
-					+ starttime + "endtime=" + endtime + "&sort=time&page=";
+					+ starttime + "&endtime=" + endtime + "&sort=time&page=";
 			String searchUrl;
 			Document doc = null;
 			if (pageNum > MaxPageNum)
 				pageNum = MaxPageNum;
 			for (int i = 1; i <= pageNum; i++) {
+				int count = 0;
 				HttpResponse res = null;
 				try {
 					searchUrl = Url + i;
-					//getLogger().info("搜索url:"+searchUrl);
+					getLogger().info("搜索url:"+searchUrl);
 					HttpGet getSearch = addHttpGetWithHeader(searchUrl);
 					res = client.execute(getSearch);
 					String responseBodyString = getResponseBody(res);
@@ -86,6 +87,7 @@ public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 									.substring(idName.indexOf("_") + 1);
 							String id = IdTransferUtil.mid2Id(mid);
 							ids.add(id);
+							count++;
 						}
 					}
 				} catch (ClientProtocolException e) {
@@ -100,6 +102,7 @@ public class MobileTopicFetcher extends BasicHttpMethod implements TopicFetcher{
 						release(res);
 					}
 				}
+				if(count == 0) break;
 			}
 			getLogger().info("<"+word + ">关键词获得的搜索结果数为：" + ids.size());
 			wids.addAll(ids);

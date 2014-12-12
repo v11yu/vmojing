@@ -1,5 +1,6 @@
-package com.vmojing.crawler;
+package com.vmojing.crawler.client;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Properties;
 import java.util.Queue;
@@ -7,6 +8,7 @@ import java.util.Queue;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.http.client.HttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,8 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
+import com.vmojing.crawler.CrawlerConfig;
+import com.vmojing.crawler.CrawlerRootConfiguration;
 import com.vmojing.crawler.fetcher.api.Loginer;
 import com.vmojing.crawler.fetcher.mobile.MobileSinaLoginer;
 import com.vmojing.crawler.queue.*;
@@ -34,15 +38,10 @@ import com.vmojing.mongodb.domain.Topic;
 
 @Component
 @Scope("prototype")
-public class CrawlerClient {
-	/*
-	 * logger
-	 */
-	private final static Logger log = LoggerFactory
-			.getLogger(CrawlerClient.class);
+public class CrawlerClient extends Client{
 	@Autowired
 	ApplicationContext context;
-	@Autowired
+
 	ThreadPoolTaskExecutor taskExecutor;
 	/*
 	 * multiple-thread queue
@@ -59,30 +58,14 @@ public class CrawlerClient {
 	/*
 	 * max multiple-thread number
 	 */
-	final Integer maxTopic;
-	final Integer maxBlogger;
-	final Integer maxClue;
+	final Integer maxTopic = CrawlerConfig.getNum("MaxTopic");
+	final Integer maxBlogger = CrawlerConfig.getNum("MaxBlogger");
+	final Integer maxClue = CrawlerConfig.getNum("MaxClue");
 
-	@Autowired
-	public CrawlerClient(
-			@Qualifier("crawlerProperties") Properties crawlerProperties) {
-		this.maxTopic = Integer.parseInt(crawlerProperties
-				.getProperty("MaxTopic"));
-		this.maxBlogger = Integer.parseInt(crawlerProperties
-				.getProperty("MaxBlogger"));
-		this.maxClue = Integer.parseInt(crawlerProperties
-				.getProperty("MaxClue"));
-	}
 
-	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(CrawlerRootConfiguration.class);
-		while(true){
-			CrawlerClient client = context.getBean(CrawlerClient.class);
-			client.work();
-		}
-	}
-
-	private void initialize() {
+	@Override
+	void initialize() {
+		taskExecutor = context.getBean(ThreadPoolTaskExecutor.class);
 		TopicBusiness topicBusiness = context.getBean(TopicBusiness.class);
 		BloggerBusiness bloggerBusiness = context
 				.getBean(BloggerBusiness.class);
@@ -90,53 +73,56 @@ public class CrawlerClient {
 		List<Topic> topics = topicBusiness.getAll();
 		List<Blogger> bloggers = bloggerBusiness.getAll();
 		List<Clue> clues = clueBusiness.getAll();
-		checkAndFill(clueQueue, clues);
-		checkAndFill(topicQueue, topics);
-		checkAndFill(bloggerQueue, bloggers);
-		Loginer loginer = new MobileSinaLoginer();
+		fillQueue(clueQueue, clues);
+		fillQueue(topicQueue, topics);
+		fillQueue(bloggerQueue, bloggers);
 	}
-	private void after(){
+	@Override
+	void after(){
 		taskExecutor.shutdown();
 	}
-	private <T> void checkAndFill(BasicQueue<T> queue, List<T> ls) {
+	@Override
+	<T> void fillQueue(BasicQueue<T> queue, List<T> ls) {
 		if (!queue.isEmpty()) {
-			log.error("队列非空,系统异常");
+			getLogger().error("队列非空,系统异常");
 			while (!queue.isEmpty())
 				queue.pop();
 		}
-		log.info("装配广搜队列："+ls.size());
-		queue.addAll(ls);
-	}
+		int count = 0;
+		for(T t:ls){
+			try {
+				Integer st = (Integer) PropertyUtils.getProperty(t, "operateStatus");
+				if(st == 0){
+					queue.push(t);
+					count ++;
+				}
+			} catch (IllegalAccessException | InvocationTargetException
+					| NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		String message = "";
+		if(ls.size()>0){
+			message = ls.get(0).getClass().getName();
+		}
+		getLogger().info(message+"装配广搜队列："+count);
 
-	public void work() {
-		initialize();
-		for (int i = 0; i < maxTopic; i++) {
+	}
+	@Override
+	void work() {
+		for (int i = 0; i < Math.min(maxTopic, topicQueue.size()); i++) {
 			SinaTopicWorker c = context.getBean(SinaTopicWorker.class);
 			taskExecutor.execute(c);
 		}
-		for (int i = 0; i < maxClue; i++) {
+		for (int i = 0; i <Math.min(maxClue, clueQueue.size()) ; i++) {
 			SinaClueWorker c = context.getBean(SinaClueWorker.class);
 			taskExecutor.execute(c);
 		}
-		for (int i = 0; i < maxBlogger; i++) {
+		for (int i = 0; i <Math.min(maxBlogger, bloggerQueue.size()) ; i++) {
 			SinaBloggerWorker c = context.getBean(SinaBloggerWorker.class);
 			taskExecutor.execute(c);
 		}
-		while (taskExecutor.getActiveCount() > 0) {
-			log.info("thread active count:" + taskExecutor.getActiveCount());
-			sleep(30);
-		}
-		log.info("一次work结束");
-		after();
-		// int t = taskExecutor.getActiveCount();
-
-	}
-	private void sleep(int second){
-		try {
-			Thread.sleep(1000*second);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		waitThread(taskExecutor);
 	}
 }

@@ -17,7 +17,7 @@ public interface WeiboParser {
 	 * 通过新浪api获取微博详细信息，需直接更新的
 	 * @param wids 待获取的微博id集合
 	 * @param lastUpdateTime 系统最后更新时间
-	 * @return weibo 微博列表,or null if get failure
+	 * @return weibo 微博列表:根据wids大小,or null if get failure
 	 */
 	public List<Weibo> getWeiboByWids(Set<String> wids,Date lastUpdateTime);
 	/**
@@ -31,7 +31,7 @@ public interface WeiboParser {
 	 * 获取该博主发布的最新微博信息，需直接更新的
 	 * @param uid 博主id
 	 * @param lastUpdateWeiboTime 最后更新时间
-	 * @return weibo 微博列表,or null if get failure
+	 * @return weibo 微博列表，最新200,or null if get failure
 	 */
 	public List<Weibo> getWeiboByUid (String uid,Date lastUpdateWeiboTime);
 	/**
