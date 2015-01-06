@@ -1,155 +1,24 @@
-[1204 15:09:49 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:54 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:55 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:55 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:56 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:56 ERROR] [main--org.springframework.test.context.TestContextManager:334 ] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@155e85b] to prepare test instance [com.vmojing.core.parser.UserParserTest@afcffa]
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.vmojing.core.parser.UserParserTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:331)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:213)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:290)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:292)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:176)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+[1231 10:12:59 ERROR] [main--com.vmojing.core.parser.impl.WeiboParserImpl:126 ] -  errorCode：10006,statusCode:400 ,weibo4j.model.WeiboException: 400:The request was invalid.  An accompanying error message will explain why. This is the status code will be returned during rate limiting.
+ error:source paramter(appkey) is missing error_code:10006/2/statuses/show_batch.jsonweibo4j.model.WeiboException: 400:The request was invalid.  An accompanying error message will explain why. This is the status code will be returned during rate limiting.
+ error:source paramter(appkey) is missing error_code:10006/2/statuses/show_batch.json
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:414)
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:371)
+	at weibo4j.http.HttpClient.get(HttpClient.java:203)
+	at weibo4j.Timeline.getStatusByIds(Timeline.java:218)
+	at com.vmojing.core.parser.impl.WeiboParserImpl.getWeiboById(WeiboParserImpl.java:120)
+	at com.vmojing.core.parser.WeiboParserTest.testGetWeiboById(WeiboParserTest.java:90)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.lang.reflect.Method.invoke(Method.java:483)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 32 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:193)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1021)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:964)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 34 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 43 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1118)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:967)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 45 more
-[1204 15:09:56 ERROR] [main--org.springframework.test.context.TestContextManager:334 ] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@155e85b] to prepare test instance [com.vmojing.core.parser.UserParserTest@25e6c4]
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.vmojing.core.parser.UserParserTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:331)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:213)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:290)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:292)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:176)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:483)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 32 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:193)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1021)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:964)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 34 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 43 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1118)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:967)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 45 more
-[1204 15:09:56 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:56 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:58 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:59 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:09:59 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:10:02 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:10:05 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:10:08 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:10:08 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:14:15 ERROR] [main--org.springframework.test.context.TestContextManager:334 ] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@14342c2] to prepare test instance [com.vmojing.core.parser.UserParserTest@df4efb]
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.vmojing.core.parser.UserParserTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:331)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:213)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:290)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:292)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
 	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
@@ -167,46 +36,28 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 26 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:193)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1021)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:964)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 28 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 37 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1118)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:967)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 39 more
-[1204 15:14:15 ERROR] [main--org.springframework.test.context.TestContextManager:334 ] - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@14342c2] to prepare test instance [com.vmojing.core.parser.UserParserTest@1010382]
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.vmojing.core.parser.UserParserTest': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
-	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
-	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:331)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:213)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:290)
+
+[1231 10:12:59 ERROR] [main--com.vmojing.core.parser.impl.WeiboParserImpl:110 ] -  errorCode：21332,statusCode:403 ,weibo4j.model.WeiboException: 403:The request is understood, but it has been refused.  An accompanying error message will explain why.
+ error:invalid_access_token error_code:21332/2/statuses/timeline_batch.jsonweibo4j.model.WeiboException: 403:The request is understood, but it has been refused.  An accompanying error message will explain why.
+ error:invalid_access_token error_code:21332/2/statuses/timeline_batch.json
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:414)
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:371)
+	at weibo4j.http.HttpClient.get(HttpClient.java:203)
+	at weibo4j.Timeline.getUserTimelineBatchByUids(Timeline.java:249)
+	at com.vmojing.core.parser.impl.WeiboParserImpl.getWeiboByUid(WeiboParserImpl.java:107)
+	at com.vmojing.core.parser.WeiboParserTest.testGetWeiboByUid(WeiboParserTest.java:69)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
 	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:292)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
 	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
 	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
@@ -224,57 +75,82 @@ org.springframework.beans.factory.BeanCreationException: Error creating bean wit
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
 	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.vmojing.core.parser.api.UserParser com.vmojing.core.parser.UserParserTest.userParser; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 26 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userParserImpl': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:293)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1186)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:537)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:475)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:321)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:193)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1021)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:964)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 28 more
-Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: private com.vmojing.mongodb.business.api.UserBusiness com.vmojing.core.parser.impl.UserParserImpl.userBusiness; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:509)
-	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:290)
-	... 37 more
-Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [com.vmojing.mongodb.business.api.UserBusiness] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1118)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:967)
-	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:862)
-	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:481)
-	... 39 more
-[1204 15:35:39 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:35:39 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:35:39 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:07 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:08 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:09 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:09 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:09 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:10 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:10 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:10 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:10 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:10 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:12 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:12 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:13 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:14 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:17 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:19 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:21 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:23 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:25 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:28 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:30 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:32 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
-[1204 15:36:33 WARN ] [main--org.apache.commons.httpclient.HttpMethodBase:682 ] - Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+
+[1231 10:12:59 ERROR] [main--com.vmojing.core.parser.impl.WeiboParserImpl:70 ] -  errorCode：10006,statusCode:400 ,weibo4j.model.WeiboException: 400:The request was invalid.  An accompanying error message will explain why. This is the status code will be returned during rate limiting.
+ error:source paramter(appkey) is missing error_code:10006/2/statuses/show_batch.jsonweibo4j.model.WeiboException: 400:The request was invalid.  An accompanying error message will explain why. This is the status code will be returned during rate limiting.
+ error:source paramter(appkey) is missing error_code:10006/2/statuses/show_batch.json
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:414)
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:371)
+	at weibo4j.http.HttpClient.get(HttpClient.java:203)
+	at weibo4j.Timeline.getStatusByIds(Timeline.java:218)
+	at com.vmojing.core.parser.impl.WeiboParserImpl.getWeiboByWids(WeiboParserImpl.java:61)
+	at com.vmojing.core.parser.WeiboParserTest.testGetWeiboByWids(WeiboParserTest.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:176)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+
+[1231 10:12:59 ERROR] [main--com.vmojing.core.parser.impl.WeiboParserImpl:95 ] -  errorCode：21332,statusCode:403 ,weibo4j.model.WeiboException: 403:The request is understood, but it has been refused.  An accompanying error message will explain why.
+ error:invalid_access_token error_code:21332/2/statuses/repost_timeline.jsonweibo4j.model.WeiboException: 403:The request is understood, but it has been refused.  An accompanying error message will explain why.
+ error:invalid_access_token error_code:21332/2/statuses/repost_timeline.json
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:414)
+	at weibo4j.http.HttpClient.httpRequest(HttpClient.java:371)
+	at weibo4j.http.HttpClient.get(HttpClient.java:203)
+	at weibo4j.Timeline.getRepostTimeline(Timeline.java:367)
+	at com.vmojing.core.parser.impl.WeiboParserImpl.getRetweet(WeiboParserImpl.java:85)
+	at com.vmojing.core.parser.WeiboParserTest.testGetRetweet(WeiboParserTest.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:483)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:47)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:44)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:233)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:87)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:176)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+

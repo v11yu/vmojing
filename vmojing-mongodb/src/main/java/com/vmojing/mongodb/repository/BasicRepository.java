@@ -1,6 +1,8 @@
 	package com.vmojing.mongodb.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -218,5 +220,37 @@ public class BasicRepository<T> implements DAO<T>{
 		document.put("_id",id);
 		return collection.remove(document);
 
+	}
+	@Override
+	public List<T> findByPageNum(int skip, int limit) {
+		// TODO Auto-generated method stub
+		DBCursor cursor = findByAll();
+		List<DBObject> ls = null;
+		try{
+			ls = cursor.skip(skip).limit(limit).toArray();
+		}catch(Exception e){
+			getLogger().error(ExceptionUtils.getStackTrace(e));
+		}finally{
+			if(cursor != null) cursor.close();
+		}
+		return dbobj2T(ls);
+	}
+
+	private List<T> dbobj2T(List<DBObject> ls) {
+		try {
+			List<T> res = new ArrayList<T>();
+			for (DBObject obj : ls) {
+				res.add(convertor.convertToPojo(obj));
+			}
+			return res;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	@Override
+	public List<T> dbobj2Entity(DBCursor cursor) {
+		// TODO Auto-generated method stub
+		List<DBObject> ls= cursor.toArray();
+		return dbobj2T(ls);
 	}
 }

@@ -14,7 +14,7 @@
 				<li><a href="${ctx}/topic/create">创建话题</a></li>
 				<li><a href="${ctx}/blogger/create">创建博主</a></li>
 				<li><a href="${ctx}/clue/create">创建线索</a></li>
-				
+				<li><a href="${ctx}/api">Api接口</a></li>
 			</ul>
 		</div>
 		<!--/.nav-collapse -->

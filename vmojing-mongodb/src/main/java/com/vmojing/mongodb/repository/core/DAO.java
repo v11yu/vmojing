@@ -88,4 +88,19 @@ public interface DAO<T>{
 	 */
 	public T findById(Object id);
 	public WriteResult dropById(Object id);
+	/**
+	 * 分页查询
+	 * For example, to get an array of the 1000-1100th elements of a cursor, use<p/>
+	 * List obj = collection.find( query ).skip( 1000 ).limit( 100 ).toArray();
+	 * @param skip 跳过数值
+	 * @param limit 返回大小
+	 * @return 列表
+	 */
+	public List<T> findByPageNum(int skip,int limit);
+	/**
+	 * DBCursor to List
+	 * @param cursor
+	 * @return
+	 */
+	public List<T> dbobj2Entity(DBCursor cursor);
 }

@@ -7,6 +7,7 @@ import com.vmojing.mongodb.domain.AccessToken;
 import com.vmojing.mongodb.domain.Blogger;
 import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.Comment;
+import com.vmojing.mongodb.domain.Tag;
 import com.vmojing.mongodb.domain.Topic;
 import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.domain.Weibo;
@@ -91,5 +92,16 @@ public class MongoBeansConfiguration {
 	@Bean
 	BasicRepository<Comment> commentDao(){
 		return new BasicRepository<Comment>(Comment.class, commentConvertor());
+	}
+	/*
+	 * tag
+	 */
+	@Bean
+	DBConvertor<Tag> tagConvertor(){
+		return new DBConvertor<Tag>(Tag.class);
+	}
+	@Bean
+	BasicRepository<Tag> tagDao(){
+		return new BasicRepository<Tag>(Tag.class,tagConvertor());
 	}
 }

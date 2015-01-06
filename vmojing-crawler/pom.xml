@@ -94,7 +94,7 @@
       <configuration>
         <archive>
           <manifest>
-            <mainClass>com.vmojing.crawler.CrawlerClient</mainClass>
+            <mainClass>com.vmojing.crawler.Startup</mainClass>
           </manifest>
         </archive>
         <descriptorRefs>

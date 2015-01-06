@@ -1,5 +1,7 @@
 package com.vmojing.web;
 
+
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,6 +22,22 @@ public class WebAppConfiguration extends WebMvcConfigurerAdapter{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
+//	@Override
+//	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//		converters.add(charsetConverter());
+//		converters.add(jsonConverter());
+//		addDefaultHttpMessageConverters(converters);
+//	}
+//	@Bean 
+//	StringHttpMessageConverter charsetConverter(){
+//		return new StringHttpMessageConverter(Charset.forName("UTF-8"));
+//	}
+//	@Bean 
+//	MappingJackson2HttpMessageConverter jsonConverter(){
+//		MappingJackson2HttpMessageConverter c = new MappingJackson2HttpMessageConverter();
+//		c.setPrettyPrint(true);
+//		return c;
+//	}
 	@Bean
 	public UrlBasedViewResolver setupViewResolver() {
 		UrlBasedViewResolver resolver = new UrlBasedViewResolver();
