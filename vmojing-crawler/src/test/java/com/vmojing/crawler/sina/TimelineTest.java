@@ -15,8 +15,8 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.crawler.CrawlerRootConfiguration;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 
 import static org.junit.Assert.*;

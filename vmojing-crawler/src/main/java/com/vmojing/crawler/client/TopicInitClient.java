@@ -5,6 +5,7 @@ import java.util.List;
 
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -12,8 +13,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
-import com.vmojing.crawler.CrawlerConfig;
 import com.vmojing.crawler.queue.BasicQueue;
+import com.vmojing.crawler.utils.CrawlerConfig;
 import com.vmojing.crawler.work.*;
 import com.vmojing.mongodb.business.api.TopicBusiness;
 import com.vmojing.mongodb.domain.Topic;

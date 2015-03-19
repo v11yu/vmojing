@@ -26,7 +26,30 @@
 			<artifactId>vmojing-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.ict</groupId>
+			<artifactId>vmojing-crawler</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- vmojing end -->
-		
+
 	</dependencies>
+	<build>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>com.vmojing.util.authorize.AuthorizeApp</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

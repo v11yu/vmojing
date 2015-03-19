@@ -1,6 +1,6 @@
 package com.vmojing.crawler.work.interval;
 
-import com.vmojing.crawler.CrawlerConfig;
+import com.vmojing.crawler.utils.CrawlerConfig;
 
 public class SimpleIntervalStrategy implements IntervalStrategy{
 	private Integer minTime = CrawlerConfig.getNum("MinFrequentTime");

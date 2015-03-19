@@ -19,10 +19,15 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 
+import com.vmojing.core.fetcher.api.ClueFetcher;
+import com.vmojing.core.fetcher.api.Loginer;
+import com.vmojing.core.fetcher.impl.ClueFetcherImpl;
+import com.vmojing.core.fetcher.impl.MobileSinaLoginer;
 import com.vmojing.core.parser.WeiboExceptionHandle;
 import com.vmojing.core.parser.api.WeiboParser;
 import com.vmojing.core.parser.convert.Converter;
 import com.vmojing.core.parser.convert.WeiboConverter;
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Weibo;
 
@@ -37,6 +42,8 @@ public class WeiboParserImpl implements WeiboParser {
 	private static int MaxWidsSize = 50;
 	@Autowired
 	private WeiboConverter weiboConverter;
+	Loginer login = new MobileSinaLoginer();
+	ClueFetcher clue = new ClueFetcherImpl(login.getClient());
 	private Timeline tm ;
 	
 	@PostConstruct
@@ -139,4 +146,24 @@ public class WeiboParserImpl implements WeiboParser {
 		}
 		return weibos;
 	}
+	@Override
+	public List<String> getWeiboMid(String mid,int page) {
+		// TODO Auto-generated method stub
+		return clue.getRepostMid(page, mid);
+	}
+	@Override
+	public String wid2Mid(String wid) {
+		// TODO Auto-generated method stub
+		return IdTransferUtil.id2Mid(wid);
+	}
+	@Override
+	public String mid2Wid(String mid) {
+		// TODO Auto-generated method stub
+		return IdTransferUtil.mid2Id(mid);
+	}
+	@Override
+	public int getPageCount(String mid) {
+		// TODO Auto-generated method stub
+		return clue.getPageCount(mid);
+	}	
 }

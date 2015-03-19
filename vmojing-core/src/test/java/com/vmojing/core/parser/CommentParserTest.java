@@ -15,8 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vmojing.core.CoreRootConfiguration;
 import com.vmojing.core.parser.api.CommentParser;
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.domain.Comment;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes ={CoreRootConfiguration.class})

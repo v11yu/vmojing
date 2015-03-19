@@ -253,4 +253,21 @@ public class BasicRepository<T> implements DAO<T>{
 		List<DBObject> ls= cursor.toArray();
 		return dbobj2T(ls);
 	}
+	@Override
+	public void saveAll(List<T> all) {
+		// TODO Auto-generated method stub
+		for(T t:all){
+			try {
+				saveAndUpdate(t);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				getLogger().error(e.getMessage());
+			}
+		}
+	}
+	@Override
+	public T obj2Entity(DBObject obj) {
+		// TODO Auto-generated method stub
+		return convertor.convertToPojo(obj);
+	}
 }

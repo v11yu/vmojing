@@ -3,7 +3,7 @@ package com.vmojing.util.app;
 import java.util.Date;
 
 /**
- * 运行app
+ * 循环一直运行的app
  * 
  * @author v11
  */

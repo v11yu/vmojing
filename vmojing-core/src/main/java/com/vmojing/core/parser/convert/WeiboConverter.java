@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 
 import weibo4j.model.Status;
 
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.domain.User;
 import com.vmojing.mongodb.domain.Weibo;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 @Component
 @Scope("prototype")
 public class WeiboConverter extends Converter<Weibo, Status>{

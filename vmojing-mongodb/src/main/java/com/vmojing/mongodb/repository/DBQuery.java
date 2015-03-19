@@ -35,6 +35,7 @@ public class DBQuery {
 		query.put(key).greaterThanEquals(value);
 		return this;
 	}
+	
 	/**
 	 * Equivalent of the find({key:value}) and return this DBQuery instance
 	 * @param key MongoDB document key
@@ -43,6 +44,10 @@ public class DBQuery {
 	 */
 	public DBQuery equalsOperation(String key , Object value){
 		query.put(key).is(value);
+		return this;
+	}
+	public DBQuery neOperation(String key , Object value){
+		query.put(key).notEquals(value);
 		return this;
 	}
 	/**

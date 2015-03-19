@@ -23,8 +23,8 @@ import weibo4j.org.json.JSONException;
 import weibo4j.util.URLEncodeUtils;
 
 import com.vmojing.core.sina.WeiboApiTest;
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 
 public class TagTest {
 	private static Logger log = LoggerFactory.getLogger(WeiboApiTest.class);

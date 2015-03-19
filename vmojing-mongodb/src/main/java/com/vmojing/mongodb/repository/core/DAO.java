@@ -103,4 +103,10 @@ public interface DAO<T>{
 	 * @return
 	 */
 	public List<T> dbobj2Entity(DBCursor cursor);
+	public T obj2Entity(DBObject obj);
+	/**
+	 * save all to database
+	 * @param all entity的List
+	 */
+	public void saveAll(List<T> all);
 }

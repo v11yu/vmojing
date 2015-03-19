@@ -33,5 +33,17 @@
 			<version>${commons-beanutils.version}</version>
 		</dependency>
 		<!-- End:reflection Api -->
+		<!-- Start:http -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>${httpclient.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
+		<!-- End:http -->
 	</dependencies>
 </project>

@@ -26,6 +26,7 @@
 		<quartz.version>2.2.1</quartz.version>
 		<commons-beanutils.version>1.9.2</commons-beanutils.version>
 		<commons.version>3.1</commons.version>
+		<guava.version>18.0</guava.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -77,13 +78,21 @@
 			<version>${commons.version}</version>
 		</dependency>
 		<!-- End: Log -->
+		<!-- guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
 	</dependencies>
 	<modules>
 		<module>vmojing-mongodb</module>
 		<module>vmojing-crawler</module>
 		<module>vmojing-web</module>
 		<module>vmojing-core</module>
-    <module>vmojing-util</module>
+		<module>vmojing-util</module>
+    <module>vmojing-analysis</module>
   </modules>
 	<build>
 		<plugins>
@@ -109,6 +118,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
+
 	</build>
 </project>

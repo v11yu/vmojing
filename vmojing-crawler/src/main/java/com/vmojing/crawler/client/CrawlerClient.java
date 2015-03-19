@@ -22,11 +22,9 @@ import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
-import com.vmojing.crawler.CrawlerConfig;
 import com.vmojing.crawler.CrawlerRootConfiguration;
-import com.vmojing.crawler.fetcher.api.Loginer;
-import com.vmojing.crawler.fetcher.mobile.MobileSinaLoginer;
 import com.vmojing.crawler.queue.*;
+import com.vmojing.crawler.utils.CrawlerConfig;
 import com.vmojing.crawler.work.SinaBloggerWorker;
 import com.vmojing.crawler.work.SinaClueWorker;
 import com.vmojing.crawler.work.SinaTopicWorker;

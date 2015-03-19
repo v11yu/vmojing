@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vmojing.core.parser.api.UserParser;
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.business.api.BloggerBusiness;
 import com.vmojing.mongodb.business.api.ClueBusiness;
 import com.vmojing.mongodb.domain.Blogger;
 import com.vmojing.mongodb.domain.Clue;
 import com.vmojing.mongodb.domain.User;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 
 @Controller
 @RequestMapping("/blogger")

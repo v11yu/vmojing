@@ -5,9 +5,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.vmojing.crawler.CrawlerBeansConfiguration;
 import com.vmojing.mongodb.MongoBeansConfiguration;
 import com.vmojing.mongodb.MongoConfiguration;
-import com.vmojing.util.app.TagFetchApp;
+import com.vmojing.util.tag.TagFetchApp;
 
 @Configuration
 

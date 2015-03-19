@@ -24,4 +24,10 @@ public interface UserParser {
 	 * @return 用户,or null if fail
 	 */
 	public User getUserByName(String name);
+	/**
+	 * 获取用户Id，通过用户名
+	 * @param id 用户id
+	 * @return 用户,or null if fail
+	 */
+	public User getUserById(String uid);
 }

@@ -6,8 +6,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 
 import weibo4j.Comments;
 import weibo4j.model.Comment;

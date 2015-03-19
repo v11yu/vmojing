@@ -25,9 +25,9 @@ import com.vmojing.core.parser.api.WeiboParser;
 import com.vmojing.core.parser.convert.Converter;
 import com.vmojing.core.parser.convert.WeiboConverter;
 import com.vmojing.core.parser.impl.WeiboParserImpl;
+import com.vmojing.core.util.IdTransferUtil;
 import com.vmojing.mongodb.business.AccessTokenAllocation;
 import com.vmojing.mongodb.domain.Weibo;
-import com.vmojing.mongodb.utils.IdTransferUtil;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {CoreRootConfiguration.class})
 public class WeiboParserTest {

@@ -11,11 +11,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.vmojing.core.fetcher.api.TopicFetcher;
+import com.vmojing.core.fetcher.impl.MobileTopicFetcher;
 import com.vmojing.core.parser.api.WeiboParser;
-import com.vmojing.crawler.CrawlerConfig;
-import com.vmojing.crawler.fetcher.api.TopicFetcher;
-import com.vmojing.crawler.fetcher.mobile.MobileTopicFetcher;
 import com.vmojing.crawler.queue.BasicQueue;
+import com.vmojing.crawler.utils.CrawlerConfig;
 import com.vmojing.crawler.work.check.CheckStrategy;
 import com.vmojing.crawler.work.push.PushStrategy;
 import com.vmojing.mongodb.business.api.TopicBusiness;

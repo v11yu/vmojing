@@ -10,8 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-import com.vmojing.crawler.CrawlerConfig;
+
 import com.vmojing.crawler.queue.BasicQueue;
+import com.vmojing.crawler.utils.CrawlerConfig;
 import com.vmojing.crawler.work.check.CheckStrategy;
 import com.vmojing.crawler.work.push.PushStrategy;
 
